@@ -1,0 +1,3955 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Integrations API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Integrations
+  description: Third-party integrations (GitHub, GitLab, etc).
+paths:
+  /experimental/workspaces/{workspaceId}/integrations:
+    get:
+      tags:
+      - Integrations
+      description: Lists integrations (GitHub, GitLab, Linear) configured for a workspace.
+      parameters:
+      - schema:
+          default: -updatedAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+          - anyOf:
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - integration
+                        attributes:
+                          anyOf:
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - github-app
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                type: object
+                                required:
+                                - installationId
+                                - installationTarget
+                                properties:
+                                  installationId:
+                                    type: number
+                                  installationTarget:
+                                    type: string
+                              metadata:
+                                type: object
+                                required:
+                                - installedByGitHubUser
+                                - installedIntoAccountName
+                                - installedIntoAccountType
+                                properties:
+                                  installedByGitHubUser:
+                                    type: number
+                                  installedIntoAccountName:
+                                    type: string
+                                  installedIntoAccountType:
+                                    anyOf:
+                                    - type: string
+                                      enum:
+                                      - organization
+                                    - type: string
+                                      enum:
+                                      - user
+                                    - type: string
+                                      enum:
+                                      - enterprise
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - github-app-agent
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                type: object
+                                required:
+                                - installationId
+                                - installationTarget
+                                properties:
+                                  installationId:
+                                    type: number
+                                  installationTarget:
+                                    type: string
+                              metadata:
+                                type: object
+                                required:
+                                - installedByGitHubUser
+                                - installedIntoAccountName
+                                - installedIntoAccountType
+                                properties:
+                                  installedByGitHubUser:
+                                    type: number
+                                  installedIntoAccountName:
+                                    type: string
+                                  installedIntoAccountType:
+                                    anyOf:
+                                    - type: string
+                                      enum:
+                                      - organization
+                                    - type: string
+                                      enum:
+                                      - user
+                                    - type: string
+                                      enum:
+                                      - enterprise
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - gitlab-token
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                anyOf:
+                                - type: object
+                                  required:
+                                  - scopeType
+                                  - host
+                                  - groupPath
+                                  - secretId
+                                  properties:
+                                    scopeType:
+                                      type: string
+                                      enum:
+                                      - group
+                                    host:
+                                      type: string
+                                    groupPath:
+                                      type: string
+                                    secretId:
+                                      type: string
+                                - type: object
+                                  required:
+                                  - scopeType
+                                  - host
+                                  - projectPath
+                                  - secretId
+                                  properties:
+                                    scopeType:
+                                      type: string
+                                      enum:
+                                      - project
+                                    host:
+                                      type: string
+                                    projectPath:
+                                      type: string
+                                    secretId:
+                                      type: string
+                              metadata:
+                                type: object
+                                properties: {}
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - linear
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                type: object
+                                required:
+                                - linearOrganizationId
+                                - agentAppUserId
+                                properties:
+                                  linearOrganizationId:
+                                    type: string
+                                  agentAppUserId:
+                                    type: string
+                                  targetRepo:
+                                    type: string
+                                  taskDelegation:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - entrypoint
+                                    properties:
+                                      entrypoint:
+                                        additionalProperties: false
+                                        type: object
+                                        required:
+                                        - plugin
+                                        - skill
+                                        properties:
+                                          plugin:
+                                            type: string
+                                          skill:
+                                            type: string
+                                      delegationStateName:
+                                        type: string
+                                      environmentName:
+                                        minLength: 1
+                                        type: string
+                                  scope:
+                                    type: string
+                                  reconnectRequired:
+                                    type: boolean
+                              metadata:
+                                type: object
+                                properties:
+                                  linearOrganizationName:
+                                    type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - bitbucket-cloud-oauth
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                type: object
+                                required:
+                                - workspaceSlug
+                                - accountId
+                                properties:
+                                  workspaceSlug:
+                                    type: string
+                                  accountId:
+                                    type: string
+                                  scope:
+                                    type: string
+                                  reconnectRequired:
+                                    type: boolean
+                              metadata:
+                                type: object
+                                properties:
+                                  workspaceName:
+                                    type: string
+                                  installedByDisplayName:
+                                    type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                          - type: object
+                            required:
+                            - type
+                            - installedBy
+                            - connectionData
+                            - metadata
+                            - createdAt
+                            - updatedAt
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - mockhub
+                              installedBy:
+                                format: uuid
+                                type: string
+                              connectionData:
+                                type: object
+                                required:
+                                - seed
+                                - org
+                                - config
+                                properties:
+                                  seed:
+                                    type: number
+                                  org:
+                                    type: string
+                                  config:
+                                    type: object
+                                    required:
+                                    - repoCount
+                                    - skillRepoFraction
+                                    - minSkillsPerRepo
+                                    - maxSkillsPerRepo
+                                    - manifestCount
+                                    - minSkillSentences
+                                    - maxSkillSentences
+                                    - duplicateClusterFraction
+                                    properties:
+                                      repoCount:
+                                        type: number
+                                      skillRepoFraction:
+                                        type: number
+                                      minSkillsPerRepo:
+                                        type: number
+                                      maxSkillsPerRepo:
+                                        type: number
+                                      manifestCount:
+                                        type: number
+                                      minSkillSentences:
+                                        type: number
+                                      maxSkillSentences:
+                                        type: number
+                                      duplicateClusterFraction:
+                                        type: number
+                              metadata:
+                                type: object
+                                properties: {}
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/{integrationId}:
+    delete:
+      tags:
+      - Integrations
+      description: Removes an integration from a workspace.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: integrationId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    patch:
+      tags:
+      - Integrations
+      description: Updates the connectionData on a Linear integration. `targetRepo` and `taskDelegation` are independently editable; pass `null` to clear either. Writing `taskDelegation` requires the `linear-task-mirroring` feature flag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              minProperties: 1
+              type: object
+              properties:
+                targetRepo:
+                  anyOf:
+                  - minLength: 1
+                    type: string
+                  - type: 'null'
+                taskDelegation:
+                  anyOf:
+                  - additionalProperties: false
+                    type: object
+                    required:
+                    - entrypoint
+                    properties:
+                      entrypoint:
+                        additionalProperties: false
+                        type: object
+                        required:
+                        - plugin
+                        - skill
+                        properties:
+                          plugin:
+                            type: string
+                          skill:
+                            type: string
+                      delegationStateName:
+                        type: string
+                      environmentName:
+                        minLength: 1
+                        type: string
+                  - type: 'null'
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: integrationId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - linear
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - linearOrganizationId
+                            - agentAppUserId
+                            properties:
+                              linearOrganizationId:
+                                type: string
+                              agentAppUserId:
+                                type: string
+                              targetRepo:
+                                type: string
+                              taskDelegation:
+                                additionalProperties: false
+                                type: object
+                                required:
+                                - entrypoint
+                                properties:
+                                  entrypoint:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - plugin
+                                    - skill
+                                    properties:
+                                      plugin:
+                                        type: string
+                                      skill:
+                                        type: string
+                                  delegationStateName:
+                                    type: string
+                                  environmentName:
+                                    minLength: 1
+                                    type: string
+                              scope:
+                                type: string
+                              reconnectRequired:
+                                type: boolean
+                          metadata:
+                            type: object
+                            properties:
+                              linearOrganizationName:
+                                type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/{integrationId}/linear/metadata:
+    get:
+      tags:
+      - Integrations
+      description: Returns the connected Linear org's workflow states across all teams. Each state carries its name, type, and owning team, so a caller can choose a delegation state to store in the task-delegation config.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: integrationId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - linear-workflow-state
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - type
+                          - teamName
+                          properties:
+                            name:
+                              type: string
+                            type:
+                              type: string
+                            teamName:
+                              type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/github-app:
+    post:
+      tags:
+      - Integrations
+      description: Completes a GitHub App OAuth handshake, attaching the installation to a workspace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - code
+              - installationId
+              properties:
+                code:
+                  type: string
+                installationId:
+                  type: number
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - github-app
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - installationId
+                            - installationTarget
+                            properties:
+                              installationId:
+                                type: number
+                              installationTarget:
+                                type: string
+                          metadata:
+                            type: object
+                            required:
+                            - installedByGitHubUser
+                            - installedIntoAccountName
+                            - installedIntoAccountType
+                            properties:
+                              installedByGitHubUser:
+                                type: number
+                              installedIntoAccountName:
+                                type: string
+                              installedIntoAccountType:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - organization
+                                - type: string
+                                  enum:
+                                  - user
+                                - type: string
+                                  enum:
+                                  - enterprise
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/github-app/request:
+    post:
+      tags:
+      - Integrations
+      description: Records a request to install a GitHub App for a workspace (pending org-admin approval).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - code
+              properties:
+                code:
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration-request
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - rejected
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/github-app/token:
+    post:
+      tags:
+      - Integrations
+      description: Mints a short-lived GitHub installation token for the workspace's Tessl Helper GitHub App installation, plus the bot identity (`appSlug`, `botUserId`, `login`, `email`) resolved via the authenticated App credentials. Used by CI workflows and the CLI to act as the Tessl Helper bot without holding the private key or guessing the slug.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                repositories:
+                  minItems: 1
+                  type: array
+                  items:
+                    minLength: 1
+                    type: string
+                permissions:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                    - type: string
+                      enum:
+                      - read
+                    - type: string
+                      enum:
+                      - write
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - github-installation-access-token
+                      attributes:
+                        type: object
+                        required:
+                        - token
+                        - expiresAt
+                        - permissions
+                        - appSlug
+                        - botUserId
+                        - login
+                        - email
+                        properties:
+                          token:
+                            type: string
+                          expiresAt:
+                            type: string
+                          permissions:
+                            type: object
+                            additionalProperties:
+                              type: string
+                          appSlug:
+                            type: string
+                          botUserId:
+                            type: number
+                          login:
+                            type: string
+                          email:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/github-app-agent:
+    post:
+      tags:
+      - Integrations
+      description: Completes the OAuth handshake for the read-write Tessl Helper GitHub App and records a workspace-scoped Tessl Helper installation, distinct from the Sync `github-app` integration.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - code
+              - installationId
+              properties:
+                code:
+                  type: string
+                installationId:
+                  type: number
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - github-app-agent
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - installationId
+                            - installationTarget
+                            properties:
+                              installationId:
+                                type: number
+                              installationTarget:
+                                type: string
+                          metadata:
+                            type: object
+                            required:
+                            - installedByGitHubUser
+                            - installedIntoAccountName
+                            - installedIntoAccountType
+                            properties:
+                              installedByGitHubUser:
+                                type: number
+                              installedIntoAccountName:
+                                type: string
+                              installedIntoAccountType:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - organization
+                                - type: string
+                                  enum:
+                                  - user
+                                - type: string
+                                  enum:
+                                  - enterprise
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/github-app-agent/request:
+    post:
+      tags:
+      - Integrations
+      description: Records a request to install the read-write Tessl Helper GitHub App for a workspace (pending org-admin approval). Distinct from the Sync `github-app` request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - code
+              properties:
+                code:
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration-request
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - rejected
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/gitlab-token:
+    post:
+      tags:
+      - Integrations
+      description: Attaches a GitLab personal/group access token as an integration to a workspace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accessToken
+              properties:
+                accessToken:
+                  type: string
+                instanceUrl:
+                  type: string
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - gitlab-token
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            anyOf:
+                            - type: object
+                              required:
+                              - scopeType
+                              - host
+                              - groupPath
+                              - secretId
+                              properties:
+                                scopeType:
+                                  type: string
+                                  enum:
+                                  - group
+                                host:
+                                  type: string
+                                groupPath:
+                                  type: string
+                                secretId:
+                                  type: string
+                                webhookId:
+                                  type: number
+                                webhookSecretId:
+                                  type: string
+                            - type: object
+                              required:
+                              - scopeType
+                              - host
+                              - projectPath
+                              - secretId
+                              properties:
+                                scopeType:
+                                  type: string
+                                  enum:
+                                  - project
+                                host:
+                                  type: string
+                                projectPath:
+                                  type: string
+                                secretId:
+                                  type: string
+                                webhookId:
+                                  type: number
+                                webhookSecretId:
+                                  type: string
+                          metadata:
+                            type: object
+                            properties: {}
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/mockhub:
+    post:
+      tags:
+      - Integrations
+      description: 'Dev-only: instantly connects a synthetic MockHub SCM provider to a workspace (no OAuth) and kicks a first inventory scan of its seeded repos/skills. Rejected with 404 unless NODE_ENV is development, and 503 when the workflow engine could not accept the first scan.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seed:
+                  type: number
+                org:
+                  type: string
+                config:
+                  type: object
+                  properties:
+                    repoCount:
+                      minimum: 0
+                      type: number
+                    skillRepoFraction:
+                      minimum: 0
+                      maximum: 1
+                      type: number
+                    minSkillsPerRepo:
+                      minimum: 0
+                      type: number
+                    maxSkillsPerRepo:
+                      minimum: 0
+                      type: number
+                    manifestCount:
+                      minimum: 0
+                      type: number
+                    minSkillSentences:
+                      minimum: 1
+                      type: number
+                    maxSkillSentences:
+                      minimum: 1
+                      type: number
+                    duplicateClusterFraction:
+                      minimum: 0
+                      maximum: 1
+                      type: number
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    - inventoryId
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - mockhub
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - seed
+                            - org
+                            - config
+                            properties:
+                              seed:
+                                type: number
+                              org:
+                                type: string
+                              config:
+                                type: object
+                                required:
+                                - repoCount
+                                - skillRepoFraction
+                                - minSkillsPerRepo
+                                - maxSkillsPerRepo
+                                - manifestCount
+                                - minSkillSentences
+                                - maxSkillSentences
+                                - duplicateClusterFraction
+                                properties:
+                                  repoCount:
+                                    type: number
+                                  skillRepoFraction:
+                                    type: number
+                                  minSkillsPerRepo:
+                                    type: number
+                                  maxSkillsPerRepo:
+                                    type: number
+                                  manifestCount:
+                                    type: number
+                                  minSkillSentences:
+                                    type: number
+                                  maxSkillSentences:
+                                    type: number
+                                  duplicateClusterFraction:
+                                    type: number
+                          metadata:
+                            type: object
+                            properties: {}
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                      inventoryId:
+                        format: uuid
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                description: Service Unavailable
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Service Unavailable
+                      status:
+                        type: number
+                        enum:
+                        - 503
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/linear/authorize:
+    post:
+      tags:
+      - Integrations
+      description: Starts the Linear OAuth flow for the workspace by issuing a signed state and authorize URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                targetRepo:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - linear-oauth-authorization
+                      attributes:
+                        type: object
+                        required:
+                        - authorizationUrl
+                        - state
+                        properties:
+                          authorizationUrl:
+                            format: uri
+                            type: string
+                          state:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/linear/callback:
+    post:
+      tags:
+      - Integrations
+      description: Completes the Linear OAuth handshake by exchanging the authorization code for a workspace token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - code
+              - state
+              properties:
+                code:
+                  minLength: 1
+                  type: string
+                state:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - linear
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - linearOrganizationId
+                            - agentAppUserId
+                            properties:
+                              linearOrganizationId:
+                                type: string
+                              agentAppUserId:
+                                type: string
+                              targetRepo:
+                                type: string
+                          metadata:
+                            type: object
+                            properties:
+                              linearOrganizationName:
+                                type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/authorize:
+    post:
+      tags:
+      - Integrations
+      description: Starts the Bitbucket Cloud OAuth flow for the workspace by issuing a signed state and authorize URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                returnTo:
+                  pattern: ^/(?![/\\])
+                  maxLength: 2048
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - bitbucket-cloud-oauth-authorization
+                      attributes:
+                        type: object
+                        required:
+                        - authorizationUrl
+                        - state
+                        properties:
+                          authorizationUrl:
+                            format: uri
+                            type: string
+                          state:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/callback:
+    post:
+      tags:
+      - Integrations
+      description: Completes the Bitbucket Cloud OAuth handshake by exchanging the authorization code for an access + refresh token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - code
+              - state
+              properties:
+                code:
+                  minLength: 1
+                  type: string
+                state:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - integration
+                      attributes:
+                        type: object
+                        required:
+                        - type
+                        - installedBy
+                        - connectionData
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - bitbucket-cloud-oauth
+                          installedBy:
+                            format: uuid
+                            type: string
+                          connectionData:
+                            type: object
+                            required:
+                            - workspaceSlug
+                            - accountId
+                            properties:
+                              workspaceSlug:
+                                type: string
+                              accountId:
+                                type: string
+                              scope:
+                                type: string
+                              reconnectRequired:
+                                type: boolean
+                          metadata:
+                            type: object
+                            properties:
+                              workspaceName:
+                                type: string
+                              installedByDisplayName:
+                                type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/requests:
+    get:
+      tags:
+      - Integrations
+      description: Lists pending integration requests (GitHub App, GitLab token) for a workspace.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - integration-request
+                        attributes:
+                          type: object
+                          required:
+                          - integrationType
+                          - status
+                          - metadata
+                          - integrationId
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            integrationType:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - github-app
+                              - type: string
+                                enum:
+                                - gitlab-token
+                            status:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - pending
+                              - type: string
+                                enum:
+                                - completed
+                              - type: string
+                                enum:
+                                - rejected
+                            metadata:
+                              anyOf:
+                              - type: object
+                                required:
+                                - githubUserId
+                                - accountId
+                                - accountLogin
+                                properties:
+                                  githubUserId:
+                                    type: number
+                                  accountId:
+                                    type: number
+                                  accountLogin:
+                                    type: string
+                              - type: object
+                                properties: {}
+                            integrationId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/integrations/requests/{requestId}:
+    delete:
+      tags:
+      - Integrations
+      description: Cancels a pending workspace integration request.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: requestId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

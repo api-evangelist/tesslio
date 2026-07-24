@@ -1,0 +1,2020 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys InstallPolicy API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: InstallPolicy
+paths:
+  /v1/install/policy/evaluate:
+    post:
+      summary: Evaluate an install policy decision for a batch of plugin sources
+      tags:
+      - InstallPolicy
+      description: Returns a per-source allow/warn/block decision plus structured reasons. For users who belong to multiple orgs, the lowest-sorted org id wins and a warning is logged — set up an org-scoped API key to avoid the picker's arbitrary choice.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sources
+              properties:
+                clientVersion:
+                  type: string
+                context:
+                  type: object
+                  properties:
+                    isCi:
+                      type: boolean
+                    runId:
+                      type: string
+                    project:
+                      type: object
+                      properties:
+                        tesslProjectId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        workspaceSlug:
+                          anyOf:
+                          - maxLength: 200
+                            type: string
+                          - type: 'null'
+                        manifestPath:
+                          type: string
+                        gitRemoteUrl:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        gitCommitSha:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                acceptedWarnings:
+                  type: boolean
+                sources:
+                  minItems: 0
+                  maxItems: 200
+                  type: array
+                  items:
+                    anyOf:
+                    - type: object
+                      required:
+                      - id
+                      - source
+                      - tile
+                      properties:
+                        id:
+                          type: string
+                        source:
+                          type: string
+                          enum:
+                          - registry
+                        tile:
+                          type: object
+                          required:
+                          - workspaceName
+                          - tileName
+                          properties:
+                            workspaceName:
+                              type: string
+                            tileName:
+                              type: string
+                            version:
+                              type: string
+                    - type: object
+                      required:
+                      - id
+                      - source
+                      - url
+                      properties:
+                        id:
+                          type: string
+                        source:
+                          type: string
+                          enum:
+                          - git
+                        url:
+                          type: string
+                        branch:
+                          type: string
+                        subpath:
+                          type: string
+                        skills:
+                          maxItems: 200
+                          type: array
+                          items:
+                            type: string
+                    - type: object
+                      required:
+                      - id
+                      - source
+                      - path
+                      properties:
+                        id:
+                          type: string
+                        source:
+                          type: string
+                          enum:
+                          - file
+                        path:
+                          type: string
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - install-policy-evaluation
+                      attributes:
+                        type: object
+                        required:
+                        - policyVersion
+                        - orgId
+                        - decisions
+                        - additionalSources
+                        properties:
+                          policyVersion:
+                            type: string
+                          orgId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          decisions:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - decision
+                              - reasons
+                              - requiresInteractiveConfirmation
+                              properties:
+                                id:
+                                  type: string
+                                decision:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - allow
+                                  - type: string
+                                    enum:
+                                    - warn
+                                  - type: string
+                                    enum:
+                                    - block
+                                resolvedSource:
+                                  anyOf:
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - tile
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - registry
+                                      tile:
+                                        type: object
+                                        required:
+                                        - workspaceName
+                                        - tileName
+                                        properties:
+                                          workspaceName:
+                                            type: string
+                                          tileName:
+                                            type: string
+                                          version:
+                                            type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - url
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - git
+                                      url:
+                                        type: string
+                                      branch:
+                                        type: string
+                                      subpath:
+                                        type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - path
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - file
+                                      path:
+                                        type: string
+                                fallbackSource:
+                                  anyOf:
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - tile
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - registry
+                                      tile:
+                                        type: object
+                                        required:
+                                        - workspaceName
+                                        - tileName
+                                        properties:
+                                          workspaceName:
+                                            type: string
+                                          tileName:
+                                            type: string
+                                          version:
+                                            type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - url
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - git
+                                      url:
+                                        type: string
+                                      branch:
+                                        type: string
+                                      subpath:
+                                        type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - path
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - file
+                                      path:
+                                        type: string
+                                reasons:
+                                  type: array
+                                  items:
+                                    anyOf:
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - security-finding
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          anyOf:
+                                          - type: string
+                                            enum:
+                                            - info
+                                          - type: string
+                                            enum:
+                                            - warn
+                                          - type: string
+                                            enum:
+                                            - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - securityLevel
+                                          - securityStatus
+                                          - findings
+                                          - registryUrl
+                                          properties:
+                                            securityLevel:
+                                              anyOf:
+                                              - enum:
+                                                - LOW
+                                                - MEDIUM
+                                                - HIGH
+                                                - CRITICAL
+                                                type: string
+                                              - type: 'null'
+                                            securityStatus:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - completed
+                                              - type: string
+                                                enum:
+                                                - failed
+                                              - type: string
+                                                enum:
+                                                - pending
+                                              - type: 'null'
+                                            findings:
+                                              type: array
+                                              items:
+                                                type: object
+                                                required:
+                                                - severity
+                                                - code
+                                                - title
+                                                - reasoning
+                                                - issueDescription
+                                                properties:
+                                                  severity:
+                                                    enum:
+                                                    - LOW
+                                                    - MEDIUM
+                                                    - HIGH
+                                                    - CRITICAL
+                                                    type: string
+                                                  code:
+                                                    type: string
+                                                  title:
+                                                    type: string
+                                                  reasoning:
+                                                    type: string
+                                                  issueDescription:
+                                                    anyOf:
+                                                    - type: string
+                                                    - type: 'null'
+                                            registryUrl:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - source-restricted
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties:
+                                            registryScope:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - all
+                                              - type: string
+                                                enum:
+                                                - tessl-and-org
+                                              - type: string
+                                                enum:
+                                                - org-only
+                                            deniedSourceKind:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - registry
+                                              - type: string
+                                                enum:
+                                                - git
+                                            gitSource:
+                                              type: object
+                                              required:
+                                              - host
+                                              - path
+                                              properties:
+                                                host:
+                                                  type: string
+                                                path:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - workspace-access
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties: {}
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - managed-project-unresolved
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties: {}
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - managed-project-required
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          anyOf:
+                                          - type: string
+                                            enum:
+                                            - info
+                                          - type: string
+                                            enum:
+                                            - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - managedWorkspace
+                                          - policyName
+                                          - dependencyName
+                                          - requiredVersion
+                                          properties:
+                                            managedWorkspace:
+                                              type: string
+                                            policyName:
+                                              type: string
+                                            dependencyName:
+                                              type: string
+                                            requiredVersion:
+                                              type: string
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - release-age
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - requestedVersion
+                                          - requestedReleaseAgeInDays
+                                          - minimumAgeInDays
+                                          - fallbackVersion
+                                          - fallbackPublishedAt
+                                          properties:
+                                            requestedVersion:
+                                              type: string
+                                            requestedReleaseAgeInDays:
+                                              minimum: 0
+                                              type: integer
+                                            minimumAgeInDays:
+                                              minimum: 0
+                                              type: integer
+                                            fallbackVersion:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                            fallbackPublishedAt:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                            fallbackSecurityReasons:
+                                              type: array
+                                              items:
+                                                type: object
+                                                required:
+                                                - kind
+                                                - ruleId
+                                                - severity
+                                                - code
+                                                - message
+                                                - details
+                                                properties:
+                                                  kind:
+                                                    type: string
+                                                    enum:
+                                                    - security-finding
+                                                  ruleId:
+                                                    type: string
+                                                  severity:
+                                                    anyOf:
+                                                    - type: string
+                                                      enum:
+                                                      - info
+                                                    - type: string
+                                                      enum:
+                                                      - warn
+                                                    - type: string
+                                                      enum:
+                                                      - error
+                                                  code:
+                                                    type: string
+                                                  message:
+                                                    type: string
+                                                  details:
+                                                    type: object
+                                                    required:
+                                                    - securityLevel
+                                                    - securityStatus
+                                                    - findings
+                                                    - registryUrl
+                                                    properties:
+                                                      securityLevel:
+                                                        anyOf:
+                                                        - enum:
+                                                          - LOW
+                                                          - MEDIUM
+                                                          - HIGH
+                                                          - CRITICAL
+                                                          type: string
+                                                        - type: 'null'
+                                                      securityStatus:
+                                                        anyOf:
+                                                        - type: string
+                                                          enum:
+                                                          - completed
+                                                        - type: string
+                                                          enum:
+                                                          - failed
+                                                        - type: string
+                                                          enum:
+                                                          - pending
+                                                        - type: 'null'
+                                                      findings:
+                                                        type: array
+                                                        items:
+                                                          type: object
+                                                          required:
+                                                          - severity
+                                                          - code
+                                                          - title
+                                                          - reasoning
+                                                          - issueDescription
+                                                          properties:
+                                                            severity:
+                                                              enum:
+                                                              - LOW
+                                                              - MEDIUM
+                                                              - HIGH
+                                                              - CRITICAL
+                                                              type: string
+                                                            code:
+                                                              type: string
+                                                            title:
+                                                              type: string
+                                                            reasoning:
+                                                              type: string
+                                                            issueDescription:
+                                                              anyOf:
+                                                              - type: string
+                                                              - type: 'null'
+                                                      registryUrl:
+                                                        anyOf:
+                                                        - type: string
+                                                        - type: 'null'
+                                requiresInteractiveConfirmation:
+                                  type: boolean
+                                minimumReleaseAgeDays:
+                                  anyOf:
+                                  - minimum: 0
+                                    type: integer
+                                  - type: 'null'
+                          additionalSources:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - source
+                              - decision
+                              - reasons
+                              properties:
+                                id:
+                                  type: string
+                                source:
+                                  anyOf:
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - tile
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - registry
+                                      tile:
+                                        type: object
+                                        required:
+                                        - workspaceName
+                                        - tileName
+                                        properties:
+                                          workspaceName:
+                                            type: string
+                                          tileName:
+                                            type: string
+                                          version:
+                                            type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - url
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - git
+                                      url:
+                                        type: string
+                                      branch:
+                                        type: string
+                                      subpath:
+                                        type: string
+                                  - type: object
+                                    required:
+                                    - id
+                                    - source
+                                    - path
+                                    properties:
+                                      id:
+                                        type: string
+                                      source:
+                                        type: string
+                                        enum:
+                                        - file
+                                      path:
+                                        type: string
+                                decision:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - allow
+                                  - type: string
+                                    enum:
+                                    - warn
+                                  - type: string
+                                    enum:
+                                    - block
+                                reasons:
+                                  type: array
+                                  items:
+                                    anyOf:
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - security-finding
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          anyOf:
+                                          - type: string
+                                            enum:
+                                            - info
+                                          - type: string
+                                            enum:
+                                            - warn
+                                          - type: string
+                                            enum:
+                                            - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - securityLevel
+                                          - securityStatus
+                                          - findings
+                                          - registryUrl
+                                          properties:
+                                            securityLevel:
+                                              anyOf:
+                                              - enum:
+                                                - LOW
+                                                - MEDIUM
+                                                - HIGH
+                                                - CRITICAL
+                                                type: string
+                                              - type: 'null'
+                                            securityStatus:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - completed
+                                              - type: string
+                                                enum:
+                                                - failed
+                                              - type: string
+                                                enum:
+                                                - pending
+                                              - type: 'null'
+                                            findings:
+                                              type: array
+                                              items:
+                                                type: object
+                                                required:
+                                                - severity
+                                                - code
+                                                - title
+                                                - reasoning
+                                                - issueDescription
+                                                properties:
+                                                  severity:
+                                                    enum:
+                                                    - LOW
+                                                    - MEDIUM
+                                                    - HIGH
+                                                    - CRITICAL
+                                                    type: string
+                                                  code:
+                                                    type: string
+                                                  title:
+                                                    type: string
+                                                  reasoning:
+                                                    type: string
+                                                  issueDescription:
+                                                    anyOf:
+                                                    - type: string
+                                                    - type: 'null'
+                                            registryUrl:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - source-restricted
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties:
+                                            registryScope:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - all
+                                              - type: string
+                                                enum:
+                                                - tessl-and-org
+                                              - type: string
+                                                enum:
+                                                - org-only
+                                            deniedSourceKind:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - registry
+                                              - type: string
+                                                enum:
+                                                - git
+                                            gitSource:
+                                              type: object
+                                              required:
+                                              - host
+                                              - path
+                                              properties:
+                                                host:
+                                                  type: string
+                                                path:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - workspace-access
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties: {}
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - managed-project-unresolved
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          properties: {}
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - managed-project-required
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          anyOf:
+                                          - type: string
+                                            enum:
+                                            - info
+                                          - type: string
+                                            enum:
+                                            - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - managedWorkspace
+                                          - policyName
+                                          - dependencyName
+                                          - requiredVersion
+                                          properties:
+                                            managedWorkspace:
+                                              type: string
+                                            policyName:
+                                              type: string
+                                            dependencyName:
+                                              type: string
+                                            requiredVersion:
+                                              type: string
+                                    - type: object
+                                      required:
+                                      - kind
+                                      - ruleId
+                                      - severity
+                                      - code
+                                      - message
+                                      - details
+                                      properties:
+                                        kind:
+                                          type: string
+                                          enum:
+                                          - release-age
+                                        ruleId:
+                                          type: string
+                                        severity:
+                                          type: string
+                                          enum:
+                                          - error
+                                        code:
+                                          type: string
+                                        message:
+                                          type: string
+                                        details:
+                                          type: object
+                                          required:
+                                          - requestedVersion
+                                          - requestedReleaseAgeInDays
+                                          - minimumAgeInDays
+                                          - fallbackVersion
+                                          - fallbackPublishedAt
+                                          properties:
+                                            requestedVersion:
+                                              type: string
+                                            requestedReleaseAgeInDays:
+                                              minimum: 0
+                                              type: integer
+                                            minimumAgeInDays:
+                                              minimum: 0
+                                              type: integer
+                                            fallbackVersion:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                            fallbackPublishedAt:
+                                              anyOf:
+                                              - type: string
+                                              - type: 'null'
+                                            fallbackSecurityReasons:
+                                              type: array
+                                              items:
+                                                type: object
+                                                required:
+                                                - kind
+                                                - ruleId
+                                                - severity
+                                                - code
+                                                - message
+                                                - details
+                                                properties:
+                                                  kind:
+                                                    type: string
+                                                    enum:
+                                                    - security-finding
+                                                  ruleId:
+                                                    type: string
+                                                  severity:
+                                                    anyOf:
+                                                    - type: string
+                                                      enum:
+                                                      - info
+                                                    - type: string
+                                                      enum:
+                                                      - warn
+                                                    - type: string
+                                                      enum:
+                                                      - error
+                                                  code:
+                                                    type: string
+                                                  message:
+                                                    type: string
+                                                  details:
+                                                    type: object
+                                                    required:
+                                                    - securityLevel
+                                                    - securityStatus
+                                                    - findings
+                                                    - registryUrl
+                                                    properties:
+                                                      securityLevel:
+                                                        anyOf:
+                                                        - enum:
+                                                          - LOW
+                                                          - MEDIUM
+                                                          - HIGH
+                                                          - CRITICAL
+                                                          type: string
+                                                        - type: 'null'
+                                                      securityStatus:
+                                                        anyOf:
+                                                        - type: string
+                                                          enum:
+                                                          - completed
+                                                        - type: string
+                                                          enum:
+                                                          - failed
+                                                        - type: string
+                                                          enum:
+                                                          - pending
+                                                        - type: 'null'
+                                                      findings:
+                                                        type: array
+                                                        items:
+                                                          type: object
+                                                          required:
+                                                          - severity
+                                                          - code
+                                                          - title
+                                                          - reasoning
+                                                          - issueDescription
+                                                          properties:
+                                                            severity:
+                                                              enum:
+                                                              - LOW
+                                                              - MEDIUM
+                                                              - HIGH
+                                                              - CRITICAL
+                                                              type: string
+                                                            code:
+                                                              type: string
+                                                            title:
+                                                              type: string
+                                                            reasoning:
+                                                              type: string
+                                                            issueDescription:
+                                                              anyOf:
+                                                              - type: string
+                                                              - type: 'null'
+                                                      registryUrl:
+                                                        anyOf:
+                                                        - type: string
+                                                        - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/install-policy:
+    get:
+      tags:
+      - InstallPolicy
+      description: Returns the install policy for the organization, falling back to the default policy when no row exists.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - install-policy
+                      attributes:
+                        type: object
+                        required:
+                        - policyDoc
+                        - isDefault
+                        - updatedAt
+                        properties:
+                          policyDoc:
+                            additionalProperties: false
+                            type: object
+                            required:
+                            - version
+                            - rules
+                            properties:
+                              version:
+                                type: number
+                                enum:
+                                - 1
+                              rules:
+                                additionalProperties: false
+                                type: object
+                                required:
+                                - securityThreshold
+                                properties:
+                                  securityThreshold:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - minSeverityToWarn
+                                    - minSeverityToBlock
+                                    properties:
+                                      minSeverityToWarn:
+                                        anyOf:
+                                        - anyOf:
+                                          - type: string
+                                            enum:
+                                            - LOW
+                                          - type: string
+                                            enum:
+                                            - MEDIUM
+                                          - type: string
+                                            enum:
+                                            - HIGH
+                                          - type: string
+                                            enum:
+                                            - CRITICAL
+                                        - type: 'null'
+                                      minSeverityToBlock:
+                                        anyOf:
+                                        - anyOf:
+                                          - type: string
+                                            enum:
+                                            - LOW
+                                          - type: string
+                                            enum:
+                                            - MEDIUM
+                                          - type: string
+                                            enum:
+                                            - HIGH
+                                          - type: string
+                                            enum:
+                                            - CRITICAL
+                                        - type: 'null'
+                                  sourceRestriction:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - registryScope
+                                    - allowGitSources
+                                    properties:
+                                      registryScope:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - all
+                                        - type: string
+                                          enum:
+                                          - tessl-and-org
+                                        - type: string
+                                          enum:
+                                          - org-only
+                                      allowGitSources:
+                                        type: boolean
+                                      gitSourceAllowlist:
+                                        type: array
+                                        items:
+                                          additionalProperties: false
+                                          type: object
+                                          required:
+                                          - host
+                                          - path
+                                          properties:
+                                            host:
+                                              minLength: 1
+                                              type: string
+                                            path:
+                                              minItems: 1
+                                              type: array
+                                              items:
+                                                minLength: 1
+                                                type: string
+                                  minimumReleaseAge:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - days
+                                    properties:
+                                      days:
+                                        minimum: 0
+                                        type: integer
+                          isDefault:
+                            type: boolean
+                          updatedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    put:
+      tags:
+      - InstallPolicy
+      description: Upserts the install policy for the organization.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - policyDoc
+              properties:
+                policyDoc:
+                  additionalProperties: false
+                  type: object
+                  required:
+                  - version
+                  - rules
+                  properties:
+                    version:
+                      type: number
+                      enum:
+                      - 1
+                    rules:
+                      additionalProperties: false
+                      type: object
+                      required:
+                      - securityThreshold
+                      properties:
+                        securityThreshold:
+                          additionalProperties: false
+                          type: object
+                          required:
+                          - minSeverityToWarn
+                          - minSeverityToBlock
+                          properties:
+                            minSeverityToWarn:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - LOW
+                                - type: string
+                                  enum:
+                                  - MEDIUM
+                                - type: string
+                                  enum:
+                                  - HIGH
+                                - type: string
+                                  enum:
+                                  - CRITICAL
+                              - type: 'null'
+                            minSeverityToBlock:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - LOW
+                                - type: string
+                                  enum:
+                                  - MEDIUM
+                                - type: string
+                                  enum:
+                                  - HIGH
+                                - type: string
+                                  enum:
+                                  - CRITICAL
+                              - type: 'null'
+                        sourceRestriction:
+                          additionalProperties: false
+                          type: object
+                          required:
+                          - registryScope
+                          - allowGitSources
+                          properties:
+                            registryScope:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - all
+                              - type: string
+                                enum:
+                                - tessl-and-org
+                              - type: string
+                                enum:
+                                - org-only
+                            allowGitSources:
+                              type: boolean
+                            gitSourceAllowlist:
+                              type: array
+                              items:
+                                additionalProperties: false
+                                type: object
+                                required:
+                                - host
+                                - path
+                                properties:
+                                  host:
+                                    minLength: 1
+                                    type: string
+                                  path:
+                                    minItems: 1
+                                    type: array
+                                    items:
+                                      minLength: 1
+                                      type: string
+                        minimumReleaseAge:
+                          additionalProperties: false
+                          type: object
+                          required:
+                          - days
+                          properties:
+                            days:
+                              minimum: 0
+                              type: integer
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - install-policy
+                      attributes:
+                        type: object
+                        required:
+                        - policyDoc
+                        - isDefault
+                        - updatedAt
+                        properties:
+                          policyDoc:
+                            additionalProperties: false
+                            type: object
+                            required:
+                            - version
+                            - rules
+                            properties:
+                              version:
+                                type: number
+                                enum:
+                                - 1
+                              rules:
+                                additionalProperties: false
+                                type: object
+                                required:
+                                - securityThreshold
+                                properties:
+                                  securityThreshold:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - minSeverityToWarn
+                                    - minSeverityToBlock
+                                    properties:
+                                      minSeverityToWarn:
+                                        anyOf:
+                                        - anyOf:
+                                          - type: string
+                                            enum:
+                                            - LOW
+                                          - type: string
+                                            enum:
+                                            - MEDIUM
+                                          - type: string
+                                            enum:
+                                            - HIGH
+                                          - type: string
+                                            enum:
+                                            - CRITICAL
+                                        - type: 'null'
+                                      minSeverityToBlock:
+                                        anyOf:
+                                        - anyOf:
+                                          - type: string
+                                            enum:
+                                            - LOW
+                                          - type: string
+                                            enum:
+                                            - MEDIUM
+                                          - type: string
+                                            enum:
+                                            - HIGH
+                                          - type: string
+                                            enum:
+                                            - CRITICAL
+                                        - type: 'null'
+                                  sourceRestriction:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - registryScope
+                                    - allowGitSources
+                                    properties:
+                                      registryScope:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - all
+                                        - type: string
+                                          enum:
+                                          - tessl-and-org
+                                        - type: string
+                                          enum:
+                                          - org-only
+                                      allowGitSources:
+                                        type: boolean
+                                      gitSourceAllowlist:
+                                        type: array
+                                        items:
+                                          additionalProperties: false
+                                          type: object
+                                          required:
+                                          - host
+                                          - path
+                                          properties:
+                                            host:
+                                              minLength: 1
+                                              type: string
+                                            path:
+                                              minItems: 1
+                                              type: array
+                                              items:
+                                                minLength: 1
+                                                type: string
+                                  minimumReleaseAge:
+                                    additionalProperties: false
+                                    type: object
+                                    required:
+                                    - days
+                                    properties:
+                                      days:
+                                        minimum: 0
+                                        type: integer
+                          isDefault:
+                            type: boolean
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    delete:
+      tags:
+      - InstallPolicy
+      description: Deletes the install policy for the organization, reverting to the default policy. Idempotent.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

@@ -1,0 +1,1567 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Projects API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Projects
+  description: Workspace projects.
+paths:
+  /v1/projects:
+    get:
+      summary: List projects
+      tags:
+      - Projects
+      description: Lists projects, optionally filtered by workspace and name.
+      parameters:
+      - schema:
+          default: -createdAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - createdAt
+              - type: string
+                enum:
+                - -createdAt
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+          - anyOf:
+            - type: string
+              enum:
+              - createdAt
+            - type: string
+              enum:
+              - -createdAt
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][eq]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[name]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[name][eq]
+        required: false
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - project
+                        attributes:
+                          type: object
+                          required:
+                          - workspaceId
+                          - name
+                          - sourceType
+                          - sourceUri
+                          - repoSubpath
+                          - createdBy
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            workspaceId:
+                              format: uuid
+                              type: string
+                            name:
+                              type: string
+                            sourceType:
+                              type: string
+                            sourceUri:
+                              type: string
+                            repoSubpath:
+                              type: string
+                            createdBy:
+                              format: uuid
+                              type: string
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    post:
+      summary: Create a project
+      tags:
+      - Projects
+      description: Creates a project bound to a workspace and a source repository.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - workspaceId
+              - name
+              - sourceType
+              - sourceUri
+              properties:
+                workspaceId:
+                  format: uuid
+                  type: string
+                name:
+                  minLength: 1
+                  pattern: ^\s*[A-Za-z0-9][A-Za-z0-9_-]{0,199}\s*$
+                  type: string
+                sourceType:
+                  minLength: 1
+                  maxLength: 64
+                  type: string
+                sourceUri:
+                  minLength: 1
+                  maxLength: 2048
+                  type: string
+                repoSubpath:
+                  maxLength: 4096
+                  type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - project
+                      attributes:
+                        type: object
+                        required:
+                        - workspaceId
+                        - name
+                        - sourceType
+                        - sourceUri
+                        - repoSubpath
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          name:
+                            type: string
+                          sourceType:
+                            type: string
+                          sourceUri:
+                            type: string
+                          repoSubpath:
+                            type: string
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - title
+                    - message
+                    - code
+                    properties:
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      title:
+                        type: string
+                      message:
+                        type: string
+                      code:
+                        anyOf:
+                        - type: string
+                          enum:
+                          - duplicate_project_name
+                        - type: string
+                          enum:
+                          - duplicate_project_provenance
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/projects/{projectId}:
+    get:
+      summary: Get a project
+      tags:
+      - Projects
+      description: Fetches a project by id.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - project
+                      attributes:
+                        type: object
+                        required:
+                        - workspaceId
+                        - name
+                        - sourceType
+                        - sourceUri
+                        - repoSubpath
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          name:
+                            type: string
+                          sourceType:
+                            type: string
+                          sourceUri:
+                            type: string
+                          repoSubpath:
+                            type: string
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    patch:
+      summary: Update a project
+      tags:
+      - Projects
+      description: Updates a project (rename, or replace source binding).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - additionalProperties: false
+                type: object
+                required:
+                - name
+                properties:
+                  name:
+                    minLength: 1
+                    pattern: ^\s*[A-Za-z0-9][A-Za-z0-9_-]{0,199}\s*$
+                    type: string
+                  sourceType:
+                    not: {}
+                  sourceUri:
+                    not: {}
+                  repoSubpath:
+                    not: {}
+              - additionalProperties: false
+                type: object
+                required:
+                - sourceType
+                - sourceUri
+                properties:
+                  name:
+                    not: {}
+                  sourceType:
+                    minLength: 1
+                    maxLength: 64
+                    type: string
+                  sourceUri:
+                    minLength: 1
+                    maxLength: 2048
+                    type: string
+                  repoSubpath:
+                    maxLength: 4096
+                    type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - project
+                      attributes:
+                        type: object
+                        required:
+                        - workspaceId
+                        - name
+                        - sourceType
+                        - sourceUri
+                        - repoSubpath
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          name:
+                            type: string
+                          sourceType:
+                            type: string
+                          sourceUri:
+                            type: string
+                          repoSubpath:
+                            type: string
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - status
+                    - title
+                    - message
+                    - code
+                    properties:
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      title:
+                        type: string
+                      message:
+                        type: string
+                      code:
+                        anyOf:
+                        - type: string
+                          enum:
+                          - duplicate_project_name
+                        - type: string
+                          enum:
+                          - duplicate_project_provenance
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    delete:
+      summary: Delete a project
+      tags:
+      - Projects
+      description: 'Soft-deletes a project: removes it from normal reads and frees its name and source binding for reuse, but preserves eval-run and scenario-generation history. Who deleted it is recorded in the audit log.'
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: projectId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/projects/validate:
+    post:
+      summary: Validate a project source binding
+      tags:
+      - Projects
+      description: Validates whether a locator/source pair maps to an existing project, surfacing drift or conflicts.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - source
+              properties:
+                locator:
+                  type: object
+                  required:
+                  - workspaceName
+                  - projectName
+                  properties:
+                    workspaceName:
+                      minLength: 1
+                      type: string
+                    projectName:
+                      minLength: 1
+                      type: string
+                source:
+                  type: object
+                  required:
+                  - sourceType
+                  - sourceUri
+                  properties:
+                    sourceType:
+                      minLength: 1
+                      maxLength: 64
+                      type: string
+                    sourceUri:
+                      minLength: 1
+                      maxLength: 2048
+                      type: string
+                    repoSubpath:
+                      maxLength: 4096
+                      type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - project-validation
+                      attributes:
+                        type: object
+                        required:
+                        - locator
+                        - source
+                        - outcome
+                        - allowedActions
+                        - linkedProject
+                        - sourceMatches
+                        properties:
+                          locator:
+                            anyOf:
+                            - type: object
+                              required:
+                              - workspaceName
+                              - projectName
+                              properties:
+                                workspaceName:
+                                  minLength: 1
+                                  type: string
+                                projectName:
+                                  minLength: 1
+                                  type: string
+                            - type: 'null'
+                          source:
+                            type: object
+                            required:
+                            - sourceType
+                            - sourceUri
+                            - repoSubpath
+                            properties:
+                              sourceType:
+                                type: string
+                              sourceUri:
+                                type: string
+                              repoSubpath:
+                                type: string
+                          outcome:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - match
+                            - type: string
+                              enum:
+                              - locator_drift
+                            - type: string
+                              enum:
+                              - provenance_drift
+                            - type: string
+                              enum:
+                              - full_mismatch
+                            - type: string
+                              enum:
+                              - conflict
+                          allowedActions:
+                            type: array
+                            items:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - relink
+                              - type: string
+                                enum:
+                                - update_source
+                              - type: string
+                                enum:
+                                - update_name
+                              - type: string
+                                enum:
+                                - create
+                          linkedProject:
+                            anyOf:
+                            - type: object
+                              required:
+                              - id
+                              - workspaceId
+                              - workspaceName
+                              - name
+                              - sourceType
+                              - sourceUri
+                              - repoSubpath
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                workspaceId:
+                                  format: uuid
+                                  type: string
+                                workspaceName:
+                                  type: string
+                                name:
+                                  type: string
+                                sourceType:
+                                  type: string
+                                sourceUri:
+                                  type: string
+                                repoSubpath:
+                                  type: string
+                            - type: 'null'
+                          sourceMatches:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - workspaceId
+                              - workspaceName
+                              - name
+                              - sourceType
+                              - sourceUri
+                              - repoSubpath
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                workspaceId:
+                                  format: uuid
+                                  type: string
+                                workspaceName:
+                                  type: string
+                                name:
+                                  type: string
+                                sourceType:
+                                  type: string
+                                sourceUri:
+                                  type: string
+                                repoSubpath:
+                                  type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

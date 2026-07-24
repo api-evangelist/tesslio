@@ -1,0 +1,3696 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Skills API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Skills
+  description: Skill discovery, reviews, and security checks.
+paths:
+  /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-reviews:
+    get:
+      tags:
+      - Skills
+      description: Returns the LLM skill reviews (per skill) for a tile version.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: tileName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: version
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - tile-version-skill-review
+                        attributes:
+                          type: object
+                          required:
+                          - path
+                          - name
+                          - description
+                          - skillMdFingerprint
+                          - reviewResults
+                          - reviewScore
+                          - reviewUpdatedAt
+                          properties:
+                            path:
+                              type: string
+                            name:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            description:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            skillMdFingerprint:
+                              pattern: ^[0-9a-f]{64}$
+                              type: string
+                            reviewResults:
+                              anyOf:
+                              - type: object
+                                required:
+                                - validation
+                                properties:
+                                  validation:
+                                    type: object
+                                    required:
+                                    - checks
+                                    - overallPassed
+                                    - errorCount
+                                    - warningCount
+                                    properties:
+                                      skillName:
+                                        type: string
+                                      skillDescription:
+                                        type: string
+                                      checks:
+                                        type: array
+                                        items:
+                                          type: object
+                                          required:
+                                          - name
+                                          - status
+                                          - message
+                                          properties:
+                                            name:
+                                              type: string
+                                            status:
+                                              anyOf:
+                                              - type: string
+                                                enum:
+                                                - passed
+                                              - type: string
+                                                enum:
+                                                - warning
+                                              - type: string
+                                                enum:
+                                                - error
+                                            message:
+                                              type: string
+                                            details:
+                                              type: object
+                                              additionalProperties:
+                                                anyOf:
+                                                - type: string
+                                                - type: number
+                                                - type: array
+                                                  items:
+                                                    type: string
+                                      overallPassed:
+                                        type: boolean
+                                      errorCount:
+                                        type: number
+                                      warningCount:
+                                        type: number
+                                  judges:
+                                    type: object
+                                    additionalProperties:
+                                      type: object
+                                      required:
+                                      - success
+                                      properties:
+                                        success:
+                                          type: boolean
+                                        errorMessage:
+                                          type: string
+                                        scale:
+                                          type: object
+                                          required:
+                                          - min
+                                          - max
+                                          properties:
+                                            min:
+                                              type: number
+                                            max:
+                                              type: number
+                                        evaluation:
+                                          type: object
+                                          required:
+                                          - scores
+                                          - overall_assessment
+                                          - suggestions
+                                          properties:
+                                            scores:
+                                              type: object
+                                              additionalProperties:
+                                                type: object
+                                                required:
+                                                - score
+                                                - reasoning
+                                                properties:
+                                                  score:
+                                                    type: number
+                                                  reasoning:
+                                                    type: string
+                                            overall_assessment:
+                                              type: string
+                                            suggestions:
+                                              type: array
+                                              items:
+                                                type: string
+                                            validation_skipped:
+                                              type: boolean
+                                        weightedScore:
+                                          type: number
+                                        normalizedScore:
+                                          type: number
+                                  scoring:
+                                    type: object
+                                    required:
+                                    - components
+                                    properties:
+                                      components:
+                                        type: array
+                                        items:
+                                          type: object
+                                          required:
+                                          - id
+                                          - weight
+                                          - normalized
+                                          properties:
+                                            id:
+                                              type: string
+                                            weight:
+                                              type: number
+                                            normalized:
+                                              anyOf:
+                                              - type: number
+                                              - type: 'null'
+                              - type: 'null'
+                            reviewScore:
+                              anyOf:
+                              - type: integer
+                              - type: 'null'
+                            reviewUpdatedAt:
+                              anyOf:
+                              - format: date-time
+                                type: string
+                              - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-security-reviews:
+    get:
+      tags:
+      - Skills
+      description: Returns the Snyk security reviews (per skill) for a tile version.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: tileName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: version
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - tile-version-skill-security-review
+                        attributes:
+                          type: object
+                          required:
+                          - path
+                          - name
+                          - description
+                          - skillFingerprint
+                          - securityStatus
+                          - securityRiskLevel
+                          - securitySummary
+                          - securityUpdatedAt
+                          - securityFindings
+                          - securityOverrideMessage
+                          properties:
+                            path:
+                              type: string
+                            name:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            description:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            skillFingerprint:
+                              pattern: ^[0-9a-f]{64}$
+                              type: string
+                            securityStatus:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - completed
+                                - type: string
+                                  enum:
+                                  - failed
+                              - type: 'null'
+                            securityRiskLevel:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - LOW
+                                - type: string
+                                  enum:
+                                  - MEDIUM
+                                - type: string
+                                  enum:
+                                  - HIGH
+                                - type: string
+                                  enum:
+                                  - CRITICAL
+                              - type: 'null'
+                            securitySummary:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            securityUpdatedAt:
+                              anyOf:
+                              - format: date-time
+                                type: string
+                              - type: 'null'
+                            securityFindings:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                - severity
+                                - code
+                                - title
+                                - reasoning
+                                - issueDescription
+                                properties:
+                                  severity:
+                                    anyOf:
+                                    - type: string
+                                      enum:
+                                      - CRITICAL
+                                    - type: string
+                                      enum:
+                                      - HIGH
+                                    - type: string
+                                      enum:
+                                      - MEDIUM
+                                    - type: string
+                                      enum:
+                                      - LOW
+                                  code:
+                                    type: string
+                                  title:
+                                    type: string
+                                  reasoning:
+                                    type: string
+                                  issueDescription:
+                                    anyOf:
+                                    - type: string
+                                    - type: 'null'
+                            securityOverrideMessage:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/implement-ticket-schema/schema.json:
+    get:
+      tags:
+      - Skills
+      description: Returns the JSON Schema for the implement-ticket skill input payload. Public and unauthenticated.
+      responses:
+        '200':
+          description: JSON Schema document
+          content:
+            application/json:
+              schema:
+                description: JSON Schema document
+                type: object
+                additionalProperties: true
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/skills/workspace:
+    post:
+      tags:
+      - Skills
+      description: Indexes one or more SKILL.md files from a GitHub repository using the workspace GitHub App installation. Supports public and private repositories.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sourceUrl
+              - paths
+              - sourceRef
+              properties:
+                sourceUrl:
+                  format: uri
+                  type: string
+                paths:
+                  minItems: 1
+                  maxItems: 10
+                  type: array
+                  items:
+                    minLength: 1
+                    pattern: ^(?:[\w.\-]+/)*SKILL\.md$
+                    description: Relative path to a SKILL.md file within the repository
+                    type: string
+                sourceRef:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - registered
+                    - skipped
+                    - failed
+                    - skills
+                    - errors
+                    properties:
+                      registered:
+                        type: integer
+                      skipped:
+                        type: integer
+                      failed:
+                        type: integer
+                      skills:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - skillId
+                          - skillVersionId
+                          - path
+                          - commitSha
+                          properties:
+                            skillId:
+                              type: string
+                            skillVersionId:
+                              type: string
+                            path:
+                              type: string
+                            commitSha:
+                              type: string
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - path
+                          - message
+                          properties:
+                            path:
+                              type: string
+                            message:
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/analyse:
+    post:
+      tags:
+      - Skills
+      description: Scans a public repository (GitHub, GitLab, or Bitbucket) at a given branch for SKILL.md files and returns a summary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - repoUrl
+              properties:
+                repoUrl:
+                  format: uri
+                  type: string
+                branch:
+                  type: string
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                - meta
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - skill
+                        attributes:
+                          type: object
+                          required:
+                          - path
+                          - name
+                          - description
+                          properties:
+                            path:
+                              type: string
+                            name:
+                              type: string
+                            description:
+                              type: string
+                  meta:
+                    type: object
+                    required:
+                    - repoUrl
+                    - branch
+                    - totalCount
+                    - unindexedCount
+                    - returnedCount
+                    - limit
+                    properties:
+                      repoUrl:
+                        type: string
+                      branch:
+                        type: string
+                      path:
+                        type: string
+                      totalCount:
+                        type: integer
+                      unindexedCount:
+                        type: integer
+                      returnedCount:
+                        type: integer
+                      limit:
+                        type: integer
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills:
+    get:
+      tags:
+      - Skills
+      description: Lists standalone skills with search and source-URL filters.
+      parameters:
+      - schema:
+          default: -updatedAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+              - type: string
+                enum:
+                - relevance
+              - type: string
+                enum:
+                - -relevance
+          - anyOf:
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+            - type: string
+              enum:
+              - relevance
+            - type: string
+              enum:
+              - -relevance
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][eq]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][ne]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][gt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][gte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][lt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][lte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[search][like]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][eq]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][ne]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][gt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][gte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][lt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][lte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[sourceUrl][like]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured][eq]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured][ne]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][eq]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][ne]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - skill
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - description
+                          - sourceUrl
+                          - sourceRef
+                          - path
+                          - featured
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            name:
+                              type: string
+                            description:
+                              type: string
+                            sourceUrl:
+                              format: uri
+                              type: string
+                            sourceRef:
+                              type: string
+                            path:
+                              type: string
+                            featured:
+                              type: boolean
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+                            relevance:
+                              anyOf:
+                              - type: number
+                              - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    post:
+      tags:
+      - Skills
+      description: Indexes a standalone skill from a public source URL (GitHub, GitLab, or Bitbucket) and triggers review + security workflows.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - sourceUrl
+              - sourceRef
+              - path
+              properties:
+                sourceUrl:
+                  format: uri
+                  type: string
+                sourceRef:
+                  minLength: 1
+                  type: string
+                path:
+                  minLength: 1
+                  pattern: (?:^|/)SKILL\.md$
+                  type: string
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - skill
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - description
+                        - sourceUrl
+                        - sourceRef
+                        - blobSha
+                        - dirTreeSha
+                        - path
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          sourceUrl:
+                            format: uri
+                            type: string
+                          sourceRef:
+                            type: string
+                          blobSha:
+                            type: string
+                          dirTreeSha:
+                            type: string
+                          path:
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '204':
+          description: Default Response
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{id}:
+    get:
+      tags:
+      - Skills
+      description: Fetches a standalone skill by id, including the SKILL.md body.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - skill
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - description
+                        - sourceUrl
+                        - sourceRef
+                        - path
+                        - skillMdBody
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          sourceUrl:
+                            format: uri
+                            type: string
+                          sourceRef:
+                            type: string
+                          path:
+                            type: string
+                          skillMdBody:
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{id}/request-evals:
+    post:
+      tags:
+      - Skills
+      description: Triggers a skill-index eval workflow for a standalone skill.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                scenarioCount:
+                  minimum: 1
+                  maximum: 50
+                  default: 3
+                  type: integer
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - workflowId
+                    properties:
+                      workflowId:
+                        type: string
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - skillVersionId
+                    - message
+                    properties:
+                      evalRunId:
+                        format: uuid
+                        type: string
+                      skillVersionId:
+                        format: uuid
+                        type: string
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{provider}/{owner}:
+    get:
+      tags:
+      - Skills
+      description: Lists repositories owned by an SCM owner that contain indexed skills.
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][eq]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][ne]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: string
+        in: path
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - skill-repo
+                        attributes:
+                          type: object
+                          required:
+                          - repoName
+                          - skillNames
+                          - skillCount
+                          - updatedAt
+                          properties:
+                            repoName:
+                              type: string
+                            skillNames:
+                              type: array
+                              items:
+                                type: string
+                            skillCount:
+                              type: number
+                            updatedAt:
+                              format: date-time
+                              type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{provider}/{owner}/{repo}:
+    get:
+      tags:
+      - Skills
+      description: Lists indexed skills in a specific repository.
+      parameters:
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][eq]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][ne]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: string
+        in: path
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: repo
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - skill
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - description
+                          - sourceUrl
+                          - sourceRef
+                          - path
+                          - isPrivate
+                          - createdAt
+                          - updatedAt
+                          - reviewScore
+                          - scores
+                          properties:
+                            name:
+                              type: string
+                            description:
+                              type: string
+                            sourceUrl:
+                              format: uri
+                              type: string
+                            sourceRef:
+                              type: string
+                            path:
+                              type: string
+                            isPrivate:
+                              type: boolean
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+                            reviewScore:
+                              anyOf:
+                              - type: number
+                              - type: 'null'
+                            scores:
+                              type: object
+                              required:
+                              - version
+                              - aggregate
+                              - quality
+                              - impact
+                              - security
+                              - evalAvg
+                              - evalBaseline
+                              - evalImprovement
+                              - evalImprovementMultiplier
+                              - evalCount
+                              - validationErrors
+                              - lastScoredAt
+                              properties:
+                                version:
+                                  type: string
+                                aggregate:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                quality:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                impact:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                security:
+                                  anyOf:
+                                  - anyOf:
+                                    - type: string
+                                      enum:
+                                      - LOW
+                                    - type: string
+                                      enum:
+                                      - MEDIUM
+                                    - type: string
+                                      enum:
+                                      - HIGH
+                                    - type: string
+                                      enum:
+                                      - CRITICAL
+                                  - type: 'null'
+                                evalAvg:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                evalBaseline:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                evalImprovement:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                evalImprovementMultiplier:
+                                  anyOf:
+                                  - type: number
+                                  - type: 'null'
+                                evalCount:
+                                  anyOf:
+                                  - type: integer
+                                  - type: 'null'
+                                validationErrors:
+                                  type: array
+                                  items:
+                                    type: string
+                                lastScoredAt:
+                                  anyOf:
+                                  - format: date-time
+                                    type: string
+                                  - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{provider}/{owner}/{repo}/{skillName}:
+    get:
+      tags:
+      - Skills
+      description: Fetches a skill by provider/owner/repo/name, including reviews and security findings.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: repo
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: skillName
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - skill
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - description
+                        - sourceUrl
+                        - sourceRef
+                        - path
+                        - isPrivate
+                        - skillMdBody
+                        - createdAt
+                        - updatedAt
+                        - tileFullName
+                        - reviewResults
+                        - reviewScore
+                        - scores
+                        - securityStatus
+                        - securityRiskLevel
+                        - securitySummary
+                        - securityUpdatedAt
+                        - securityFindings
+                        - securityOverrideMessage
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          sourceUrl:
+                            format: uri
+                            type: string
+                          sourceRef:
+                            type: string
+                          path:
+                            type: string
+                          isPrivate:
+                            type: boolean
+                          skillMdBody:
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          tileFullName:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          reviewResults:
+                            anyOf:
+                            - type: object
+                              required:
+                              - validation
+                              properties:
+                                validation:
+                                  type: object
+                                  required:
+                                  - checks
+                                  - overallPassed
+                                  - errorCount
+                                  - warningCount
+                                  properties:
+                                    skillName:
+                                      type: string
+                                    skillDescription:
+                                      type: string
+                                    checks:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - name
+                                        - status
+                                        - message
+                                        properties:
+                                          name:
+                                            type: string
+                                          status:
+                                            anyOf:
+                                            - type: string
+                                              enum:
+                                              - passed
+                                            - type: string
+                                              enum:
+                                              - warning
+                                            - type: string
+                                              enum:
+                                              - error
+                                          message:
+                                            type: string
+                                          details:
+                                            type: object
+                                            additionalProperties:
+                                              anyOf:
+                                              - type: string
+                                              - type: number
+                                              - type: array
+                                                items:
+                                                  type: string
+                                    overallPassed:
+                                      type: boolean
+                                    errorCount:
+                                      type: number
+                                    warningCount:
+                                      type: number
+                                judges:
+                                  type: object
+                                  additionalProperties:
+                                    type: object
+                                    required:
+                                    - success
+                                    properties:
+                                      success:
+                                        type: boolean
+                                      errorMessage:
+                                        type: string
+                                      scale:
+                                        type: object
+                                        required:
+                                        - min
+                                        - max
+                                        properties:
+                                          min:
+                                            type: number
+                                          max:
+                                            type: number
+                                      evaluation:
+                                        type: object
+                                        required:
+                                        - scores
+                                        - overall_assessment
+                                        - suggestions
+                                        properties:
+                                          scores:
+                                            type: object
+                                            additionalProperties:
+                                              type: object
+                                              required:
+                                              - score
+                                              - reasoning
+                                              properties:
+                                                score:
+                                                  type: number
+                                                reasoning:
+                                                  type: string
+                                          overall_assessment:
+                                            type: string
+                                          suggestions:
+                                            type: array
+                                            items:
+                                              type: string
+                                          validation_skipped:
+                                            type: boolean
+                                      weightedScore:
+                                        type: number
+                                      normalizedScore:
+                                        type: number
+                                scoring:
+                                  type: object
+                                  required:
+                                  - components
+                                  properties:
+                                    components:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - id
+                                        - weight
+                                        - normalized
+                                        properties:
+                                          id:
+                                            type: string
+                                          weight:
+                                            type: number
+                                          normalized:
+                                            anyOf:
+                                            - type: number
+                                            - type: 'null'
+                            - type: 'null'
+                          reviewScore:
+                            anyOf:
+                            - type: number
+                            - type: 'null'
+                          scores:
+                            type: object
+                            required:
+                            - version
+                            - aggregate
+                            - quality
+                            - impact
+                            - security
+                            - evalAvg
+                            - evalBaseline
+                            - evalImprovement
+                            - evalImprovementMultiplier
+                            - evalCount
+                            - validationErrors
+                            - lastScoredAt
+                            properties:
+                              version:
+                                type: string
+                              aggregate:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              quality:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              impact:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              security:
+                                anyOf:
+                                - anyOf:
+                                  - type: string
+                                    enum:
+                                    - LOW
+                                  - type: string
+                                    enum:
+                                    - MEDIUM
+                                  - type: string
+                                    enum:
+                                    - HIGH
+                                  - type: string
+                                    enum:
+                                    - CRITICAL
+                                - type: 'null'
+                              evalAvg:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              evalBaseline:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              evalImprovement:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              evalImprovementMultiplier:
+                                anyOf:
+                                - type: number
+                                - type: 'null'
+                              evalCount:
+                                anyOf:
+                                - type: integer
+                                - type: 'null'
+                              validationErrors:
+                                type: array
+                                items:
+                                  type: string
+                              lastScoredAt:
+                                anyOf:
+                                - format: date-time
+                                  type: string
+                                - type: 'null'
+                          securityStatus:
+                            anyOf:
+                            - anyOf:
+                              - type: string
+                                enum:
+                                - completed
+                              - type: string
+                                enum:
+                                - failed
+                            - type: 'null'
+                          securityRiskLevel:
+                            anyOf:
+                            - anyOf:
+                              - type: string
+                                enum:
+                                - LOW
+                              - type: string
+                                enum:
+                                - MEDIUM
+                              - type: string
+                                enum:
+                                - HIGH
+                              - type: string
+                                enum:
+                                - CRITICAL
+                            - type: 'null'
+                          securitySummary:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          securityUpdatedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          securityFindings:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - severity
+                              - code
+                              - title
+                              - reasoning
+                              - issueDescription
+                              properties:
+                                severity:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - CRITICAL
+                                  - type: string
+                                    enum:
+                                    - HIGH
+                                  - type: string
+                                    enum:
+                                    - MEDIUM
+                                  - type: string
+                                    enum:
+                                    - LOW
+                                code:
+                                  type: string
+                                title:
+                                  type: string
+                                reasoning:
+                                  type: string
+                                issueDescription:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                          securityOverrideMessage:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite:
+    get:
+      tags:
+      - Skills
+      description: Returns the eval suite (latest run + scenarios) for a skill identified by provider/owner/repo/name.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: repo
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: skillName
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-suite
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - scenarios
+                        - expectedVariants
+                        - lastScoredAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          scenarios:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - fingerprint
+                              - task
+                              - rubric
+                              - createdAt
+                              - updatedAt
+                              - solutions
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                fingerprint:
+                                  pattern: ^[a-f0-9]{64}$
+                                  type: string
+                                task:
+                                  type: string
+                                path:
+                                  type: string
+                                shortDescription:
+                                  type: string
+                                rubric:
+                                  type: object
+                                  required:
+                                  - context
+                                  - type
+                                  - checklist
+                                  properties:
+                                    context:
+                                      minLength: 1
+                                      type: string
+                                    type:
+                                      type: string
+                                      enum:
+                                      - weighted_checklist
+                                    checklist:
+                                      minItems: 1
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - name
+                                        - description
+                                        - max_score
+                                        properties:
+                                          name:
+                                            minLength: 1
+                                            type: string
+                                          description:
+                                            minLength: 1
+                                            type: string
+                                          max_score:
+                                            minimum: 0
+                                            type: number
+                                qualityAssessment:
+                                  type: object
+                                  required:
+                                  - feasibility
+                                  - feasibility_notes
+                                  - leakage
+                                  - leakage_evidence
+                                  - scenario_value
+                                  - scenario_value_notes
+                                  - assessed_at
+                                  - model
+                                  properties:
+                                    feasibility:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - FEASIBLE
+                                      - type: string
+                                        enum:
+                                        - NOT_FEASIBLE
+                                    feasibility_notes:
+                                      type: string
+                                    leakage:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - NO_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - LOW_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - MEDIUM_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - HIGH_LEAKAGE
+                                    leakage_evidence:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - scenario_statement
+                                        - criteria_rubric
+                                        properties:
+                                          scenario_statement:
+                                            type: string
+                                          criteria_rubric:
+                                            type: string
+                                    scenario_value:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                    scenario_value_notes:
+                                      type: string
+                                    assessed_at:
+                                      format: date-time
+                                      type: string
+                                    model:
+                                      type: string
+                                qualityFilterStatus:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - included
+                                  - type: string
+                                    enum:
+                                    - rejected
+                                createdAt:
+                                  format: date-time
+                                  type: string
+                                updatedAt:
+                                  format: date-time
+                                  type: string
+                                solutions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - id
+                                    - variant
+                                    - solutionTarGZS3Key
+                                    - solutionMetadata
+                                    - assessmentResults
+                                    - assessmentMetadata
+                                    - createdAt
+                                    - updatedAt
+                                    properties:
+                                      id:
+                                        format: uuid
+                                        type: string
+                                      variant:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - baseline
+                                        - type: string
+                                          enum:
+                                          - usage-spec
+                                      solutionTarGZS3Key:
+                                        anyOf:
+                                        - type: string
+                                        - type: 'null'
+                                      solutionMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      assessmentResults:
+                                        anyOf:
+                                        - type: array
+                                          items:
+                                            type: object
+                                            required:
+                                            - name
+                                            - score
+                                            - reasoning
+                                            properties:
+                                              name:
+                                                minLength: 1
+                                                type: string
+                                              score:
+                                                minimum: 0
+                                                type: number
+                                              max_score:
+                                                minimum: 0
+                                                type: number
+                                              reasoning:
+                                                minLength: 1
+                                                type: string
+                                        - type: 'null'
+                                      assessmentMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      createdAt:
+                                        format: date-time
+                                        type: string
+                                      updatedAt:
+                                        format: date-time
+                                        type: string
+                                      runs:
+                                        type: array
+                                        items:
+                                          anyOf:
+                                          - type: object
+                                            required:
+                                            - status
+                                            - solutionId
+                                            - score
+                                            - createdAt
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - completed
+                                              solutionId:
+                                                format: uuid
+                                                type: string
+                                              score:
+                                                anyOf:
+                                                - type: number
+                                                - type: 'null'
+                                              createdAt:
+                                                format: date-time
+                                                type: string
+                                          - type: object
+                                            required:
+                                            - status
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - pending
+                                      activation:
+                                        type: object
+                                        required:
+                                        - activatedSkills
+                                        properties:
+                                          activatedSkills:
+                                            type: array
+                                            items:
+                                              type: string
+                          expectedVariants:
+                            type: array
+                            items:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - baseline
+                              - type: string
+                                enum:
+                                - usage-spec
+                          lastScoredAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          progress:
+                            type: object
+                            required:
+                            - queue
+                            - recipes
+                            properties:
+                              queue:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - preparing
+                                - type: string
+                                  enum:
+                                  - queued
+                                - type: string
+                                  enum:
+                                  - active
+                                - type: string
+                                  enum:
+                                  - finishing
+                              recipes:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - waiting
+                                  - running
+                                  - completed
+                                  properties:
+                                    name:
+                                      type: string
+                                    waiting:
+                                      minimum: 0
+                                      type: integer
+                                    running:
+                                      minimum: 0
+                                      type: integer
+                                    completed:
+                                      minimum: 0
+                                      type: integer
+                              summary:
+                                type: object
+                                required:
+                                - label
+                                - completed
+                                - failed
+                                properties:
+                                  label:
+                                    type: string
+                                  total:
+                                    minimum: 0
+                                    type: integer
+                                  completed:
+                                    minimum: 0
+                                    type: integer
+                                  failed:
+                                    minimum: 0
+                                    type: integer
+                              units:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - percent
+                                  - waiting
+                                  properties:
+                                    name:
+                                      type: string
+                                    percent:
+                                      minimum: 0
+                                      maximum: 100
+                                      type: integer
+                                    waiting:
+                                      type: boolean
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/improve:
+    post:
+      tags:
+      - Skills
+      description: Iteratively improves a SKILL.md via LLM passes guided by the review pipeline; returns the diff and revised content.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - content
+              properties:
+                content:
+                  minLength: 1
+                  maxLength: 100000
+                  type: string
+                model:
+                  minLength: 1
+                  description: Model override to use for the improve passes instead of the default model
+                  type: string
+                max-iterations:
+                  minimum: 1
+                  maximum: 10
+                  default: 3
+                  description: Maximum number of improve iterations (1-10, default 3)
+                  type: integer
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - originalContent
+                - improvedContent
+                - diff
+                - reviewSummary
+                - summaryOfChanges
+                - originalScore
+                - finalScore
+                - iterations
+                properties:
+                  originalContent:
+                    type: string
+                  improvedContent:
+                    type: string
+                  diff:
+                    type: string
+                  reviewSummary:
+                    type: string
+                  summaryOfChanges:
+                    type: string
+                  originalScore:
+                    anyOf:
+                    - type: integer
+                    - type: 'null'
+                  finalScore:
+                    anyOf:
+                    - type: integer
+                    - type: 'null'
+                  iterations:
+                    type: integer
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/review:
+    post:
+      tags:
+      - Skills
+      description: Runs the LLM skill-review pipeline against a SKILL.md content string and returns scored validation results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - content
+              properties:
+                content:
+                  minLength: 1
+                  type: string
+                model:
+                  minLength: 1
+                  description: Model override to use for the review instead of the default model
+                  type: string
+                files:
+                  description: Optional bundle files (relative path -> UTF-8 content) that accompany SKILL.md.
+                  type: object
+                  additionalProperties:
+                    type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - review
+                - validation
+                properties:
+                  review:
+                    type: object
+                    required:
+                    - reviewScore
+                    properties:
+                      reviewScore:
+                        anyOf:
+                        - minimum: 0
+                          maximum: 100
+                          type: integer
+                        - type: 'null'
+                  validation:
+                    type: object
+                    required:
+                    - checks
+                    - overallPassed
+                    - errorCount
+                    - warningCount
+                    properties:
+                      skillName:
+                        type: string
+                      skillDescription:
+                        type: string
+                      checks:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - name
+                          - status
+                          - message
+                          properties:
+                            name:
+                              type: string
+                            status:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - passed
+                              - type: string
+                                enum:
+                                - warning
+                              - type: string
+                                enum:
+                                - error
+                            message:
+                              type: string
+                            details:
+                              type: object
+                              additionalProperties: {}
+                      overallPassed:
+                        type: boolean
+                      errorCount:
+                        type: number
+                      warningCount:
+                        type: number
+                  descriptionJudge:
+                    type: object
+                    required:
+                    - success
+                    properties:
+                      success:
+                        type: boolean
+                      errorMessage:
+                        type: string
+                      evaluation:
+                        type: object
+                        required:
+                        - scores
+                        - overall_assessment
+                        - suggestions
+                        properties:
+                          scores:
+                            type: object
+                            additionalProperties:
+                              type: object
+                              required:
+                              - score
+                              - reasoning
+                              properties:
+                                score:
+                                  type: number
+                                reasoning:
+                                  type: string
+                          overall_assessment:
+                            type: string
+                          suggestions:
+                            type: array
+                            items:
+                              type: string
+                          validation_skipped:
+                            type: boolean
+                      weightedScore:
+                        type: number
+                      normalizedScore:
+                        type: number
+                  contentJudge:
+                    type: object
+                    required:
+                    - success
+                    properties:
+                      success:
+                        type: boolean
+                      errorMessage:
+                        type: string
+                      evaluation:
+                        type: object
+                        required:
+                        - scores
+                        - overall_assessment
+                        - suggestions
+                        properties:
+                          scores:
+                            type: object
+                            additionalProperties:
+                              type: object
+                              required:
+                              - score
+                              - reasoning
+                              properties:
+                                score:
+                                  type: number
+                                reasoning:
+                                  type: string
+                          overall_assessment:
+                            type: string
+                          suggestions:
+                            type: array
+                            items:
+                              type: string
+                          validation_skipped:
+                            type: boolean
+                      weightedScore:
+                        type: number
+                      normalizedScore:
+                        type: number
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/tile-skills:
+    get:
+      tags:
+      - Skills
+      description: Lists tile-skills (skills shipped inside a tile version) sourced from a given repository URL.
+      parameters:
+      - schema:
+          format: uri
+          type: string
+        in: query
+        name: sourceUrl
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - type
+                      - attributes
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - tile-skill
+                        attributes:
+                          type: object
+                          required:
+                          - skillPath
+                          - skillName
+                          - skillDescription
+                          - tileFullName
+                          - tileName
+                          - tileVersion
+                          - workspaceName
+                          properties:
+                            skillPath:
+                              type: string
+                            skillName:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            skillDescription:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            tileFullName:
+                              type: string
+                            tileName:
+                              type: string
+                            tileVersion:
+                              type: string
+                            workspaceName:
+                              type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

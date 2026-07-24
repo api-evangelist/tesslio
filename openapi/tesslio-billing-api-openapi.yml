@@ -1,0 +1,1602 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Billing API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Billing
+paths:
+  /v1/orgs/{orgId}/billing/checkout-sessions:
+    post:
+      summary: Start a Team upgrade checkout
+      tags:
+      - Billing
+      description: Creates a Stripe Checkout session (subscription mode) for the Team plan. Returns the hosted checkout URL to redirect to. Stripe creates the customer and recurring subscription; the org is provisioned by the Stripe webhook once checkout completes.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties: {}
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - checkout-session
+                      attributes:
+                        type: object
+                        required:
+                        - checkoutUrl
+                        properties:
+                          checkoutUrl:
+                            format: uri
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                description: Service Unavailable
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Service Unavailable
+                      status:
+                        type: number
+                        enum:
+                        - 503
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/billing/subscription:
+    get:
+      tags:
+      - Billing
+      description: The org's current plan and self-serve subscription status.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - subscription
+                      attributes:
+                        type: object
+                        required:
+                        - plan
+                        - status
+                        - startedAt
+                        - monthlyPriceUsd
+                        - upgradePriceUsd
+                        properties:
+                          plan:
+                            type: object
+                            required:
+                            - code
+                            - displayName
+                            properties:
+                              code:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - free
+                                - type: string
+                                  enum:
+                                  - free-legacy-v1
+                                - type: string
+                                  enum:
+                                  - team-v1
+                                - type: string
+                                  enum:
+                                  - business-v1
+                                - type: string
+                                  enum:
+                                  - enterprise-v1
+                              displayName:
+                                type: string
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - none
+                            - type: string
+                              enum:
+                              - incomplete
+                            - type: string
+                              enum:
+                              - active
+                            - type: string
+                              enum:
+                              - past_due
+                            - type: string
+                              enum:
+                              - canceling
+                            - type: string
+                              enum:
+                              - canceled
+                          startedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          monthlyPriceUsd:
+                            anyOf:
+                            - type: number
+                            - type: 'null'
+                          upgradePriceUsd:
+                            anyOf:
+                            - type: number
+                            - type: 'null'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    patch:
+      summary: Cancel a Team subscription at period end
+      tags:
+      - Billing
+      description: Schedules the org to revert to free at the end of the current billing period by setting cancel_at_period_end on its Stripe subscription. Team stays active until the period ends; the plan flips to free on the customer.subscription.deleted webhook.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - cancelAtPeriodEnd
+              properties:
+                cancelAtPeriodEnd:
+                  type: boolean
+                  enum:
+                  - true
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - subscription
+                      attributes:
+                        type: object
+                        required:
+                        - plan
+                        - status
+                        - startedAt
+                        properties:
+                          plan:
+                            type: object
+                            required:
+                            - code
+                            - displayName
+                            properties:
+                              code:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - free
+                                - type: string
+                                  enum:
+                                  - free-legacy-v1
+                                - type: string
+                                  enum:
+                                  - team-v1
+                                - type: string
+                                  enum:
+                                  - business-v1
+                                - type: string
+                                  enum:
+                                  - enterprise-v1
+                              displayName:
+                                type: string
+                          status:
+                            type: string
+                            enum:
+                            - canceling
+                          startedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                description: Service Unavailable
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Service Unavailable
+                      status:
+                        type: number
+                        enum:
+                        - 503
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/credits:
+    get:
+      tags:
+      - Billing
+      description: 'The org''s credit account: current-window usage against the advertised limit and the plan. Pass `?include=bundles` to also include the catalogue of purchasable top-up bundles in the response.'
+      parameters:
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - bundles
+          - type: array
+            items:
+              type: string
+              enum:
+              - bundles
+        in: query
+        name: include
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - credit-account
+                      attributes:
+                        type: object
+                        required:
+                        - credits
+                        - plan
+                        properties:
+                          credits:
+                            anyOf:
+                            - type: object
+                              required:
+                              - state
+                              - limit
+                              - used
+                              - remaining
+                              - windowStart
+                              - overLimit
+                              - blocked
+                              - overageAllowed
+                              properties:
+                                state:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - ok
+                                  - type: string
+                                    enum:
+                                    - over_budget
+                                limit:
+                                  type: number
+                                used:
+                                  type: number
+                                remaining:
+                                  type: number
+                                windowStart:
+                                  anyOf:
+                                  - format: date-time
+                                    type: string
+                                  - type: 'null'
+                                overLimit:
+                                  type: boolean
+                                blocked:
+                                  type: boolean
+                                overageAllowed:
+                                  type: boolean
+                            - type: object
+                              required:
+                              - state
+                              properties:
+                                state:
+                                  type: string
+                                  enum:
+                                  - unlimited
+                            - type: object
+                              required:
+                              - state
+                              properties:
+                                state:
+                                  type: string
+                                  enum:
+                                  - unavailable
+                          plan:
+                            type: object
+                            required:
+                            - code
+                            - displayName
+                            properties:
+                              code:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - free
+                                - type: string
+                                  enum:
+                                  - free-legacy-v1
+                                - type: string
+                                  enum:
+                                  - team-v1
+                                - type: string
+                                  enum:
+                                  - business-v1
+                                - type: string
+                                  enum:
+                                  - enterprise-v1
+                              displayName:
+                                type: string
+                          bundles:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - code
+                              - credits
+                              - priceUsd
+                              - displayName
+                              properties:
+                                code:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - bundle-5k-v1
+                                  - type: string
+                                    enum:
+                                    - bundle-25k-v1
+                                credits:
+                                  type: number
+                                priceUsd:
+                                  type: number
+                                displayName:
+                                  type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    post:
+      summary: Start a credit-bundle checkout (top up)
+      tags:
+      - Billing
+      description: Creates a Stripe Checkout session (payment mode) to buy a one-off credit bundle. Returns the hosted checkout URL to redirect to; Stripe charges the card at checkout and the credits are granted by the Stripe webhook once payment completes. Requires the org to be on the Team plan.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - bundleCode
+              properties:
+                bundleCode:
+                  anyOf:
+                  - type: string
+                    enum:
+                    - bundle-5k-v1
+                  - type: string
+                    enum:
+                    - bundle-25k-v1
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - checkout-session
+                      attributes:
+                        type: object
+                        required:
+                        - checkoutUrl
+                        properties:
+                          checkoutUrl:
+                            format: uri
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                description: Service Unavailable
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Service Unavailable
+                      status:
+                        type: number
+                        enum:
+                        - 503
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/credits/usage:
+    get:
+      tags:
+      - Billing
+      description: Paginated, filterable log of the org's billing_event usage rows (one row per idempotency key), with credit totals for the filtered range. Org-admin only.
+      parameters:
+      - schema:
+          default: -timestamp
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - timestamp
+              - type: string
+                enum:
+                - -timestamp
+          - anyOf:
+            - type: string
+              enum:
+              - timestamp
+            - type: string
+              enum:
+              - -timestamp
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - generation
+          - type: string
+            enum:
+            - tests_reviews
+          - type: string
+            enum:
+            - task_evaluations
+          - type: string
+            enum:
+            - analysis
+          - type: string
+            enum:
+            - mcp
+          - type: string
+            enum:
+            - launch
+          - type: string
+            enum:
+            - inference
+        in: query
+        name: filter[category]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[actionCode]
+        required: false
+      - schema:
+          format: date-time
+          type: string
+        in: query
+        name: filter[timestamp][gte]
+        required: false
+      - schema:
+          format: date-time
+          type: string
+        in: query
+        name: filter[timestamp][lte]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    - totals
+                    properties:
+                      count:
+                        type: number
+                      totals:
+                        type: object
+                        required:
+                        - totalCredits
+                        - byCategory
+                        properties:
+                          totalCredits:
+                            type: number
+                          byCategory:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - category
+                              - totalCredits
+                              properties:
+                                category:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - generation
+                                  - type: string
+                                    enum:
+                                    - tests_reviews
+                                  - type: string
+                                    enum:
+                                    - task_evaluations
+                                  - type: string
+                                    enum:
+                                    - analysis
+                                  - type: string
+                                    enum:
+                                    - mcp
+                                  - type: string
+                                    enum:
+                                    - launch
+                                  - type: string
+                                    enum:
+                                    - inference
+                                totalCredits:
+                                  type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - credit-usage-event
+                        attributes:
+                          type: object
+                          required:
+                          - timestamp
+                          - category
+                          - actionCode
+                          - quantity
+                          - unit
+                          - totalCredits
+                          properties:
+                            timestamp:
+                              format: date-time
+                              type: string
+                            category:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - generation
+                              - type: string
+                                enum:
+                                - tests_reviews
+                              - type: string
+                                enum:
+                                - task_evaluations
+                              - type: string
+                                enum:
+                                - analysis
+                              - type: string
+                                enum:
+                                - mcp
+                              - type: string
+                                enum:
+                                - launch
+                              - type: string
+                                enum:
+                                - inference
+                            actionCode:
+                              type: string
+                            quantity:
+                              type: number
+                            unit:
+                              type: string
+                            totalCredits:
+                              type: number
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

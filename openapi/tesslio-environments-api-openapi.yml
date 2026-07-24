@@ -1,0 +1,1067 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Environments API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Environments
+paths:
+  /experimental/environments:
+    post:
+      tags:
+      - Environments
+      description: Creates a named, workspace-scoped environment. The supplied `.env` payload is validated, sealed under the workspace key, and never returned by any read path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - workspaceName
+              - name
+              properties:
+                workspaceName:
+                  minLength: 1
+                  type: string
+                name:
+                  minLength: 1
+                  type: string
+                envFile:
+                  minLength: 1
+                  description: Raw `.env` file contents (`KEY=VALUE` per line). Blank lines and `#` comments are ignored. Mutually exclusive with `entries`.
+                  type: string
+                entries:
+                  description: Environment variables as a `KEY=VALUE` map. Mutually exclusive with `envFile`.
+                  type: object
+                  additionalProperties:
+                    type: string
+                metadata:
+                  additionalProperties: true
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    envVariableNames:
+                      type: array
+                      items:
+                        type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - environment
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - workspaceId
+                        - metadata
+                        - keyNames
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          metadata:
+                            anyOf:
+                            - additionalProperties: true
+                              type: object
+                              properties:
+                                description:
+                                  type: string
+                                envVariableNames:
+                                  type: array
+                                  items:
+                                    type: string
+                            - type: 'null'
+                          keyNames:
+                            type: array
+                            items:
+                              type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    get:
+      tags:
+      - Environments
+      description: Lists environments in the workspaces the caller can view, newest-first. Never returns the sealed values — only names, metadata, and declared key names.
+      parameters:
+      - schema:
+          default: -id
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - createdAt
+              - type: string
+                enum:
+                - -createdAt
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+          - anyOf:
+            - type: string
+              enum:
+              - createdAt
+            - type: string
+              enum:
+              - -createdAt
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][eq]
+        required: false
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - environment
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - workspaceId
+                          - metadata
+                          - keyNames
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            name:
+                              type: string
+                            workspaceId:
+                              format: uuid
+                              type: string
+                            metadata:
+                              anyOf:
+                              - additionalProperties: true
+                                type: object
+                                properties:
+                                  description:
+                                    type: string
+                                  envVariableNames:
+                                    type: array
+                                    items:
+                                      type: string
+                              - type: 'null'
+                            keyNames:
+                              type: array
+                              items:
+                                type: string
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/environments/{id}:
+    get:
+      tags:
+      - Environments
+      description: Gets a single environment by ID (metadata only — the sealed value is never returned).
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - environment
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - workspaceId
+                        - metadata
+                        - keyNames
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          metadata:
+                            anyOf:
+                            - additionalProperties: true
+                              type: object
+                              properties:
+                                description:
+                                  type: string
+                                envVariableNames:
+                                  type: array
+                                  items:
+                                    type: string
+                            - type: 'null'
+                          keyNames:
+                            type: array
+                            items:
+                              type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    put:
+      tags:
+      - Environments
+      description: Replaces an environment's sealed value in place. The new `.env` payload is validated, sealed under the workspace key, and never returned.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                envFile:
+                  minLength: 1
+                  description: Raw `.env` file contents (`KEY=VALUE` per line). Blank lines and `#` comments are ignored. Mutually exclusive with `entries`.
+                  type: string
+                entries:
+                  description: Environment variables as a `KEY=VALUE` map. Mutually exclusive with `envFile`.
+                  type: object
+                  additionalProperties:
+                    type: string
+                metadata:
+                  additionalProperties: true
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    envVariableNames:
+                      type: array
+                      items:
+                        type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - environment
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - workspaceId
+                        - metadata
+                        - keyNames
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          metadata:
+                            anyOf:
+                            - additionalProperties: true
+                              type: object
+                              properties:
+                                description:
+                                  type: string
+                                envVariableNames:
+                                  type: array
+                                  items:
+                                    type: string
+                            - type: 'null'
+                          keyNames:
+                            type: array
+                            items:
+                              type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    delete:
+      tags:
+      - Environments
+      description: Deletes an environment by ID.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

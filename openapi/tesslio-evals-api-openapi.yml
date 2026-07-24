@@ -1,0 +1,4413 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Evals API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Evals
+  description: Eval runs, scenarios, and solution scoring.
+paths:
+  /v1/tiles/{workspaceName}/{tileName}/versions/{version}/eval-suite:
+    get:
+      tags:
+      - Evals
+      description: Returns the eval suite (scenarios + latest run status) for a tile version.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: tileName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: version
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-suite
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - evalRunId
+                        - scenarios
+                        - createdAt
+                        - updatedAt
+                        - expectedVariants
+                        - lastScoredAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          evalRunId:
+                            format: uuid
+                            type: string
+                          scenarios:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - fingerprint
+                              - task
+                              - rubric
+                              - createdAt
+                              - updatedAt
+                              - solutions
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                fingerprint:
+                                  pattern: ^[a-f0-9]{64}$
+                                  type: string
+                                task:
+                                  type: string
+                                path:
+                                  type: string
+                                shortDescription:
+                                  type: string
+                                rubric:
+                                  type: object
+                                  required:
+                                  - context
+                                  - type
+                                  - checklist
+                                  properties:
+                                    context:
+                                      minLength: 1
+                                      type: string
+                                    type:
+                                      type: string
+                                      enum:
+                                      - weighted_checklist
+                                    checklist:
+                                      minItems: 1
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - name
+                                        - description
+                                        - max_score
+                                        properties:
+                                          name:
+                                            minLength: 1
+                                            type: string
+                                          description:
+                                            minLength: 1
+                                            type: string
+                                          max_score:
+                                            minimum: 0
+                                            type: number
+                                qualityAssessment:
+                                  type: object
+                                  required:
+                                  - feasibility
+                                  - feasibility_notes
+                                  - leakage
+                                  - leakage_evidence
+                                  - scenario_value
+                                  - scenario_value_notes
+                                  - assessed_at
+                                  - model
+                                  properties:
+                                    feasibility:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - FEASIBLE
+                                      - type: string
+                                        enum:
+                                        - NOT_FEASIBLE
+                                    feasibility_notes:
+                                      type: string
+                                    leakage:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - NO_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - LOW_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - MEDIUM_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - HIGH_LEAKAGE
+                                    leakage_evidence:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - scenario_statement
+                                        - criteria_rubric
+                                        properties:
+                                          scenario_statement:
+                                            type: string
+                                          criteria_rubric:
+                                            type: string
+                                    scenario_value:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                    scenario_value_notes:
+                                      type: string
+                                    assessed_at:
+                                      format: date-time
+                                      type: string
+                                    model:
+                                      type: string
+                                qualityFilterStatus:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - included
+                                  - type: string
+                                    enum:
+                                    - rejected
+                                createdAt:
+                                  format: date-time
+                                  type: string
+                                updatedAt:
+                                  format: date-time
+                                  type: string
+                                solutions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - id
+                                    - variant
+                                    - solutionTarGZS3Key
+                                    - solutionMetadata
+                                    - assessmentResults
+                                    - assessmentMetadata
+                                    - createdAt
+                                    - updatedAt
+                                    properties:
+                                      id:
+                                        format: uuid
+                                        type: string
+                                      variant:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - baseline
+                                        - type: string
+                                          enum:
+                                          - usage-spec
+                                      solutionTarGZS3Key:
+                                        anyOf:
+                                        - type: string
+                                        - type: 'null'
+                                      solutionMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      assessmentResults:
+                                        anyOf:
+                                        - type: array
+                                          items:
+                                            type: object
+                                            required:
+                                            - name
+                                            - score
+                                            - reasoning
+                                            properties:
+                                              name:
+                                                minLength: 1
+                                                type: string
+                                              score:
+                                                minimum: 0
+                                                type: number
+                                              max_score:
+                                                minimum: 0
+                                                type: number
+                                              reasoning:
+                                                minLength: 1
+                                                type: string
+                                        - type: 'null'
+                                      assessmentMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      createdAt:
+                                        format: date-time
+                                        type: string
+                                      updatedAt:
+                                        format: date-time
+                                        type: string
+                                      runs:
+                                        type: array
+                                        items:
+                                          anyOf:
+                                          - type: object
+                                            required:
+                                            - status
+                                            - solutionId
+                                            - score
+                                            - createdAt
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - completed
+                                              solutionId:
+                                                format: uuid
+                                                type: string
+                                              score:
+                                                anyOf:
+                                                - type: number
+                                                - type: 'null'
+                                              createdAt:
+                                                format: date-time
+                                                type: string
+                                          - type: object
+                                            required:
+                                            - status
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - pending
+                                      activation:
+                                        type: object
+                                        required:
+                                        - activatedSkills
+                                        properties:
+                                          activatedSkills:
+                                            type: array
+                                            items:
+                                              type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          expectedVariants:
+                            type: array
+                            items:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - baseline
+                              - type: string
+                                enum:
+                                - usage-spec
+                          lastScoredAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs:
+    get:
+      tags:
+      - Evals
+      description: Lists eval runs filtered by context-fixture type, status, visibility, and creator.
+      parameters:
+      - schema:
+          default: -createdAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - createdAt
+              - type: string
+                enum:
+                - -createdAt
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+          - anyOf:
+            - type: string
+              enum:
+              - createdAt
+            - type: string
+              enum:
+              - -createdAt
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          default: true
+          type: boolean
+        in: query
+        name: mineOnly
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: projectId
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: workspaceNameFilter
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: tileNameFilter
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - commit
+          - type: string
+            enum:
+            - directory
+          - type: string
+            enum:
+            - plugin
+          - type: string
+            enum:
+            - plugin-directory
+          - type: string
+            enum:
+            - no-context
+        in: query
+        name: contextType
+        required: false
+      - schema:
+          deprecated: true
+          anyOf:
+          - type: string
+            enum:
+            - tile
+          - type: string
+            enum:
+            - skill
+          - type: string
+            enum:
+            - project
+        in: query
+        name: subjectType
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pending
+          - type: string
+            enum:
+            - in_progress
+          - type: string
+            enum:
+            - completed
+          - type: string
+            enum:
+            - failed
+        in: query
+        name: status
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - private
+          - type: string
+            enum:
+            - public_view
+          - type: string
+            enum:
+            - public_download
+        in: query
+        name: visibility
+        required: false
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - eval-run
+                        attributes:
+                          type: object
+                          required:
+                          - status
+                          - metadata
+                          - createdBy
+                          - label
+                          - createdAt
+                          - updatedAt
+                          - visibility
+                          - scenarioSummary
+                          properties:
+                            status:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - pending
+                              - type: string
+                                enum:
+                                - completed
+                              - type: string
+                                enum:
+                                - failed
+                            metadata:
+                              additionalProperties: true
+                              type: object
+                              properties:
+                                originRemoteUrl:
+                                  type: string
+                                branchName:
+                                  type: string
+                                commitHash:
+                                  type: string
+                                dirty:
+                                  type: boolean
+                                cwd:
+                                  type: string
+                                cliInvocation:
+                                  type: string
+                                tileName:
+                                  type: string
+                                tileVersion:
+                                  type: string
+                                tileSummary:
+                                  type: string
+                                tileIsPrivate:
+                                  type: boolean
+                                skillName:
+                                  type: string
+                                sourceUrl:
+                                  type: string
+                                blobSha:
+                                  type: string
+                            createdBy:
+                              type: object
+                              required:
+                              - type
+                              - id
+                              - firstName
+                              - lastName
+                              properties:
+                                type:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - user
+                                  - type: string
+                                    enum:
+                                    - api_key
+                                id:
+                                  format: uuid
+                                  type: string
+                                firstName:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                lastName:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                            runCount:
+                              minimum: 1
+                              type: integer
+                            label:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+                            visibility:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - private
+                              - type: string
+                                enum:
+                                - public_view
+                              - type: string
+                                enum:
+                                - public_download
+                            agent:
+                              type: string
+                            model:
+                              type: string
+                            scorerAgent:
+                              type: string
+                            scorerModel:
+                              type: string
+                            skipForcedContextActivation:
+                              type: boolean
+                            skipScoring:
+                              type: boolean
+                            runQualityCheck:
+                              type: boolean
+                            evalRunFixtures:
+                              type: object
+                              additionalProperties:
+                                anyOf:
+                                - type: object
+                                  required:
+                                  - type
+                                  - repoUrl
+                                  - ref
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                      - commit
+                                    repoUrl:
+                                      type: string
+                                    ref:
+                                      type: string
+                                    installPath:
+                                      type: string
+                                    include:
+                                      type: array
+                                      items:
+                                        type: string
+                                    exclude:
+                                      type: array
+                                      items:
+                                        type: string
+                                - type: object
+                                  required:
+                                  - type
+                                  - path
+                                  - installPath
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                      - directory
+                                    path:
+                                      type: string
+                                    installPath:
+                                      type: string
+                                    include:
+                                      type: array
+                                      items:
+                                        type: string
+                                    exclude:
+                                      type: array
+                                      items:
+                                        type: string
+                                - type: object
+                                  required:
+                                  - type
+                                  - name
+                                  - version
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                      - plugin
+                                    name:
+                                      type: string
+                                    version:
+                                      type: string
+                                - type: object
+                                  required:
+                                  - type
+                                  - path
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                      - plugin-directory
+                                    path:
+                                      type: string
+                                    skills:
+                                      type: array
+                                      items:
+                                        type: string
+                            scenarioSummary:
+                              type: object
+                              required:
+                              - count
+                              properties:
+                                count:
+                                  minimum: 0
+                                  type: integer
+                                commonBasePath:
+                                  type: string
+                        relationships:
+                          type: object
+                          properties:
+                            tile:
+                              type: object
+                              required:
+                              - data
+                              properties:
+                                data:
+                                  type: object
+                                  required:
+                                  - id
+                                  - fullName
+                                  properties:
+                                    id:
+                                      format: uuid
+                                      type: string
+                                    fullName:
+                                      type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/{id}:
+    get:
+      tags:
+      - Evals
+      description: Fetches an eval run by id, including scenarios, solutions, and progress.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-run
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - metadata
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        - scenarios
+                        - label
+                        - skippedCount
+                        - expectedVariants
+                        - lastScoredAt
+                        - visibility
+                        - isMember
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          metadata:
+                            additionalProperties: true
+                            type: object
+                            properties:
+                              originRemoteUrl:
+                                type: string
+                              branchName:
+                                type: string
+                              commitHash:
+                                type: string
+                              dirty:
+                                type: boolean
+                              cwd:
+                                type: string
+                              cliInvocation:
+                                type: string
+                              tileName:
+                                type: string
+                              tileVersion:
+                                type: string
+                              tileSummary:
+                                type: string
+                              tileIsPrivate:
+                                type: boolean
+                              skillName:
+                                type: string
+                              sourceUrl:
+                                type: string
+                              blobSha:
+                                type: string
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          scenarios:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - fingerprint
+                              - task
+                              - rubric
+                              - createdAt
+                              - updatedAt
+                              - solutions
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                fingerprint:
+                                  pattern: ^[a-f0-9]{64}$
+                                  type: string
+                                task:
+                                  type: string
+                                path:
+                                  type: string
+                                shortDescription:
+                                  type: string
+                                rubric:
+                                  type: object
+                                  required:
+                                  - context
+                                  - type
+                                  - checklist
+                                  properties:
+                                    context:
+                                      minLength: 1
+                                      type: string
+                                    type:
+                                      type: string
+                                      enum:
+                                      - weighted_checklist
+                                    checklist:
+                                      minItems: 1
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - name
+                                        - description
+                                        - max_score
+                                        properties:
+                                          name:
+                                            minLength: 1
+                                            type: string
+                                          description:
+                                            minLength: 1
+                                            type: string
+                                          max_score:
+                                            minimum: 0
+                                            type: number
+                                qualityAssessment:
+                                  type: object
+                                  required:
+                                  - feasibility
+                                  - feasibility_notes
+                                  - leakage
+                                  - leakage_evidence
+                                  - scenario_value
+                                  - scenario_value_notes
+                                  - assessed_at
+                                  - model
+                                  properties:
+                                    feasibility:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - FEASIBLE
+                                      - type: string
+                                        enum:
+                                        - NOT_FEASIBLE
+                                    feasibility_notes:
+                                      type: string
+                                    leakage:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - NO_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - LOW_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - MEDIUM_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - HIGH_LEAKAGE
+                                    leakage_evidence:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - scenario_statement
+                                        - criteria_rubric
+                                        properties:
+                                          scenario_statement:
+                                            type: string
+                                          criteria_rubric:
+                                            type: string
+                                    scenario_value:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                    scenario_value_notes:
+                                      type: string
+                                    assessed_at:
+                                      format: date-time
+                                      type: string
+                                    model:
+                                      type: string
+                                qualityFilterStatus:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - included
+                                  - type: string
+                                    enum:
+                                    - rejected
+                                createdAt:
+                                  format: date-time
+                                  type: string
+                                updatedAt:
+                                  format: date-time
+                                  type: string
+                                solutions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - id
+                                    - variant
+                                    - solutionTarGZS3Key
+                                    - solutionMetadata
+                                    - assessmentResults
+                                    - assessmentMetadata
+                                    - createdAt
+                                    - updatedAt
+                                    properties:
+                                      id:
+                                        format: uuid
+                                        type: string
+                                      variant:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - baseline
+                                        - type: string
+                                          enum:
+                                          - usage-spec
+                                      solutionTarGZS3Key:
+                                        anyOf:
+                                        - type: string
+                                        - type: 'null'
+                                      solutionMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      assessmentResults:
+                                        anyOf:
+                                        - type: array
+                                          items:
+                                            type: object
+                                            required:
+                                            - name
+                                            - score
+                                            - reasoning
+                                            properties:
+                                              name:
+                                                minLength: 1
+                                                type: string
+                                              score:
+                                                minimum: 0
+                                                type: number
+                                              max_score:
+                                                minimum: 0
+                                                type: number
+                                              reasoning:
+                                                minLength: 1
+                                                type: string
+                                        - type: 'null'
+                                      assessmentMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      createdAt:
+                                        format: date-time
+                                        type: string
+                                      updatedAt:
+                                        format: date-time
+                                        type: string
+                                      runs:
+                                        type: array
+                                        items:
+                                          anyOf:
+                                          - type: object
+                                            required:
+                                            - status
+                                            - solutionId
+                                            - score
+                                            - createdAt
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - completed
+                                              solutionId:
+                                                format: uuid
+                                                type: string
+                                              score:
+                                                anyOf:
+                                                - type: number
+                                                - type: 'null'
+                                              createdAt:
+                                                format: date-time
+                                                type: string
+                                          - type: object
+                                            required:
+                                            - status
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - pending
+                                      activation:
+                                        type: object
+                                        required:
+                                        - activatedSkills
+                                        properties:
+                                          activatedSkills:
+                                            type: array
+                                            items:
+                                              type: string
+                          runCount:
+                            minimum: 1
+                            type: integer
+                          label:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          skippedCount:
+                            type: number
+                          expectedVariants:
+                            type: array
+                            items:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - baseline
+                              - type: string
+                                enum:
+                                - usage-spec
+                          lastScoredAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          workflowId:
+                            type: string
+                          visibility:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - private
+                            - type: string
+                              enum:
+                              - public_view
+                            - type: string
+                              enum:
+                              - public_download
+                          isMember:
+                            type: boolean
+                          workspaceName:
+                            type: string
+                          runMetadata:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - runId
+                              properties:
+                                runId:
+                                  type: string
+                                metrics: {}
+                                errorSummary: {}
+                          progress:
+                            type: object
+                            required:
+                            - queue
+                            - recipes
+                            properties:
+                              queue:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - preparing
+                                - type: string
+                                  enum:
+                                  - queued
+                                - type: string
+                                  enum:
+                                  - active
+                                - type: string
+                                  enum:
+                                  - finishing
+                              recipes:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - waiting
+                                  - running
+                                  - completed
+                                  properties:
+                                    name:
+                                      type: string
+                                    waiting:
+                                      minimum: 0
+                                      type: integer
+                                    running:
+                                      minimum: 0
+                                      type: integer
+                                    completed:
+                                      minimum: 0
+                                      type: integer
+                              summary:
+                                type: object
+                                required:
+                                - label
+                                - completed
+                                - failed
+                                properties:
+                                  label:
+                                    type: string
+                                  total:
+                                    minimum: 0
+                                    type: integer
+                                  completed:
+                                    minimum: 0
+                                    type: integer
+                                  failed:
+                                    minimum: 0
+                                    type: integer
+                              units:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - percent
+                                  - waiting
+                                  properties:
+                                    name:
+                                      type: string
+                                    percent:
+                                      minimum: 0
+                                      maximum: 100
+                                      type: integer
+                                    waiting:
+                                      type: boolean
+                          agent:
+                            type: string
+                          model:
+                            type: string
+                          scorerAgent:
+                            type: string
+                          scorerModel:
+                            type: string
+                          skipForcedContextActivation:
+                            type: boolean
+                          skipScoring:
+                            type: boolean
+                          runQualityCheck:
+                            type: boolean
+                          evalRunFixtures:
+                            type: object
+                            additionalProperties:
+                              anyOf:
+                              - type: object
+                                required:
+                                - type
+                                - repoUrl
+                                - ref
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - commit
+                                  repoUrl:
+                                    type: string
+                                  ref:
+                                    type: string
+                                  installPath:
+                                    type: string
+                                  include:
+                                    type: array
+                                    items:
+                                      type: string
+                                  exclude:
+                                    type: array
+                                    items:
+                                      type: string
+                              - type: object
+                                required:
+                                - type
+                                - path
+                                - installPath
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - directory
+                                  path:
+                                    type: string
+                                  installPath:
+                                    type: string
+                                  include:
+                                    type: array
+                                    items:
+                                      type: string
+                                  exclude:
+                                    type: array
+                                    items:
+                                      type: string
+                              - type: object
+                                required:
+                                - type
+                                - name
+                                - version
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - plugin
+                                  name:
+                                    type: string
+                                  version:
+                                    type: string
+                              - type: object
+                                required:
+                                - type
+                                - path
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - plugin-directory
+                                  path:
+                                    type: string
+                                  skills:
+                                    type: array
+                                    items:
+                                      type: string
+                          failureReason:
+                            type: object
+                            required:
+                            - code
+                            - message
+                            properties:
+                              code:
+                                type: string
+                              message:
+                                type: string
+                      relationships:
+                        type: object
+                        required:
+                        - tile
+                        properties:
+                          tile:
+                            type: object
+                            required:
+                            - data
+                            properties:
+                              data:
+                                type: object
+                                required:
+                                - id
+                                - fullName
+                                properties:
+                                  id:
+                                    format: uuid
+                                    type: string
+                                  fullName:
+                                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    patch:
+      tags:
+      - Evals
+      description: Updates an eval run's visibility (private, public_view, public_download).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - visibility
+              properties:
+                visibility:
+                  anyOf:
+                  - type: string
+                    enum:
+                    - private
+                  - type: string
+                    enum:
+                    - public_view
+                  - type: string
+                    enum:
+                    - public_download
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-run
+                      attributes:
+                        type: object
+                        required:
+                        - visibility
+                        properties:
+                          visibility:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - private
+                            - type: string
+                              enum:
+                              - public_view
+                            - type: string
+                              enum:
+                              - public_download
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/{id}/debug:
+    get:
+      tags:
+      - Evals
+      description: Returns Temporal workflow metadata and recipe-run metrics for an eval run. Tessl staff only.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - evalRun
+                - temporal
+                - runs
+                properties:
+                  evalRun:
+                    type: object
+                    required:
+                    - id
+                    - workspaceId
+                    - workflowId
+                    - status
+                    - metadata
+                    - skipForcedContextActivation
+                    - skipScoring
+                    - runQualityCheck
+                    - createdBy
+                    - createdAt
+                    - updatedAt
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      workspaceId:
+                        format: uuid
+                        type: string
+                      workflowId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      status:
+                        anyOf:
+                        - type: string
+                          enum:
+                          - pending
+                        - type: string
+                          enum:
+                          - completed
+                        - type: string
+                          enum:
+                          - failed
+                      metadata:
+                        type: object
+                        additionalProperties: {}
+                      skipForcedContextActivation:
+                        type: boolean
+                      skipScoring:
+                        type: boolean
+                      runQualityCheck:
+                        type: boolean
+                      createdBy:
+                        anyOf:
+                        - format: uuid
+                          type: string
+                        - type: 'null'
+                      createdAt:
+                        format: date-time
+                        type: string
+                      updatedAt:
+                        format: date-time
+                        type: string
+                  temporal:
+                    anyOf:
+                    - type: object
+                      required:
+                      - temporalWorkflowId
+                      - status
+                      - workflowType
+                      - taskQueue
+                      - startTime
+                      - closeTime
+                      - historyLength
+                      properties:
+                        temporalWorkflowId:
+                          type: string
+                        status:
+                          type: string
+                        workflowType:
+                          type: string
+                        taskQueue:
+                          type: string
+                        startTime:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        closeTime:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        historyLength:
+                          type: number
+                    - type: 'null'
+                  runs:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - runId
+                      properties:
+                        runId:
+                          type: string
+                        metrics: {}
+                        errorSummary: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/{id}/solutions/{solutionId}/files:
+    get:
+      tags:
+      - Evals
+      description: Streams the tar.gz of an eval-run solution's files.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: solutionId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/x-tar:
+              schema: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs-v2:
+    post:
+      tags:
+      - Evals
+      description: Creates an eval run.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - workspaceName
+              - scenarios
+              - variants
+              properties:
+                workspaceName:
+                  type: string
+                scenarios:
+                  description: Per-scenario tarballs and fixtures, keyed by scenario path
+                  minProperties: 1
+                  type: object
+                  additionalProperties:
+                    type: object
+                    required:
+                    - scenarioData
+                    - fixtureData
+                    properties:
+                      scenarioData:
+                        type: object
+                        required:
+                        - uploadKey
+                        - fingerprint
+                        properties:
+                          uploadKey:
+                            type: string
+                          fingerprint:
+                            type: string
+                      fixtureData:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          required:
+                          - uploadKey
+                          - fingerprint
+                          properties:
+                            uploadKey:
+                              type: string
+                            fingerprint:
+                              type: string
+                evalRunFixtures:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                    - type: object
+                      required:
+                      - definition
+                      - data
+                      properties:
+                        definition:
+                          anyOf:
+                          - type: object
+                            required:
+                            - type
+                            - repoUrl
+                            - ref
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - commit
+                              repoUrl:
+                                type: string
+                              ref:
+                                type: string
+                              installPath:
+                                type: string
+                              include:
+                                type: array
+                                items:
+                                  type: string
+                              exclude:
+                                type: array
+                                items:
+                                  type: string
+                          - type: object
+                            required:
+                            - type
+                            - path
+                            - installPath
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - directory
+                              path:
+                                type: string
+                              installPath:
+                                type: string
+                              include:
+                                type: array
+                                items:
+                                  type: string
+                              exclude:
+                                type: array
+                                items:
+                                  type: string
+                          - type: object
+                            required:
+                            - type
+                            - path
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - plugin-directory
+                              path:
+                                type: string
+                              skills:
+                                type: array
+                                items:
+                                  type: string
+                        data:
+                          type: object
+                          required:
+                          - uploadKey
+                          - fingerprint
+                          properties:
+                            uploadKey:
+                              type: string
+                            fingerprint:
+                              type: string
+                    - type: object
+                      required:
+                      - definition
+                      properties:
+                        definition:
+                          type: object
+                          required:
+                          - type
+                          - name
+                          - version
+                          properties:
+                            type:
+                              type: string
+                              enum:
+                              - plugin
+                            name:
+                              type: string
+                            version:
+                              type: string
+                skipForcedContextActivation:
+                  type: boolean
+                skipScoring:
+                  type: boolean
+                variants:
+                  minItems: 1
+                  type: array
+                  items:
+                    anyOf:
+                    - type: string
+                      enum:
+                      - baseline
+                    - type: string
+                      enum:
+                      - usage-spec
+                agent:
+                  minLength: 1
+                  type: string
+                model:
+                  minLength: 1
+                  type: string
+                scorerAgent:
+                  minLength: 1
+                  type: string
+                scorerModel:
+                  minLength: 1
+                  type: string
+                runs:
+                  minimum: 1
+                  maximum: 10
+                  default: 1
+                  type: integer
+                skipSolved:
+                  default: false
+                  type: boolean
+                runQualityCheck:
+                  default: false
+                  type: boolean
+                label:
+                  maxLength: 256
+                  type: string
+                metadata:
+                  additionalProperties: true
+                  type: object
+                  properties:
+                    originRemoteUrl:
+                      type: string
+                    branchName:
+                      type: string
+                    commitHash:
+                      type: string
+                    dirty:
+                      type: boolean
+                    cwd:
+                      type: string
+                    cliInvocation:
+                      type: string
+                    tileName:
+                      type: string
+                    tileVersion:
+                      type: string
+                    tileSummary:
+                      type: string
+                    tileIsPrivate:
+                      type: boolean
+                    skillName:
+                      type: string
+                    sourceUrl:
+                      type: string
+                    blobSha:
+                      type: string
+                projectLocator:
+                  type: object
+                  required:
+                  - workspaceName
+                  - projectName
+                  properties:
+                    workspaceName:
+                      minLength: 1
+                      type: string
+                    projectName:
+                      minLength: 1
+                      type: string
+                projectProvenance:
+                  type: object
+                  required:
+                  - sourceType
+                  - sourceUri
+                  - repoSubpath
+                  properties:
+                    sourceType:
+                      minLength: 1
+                      maxLength: 64
+                      type: string
+                    sourceUri:
+                      minLength: 1
+                      maxLength: 2048
+                      type: string
+                    repoSubpath:
+                      maxLength: 4096
+                      type: string
+                encryptedEnvUpload:
+                  description: Reference to an encrypted-input upload (e.g. an env-file) delivered to the solve sandbox. Must be an existing, viewable, encrypted upload.
+                  type: object
+                  required:
+                  - uploadKey
+                  properties:
+                    uploadKey:
+                      type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-run
+                      attributes:
+                        type: object
+                        required:
+                        - workflowId
+                        - metadata
+                        - label
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workflowId:
+                            type: string
+                          metadata:
+                            additionalProperties: true
+                            type: object
+                            properties:
+                              originRemoteUrl:
+                                type: string
+                              branchName:
+                                type: string
+                              commitHash:
+                                type: string
+                              dirty:
+                                type: boolean
+                              cwd:
+                                type: string
+                              cliInvocation:
+                                type: string
+                              tileName:
+                                type: string
+                              tileVersion:
+                                type: string
+                              tileSummary:
+                                type: string
+                              tileIsPrivate:
+                                type: boolean
+                              skillName:
+                                type: string
+                              sourceUrl:
+                                type: string
+                              blobSha:
+                                type: string
+                          label:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+                      code:
+                        type: string
+                      url:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs-v2:check:
+    post:
+      tags:
+      - Evals
+      description: 'Checks an eval run up front: validates the agent/model selection, workspace access, and the modelSelection entitlement from the selection alone, with no fixture data.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - workspaceName
+              properties:
+                workspaceName:
+                  minLength: 1
+                  type: string
+                agent:
+                  minLength: 1
+                  type: string
+                model:
+                  minLength: 1
+                  type: string
+                scorerAgent:
+                  minLength: 1
+                  type: string
+                scorerModel:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-run-check
+                      attributes:
+                        type: object
+                        required:
+                        - ok
+                        properties:
+                          ok:
+                            type: boolean
+                            enum:
+                            - true
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+                      code:
+                        type: string
+                      url:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/agents:
+    get:
+      tags:
+      - Evals
+      description: Lists agents and models available for eval runs, with the default selection.
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-agents
+                      attributes:
+                        type: object
+                        required:
+                        - agents
+                        - default
+                        properties:
+                          agents:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - name
+                              - models
+                              properties:
+                                name:
+                                  type: string
+                                models:
+                                  type: array
+                                  items:
+                                    type: string
+                          default:
+                            type: object
+                            required:
+                            - agent
+                            - model
+                            properties:
+                              agent:
+                                type: string
+                              model:
+                                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/repo-results:
+    get:
+      tags:
+      - Evals
+      description: Removed — always returns 410. Use GET /eval-runs/:id instead.
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                description: Gone
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Gone
+                      status:
+                        type: number
+                        enum:
+                        - 410
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-scenarios/generate:
+    post:
+      tags:
+      - Evals
+      description: Starts an LLM-driven eval scenario generation run for a repo commit or tile upload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              properties:
+                workspaceName:
+                  type: string
+                workspaceId:
+                  format: uuid
+                  type: string
+                source:
+                  anyOf:
+                  - type: object
+                    required:
+                    - type
+                    - orgName
+                    - repoName
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - commit
+                      orgName:
+                        type: string
+                      repoName:
+                        type: string
+                      commit:
+                        minLength: 7
+                        maxLength: 82
+                        type: string
+                      pullRequestNumber:
+                        minimum: 1
+                        type: integer
+                      contextPatterns:
+                        type: array
+                        items:
+                          type: string
+                      repoArchiveUpload:
+                        type: object
+                        required:
+                        - archiveUploadKey
+                        - commitDetails
+                        - repoCloneUrl
+                        - defaultBranch
+                        - parentCommitHash
+                        properties:
+                          archiveUploadKey:
+                            description: S3 uploads key for repo archive at HEAD of default branch
+                            type: string
+                          commitDetails:
+                            description: JSON string of pre-extracted commit details
+                            type: string
+                          repoCloneUrl:
+                            description: Clone URL for fixture metadata
+                            type: string
+                          defaultBranch:
+                            type: string
+                          parentCommitHash:
+                            description: Parent commit hash used as the fixture ref
+                            type: string
+                  - type: object
+                    required:
+                    - type
+                    - uploadsS3Key
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - tile-upload
+                      uploadsS3Key:
+                        type: string
+                      scenarioCount:
+                        minimum: 1
+                        maximum: 10
+                        type: integer
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  meta:
+                    type: object
+                    required:
+                    - generationId
+                    - workflowId
+                    properties:
+                      generationId:
+                        format: uuid
+                        type: string
+                      workflowId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-generation
+                      attributes:
+                        type: object
+                        required:
+                        - workflowId
+                        - source
+                        - metadata
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          source:
+                            anyOf:
+                            - type: object
+                              required:
+                              - type
+                              - orgName
+                              - repoName
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - commit
+                                orgName:
+                                  type: string
+                                repoName:
+                                  type: string
+                                commit:
+                                  minLength: 7
+                                  maxLength: 82
+                                  type: string
+                                pullRequestNumber:
+                                  minimum: 1
+                                  type: integer
+                                contextPatterns:
+                                  type: array
+                                  items:
+                                    type: string
+                                repoArchiveUpload:
+                                  type: object
+                                  required:
+                                  - archiveUploadKey
+                                  - commitDetails
+                                  - repoCloneUrl
+                                  - defaultBranch
+                                  - parentCommitHash
+                                  properties:
+                                    archiveUploadKey:
+                                      description: S3 uploads key for repo archive at HEAD of default branch
+                                      type: string
+                                    commitDetails:
+                                      description: JSON string of pre-extracted commit details
+                                      type: string
+                                    repoCloneUrl:
+                                      description: Clone URL for fixture metadata
+                                      type: string
+                                    defaultBranch:
+                                      type: string
+                                    parentCommitHash:
+                                      description: Parent commit hash used as the fixture ref
+                                      type: string
+                            - type: object
+                              required:
+                              - type
+                              - uploadsS3Key
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - tile-upload
+                                uploadsS3Key:
+                                  type: string
+                                scenarioCount:
+                                  minimum: 1
+                                  maximum: 10
+                                  type: integer
+                          metadata:
+                            type: object
+                            additionalProperties: {}
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/eval-runs/{id}/retry:
+    post:
+      tags:
+      - Evals
+      description: Retries a failed eval run by creating a new run with the same config.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-run
+                      attributes:
+                        type: object
+                        required:
+                        - workflowId
+                        - metadata
+                        - label
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workflowId:
+                            type: string
+                          metadata:
+                            additionalProperties: true
+                            type: object
+                            properties:
+                              originRemoteUrl:
+                                type: string
+                              branchName:
+                                type: string
+                              commitHash:
+                                type: string
+                              dirty:
+                                type: boolean
+                              cwd:
+                                type: string
+                              cliInvocation:
+                                type: string
+                              tileName:
+                                type: string
+                              tileVersion:
+                                type: string
+                              tileSummary:
+                                type: string
+                              tileIsPrivate:
+                                type: boolean
+                              skillName:
+                                type: string
+                              sourceUrl:
+                                type: string
+                              blobSha:
+                                type: string
+                          label:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+                      code:
+                        type: string
+                      url:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{id}/request-evals:
+    post:
+      tags:
+      - Evals
+      description: Triggers a skill-index eval workflow for a standalone skill.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                scenarioCount:
+                  minimum: 1
+                  maximum: 50
+                  default: 3
+                  type: integer
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - workflowId
+                    properties:
+                      workflowId:
+                        type: string
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                    - skillVersionId
+                    - message
+                    properties:
+                      evalRunId:
+                        format: uuid
+                        type: string
+                      skillVersionId:
+                        format: uuid
+                        type: string
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite:
+    get:
+      tags:
+      - Evals
+      description: Returns the eval suite (latest run + scenarios) for a skill identified by provider/owner/repo/name.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: owner
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: repo
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: skillName
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-suite
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - scenarios
+                        - expectedVariants
+                        - lastScoredAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          scenarios:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              - fingerprint
+                              - task
+                              - rubric
+                              - createdAt
+                              - updatedAt
+                              - solutions
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                fingerprint:
+                                  pattern: ^[a-f0-9]{64}$
+                                  type: string
+                                task:
+                                  type: string
+                                path:
+                                  type: string
+                                shortDescription:
+                                  type: string
+                                rubric:
+                                  type: object
+                                  required:
+                                  - context
+                                  - type
+                                  - checklist
+                                  properties:
+                                    context:
+                                      minLength: 1
+                                      type: string
+                                    type:
+                                      type: string
+                                      enum:
+                                      - weighted_checklist
+                                    checklist:
+                                      minItems: 1
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - name
+                                        - description
+                                        - max_score
+                                        properties:
+                                          name:
+                                            minLength: 1
+                                            type: string
+                                          description:
+                                            minLength: 1
+                                            type: string
+                                          max_score:
+                                            minimum: 0
+                                            type: number
+                                qualityAssessment:
+                                  type: object
+                                  required:
+                                  - feasibility
+                                  - feasibility_notes
+                                  - leakage
+                                  - leakage_evidence
+                                  - scenario_value
+                                  - scenario_value_notes
+                                  - assessed_at
+                                  - model
+                                  properties:
+                                    feasibility:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - FEASIBLE
+                                      - type: string
+                                        enum:
+                                        - NOT_FEASIBLE
+                                    feasibility_notes:
+                                      type: string
+                                    leakage:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - NO_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - LOW_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - MEDIUM_LEAKAGE
+                                      - type: string
+                                        enum:
+                                        - HIGH_LEAKAGE
+                                    leakage_evidence:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - scenario_statement
+                                        - criteria_rubric
+                                        properties:
+                                          scenario_statement:
+                                            type: string
+                                          criteria_rubric:
+                                            type: string
+                                    scenario_value:
+                                      anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                    scenario_value_notes:
+                                      type: string
+                                    assessed_at:
+                                      format: date-time
+                                      type: string
+                                    model:
+                                      type: string
+                                qualityFilterStatus:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - included
+                                  - type: string
+                                    enum:
+                                    - rejected
+                                createdAt:
+                                  format: date-time
+                                  type: string
+                                updatedAt:
+                                  format: date-time
+                                  type: string
+                                solutions:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - id
+                                    - variant
+                                    - solutionTarGZS3Key
+                                    - solutionMetadata
+                                    - assessmentResults
+                                    - assessmentMetadata
+                                    - createdAt
+                                    - updatedAt
+                                    properties:
+                                      id:
+                                        format: uuid
+                                        type: string
+                                      variant:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - baseline
+                                        - type: string
+                                          enum:
+                                          - usage-spec
+                                      solutionTarGZS3Key:
+                                        anyOf:
+                                        - type: string
+                                        - type: 'null'
+                                      solutionMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      assessmentResults:
+                                        anyOf:
+                                        - type: array
+                                          items:
+                                            type: object
+                                            required:
+                                            - name
+                                            - score
+                                            - reasoning
+                                            properties:
+                                              name:
+                                                minLength: 1
+                                                type: string
+                                              score:
+                                                minimum: 0
+                                                type: number
+                                              max_score:
+                                                minimum: 0
+                                                type: number
+                                              reasoning:
+                                                minLength: 1
+                                                type: string
+                                        - type: 'null'
+                                      assessmentMetadata:
+                                        anyOf:
+                                        - type: object
+                                          additionalProperties: {}
+                                        - type: 'null'
+                                      createdAt:
+                                        format: date-time
+                                        type: string
+                                      updatedAt:
+                                        format: date-time
+                                        type: string
+                                      runs:
+                                        type: array
+                                        items:
+                                          anyOf:
+                                          - type: object
+                                            required:
+                                            - status
+                                            - solutionId
+                                            - score
+                                            - createdAt
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - completed
+                                              solutionId:
+                                                format: uuid
+                                                type: string
+                                              score:
+                                                anyOf:
+                                                - type: number
+                                                - type: 'null'
+                                              createdAt:
+                                                format: date-time
+                                                type: string
+                                          - type: object
+                                            required:
+                                            - status
+                                            properties:
+                                              status:
+                                                type: string
+                                                enum:
+                                                - pending
+                                      activation:
+                                        type: object
+                                        required:
+                                        - activatedSkills
+                                        properties:
+                                          activatedSkills:
+                                            type: array
+                                            items:
+                                              type: string
+                          expectedVariants:
+                            type: array
+                            items:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - baseline
+                              - type: string
+                                enum:
+                                - usage-spec
+                          lastScoredAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          progress:
+                            type: object
+                            required:
+                            - queue
+                            - recipes
+                            properties:
+                              queue:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - preparing
+                                - type: string
+                                  enum:
+                                  - queued
+                                - type: string
+                                  enum:
+                                  - active
+                                - type: string
+                                  enum:
+                                  - finishing
+                              recipes:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - waiting
+                                  - running
+                                  - completed
+                                  properties:
+                                    name:
+                                      type: string
+                                    waiting:
+                                      minimum: 0
+                                      type: integer
+                                    running:
+                                      minimum: 0
+                                      type: integer
+                                    completed:
+                                      minimum: 0
+                                      type: integer
+                              summary:
+                                type: object
+                                required:
+                                - label
+                                - completed
+                                - failed
+                                properties:
+                                  label:
+                                    type: string
+                                  total:
+                                    minimum: 0
+                                    type: integer
+                                  completed:
+                                    minimum: 0
+                                    type: integer
+                                  failed:
+                                    minimum: 0
+                                    type: integer
+                              units:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - name
+                                  - percent
+                                  - waiting
+                                  properties:
+                                    name:
+                                      type: string
+                                    percent:
+                                      minimum: 0
+                                      maximum: 100
+                                      type: integer
+                                    waiting:
+                                      type: boolean
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

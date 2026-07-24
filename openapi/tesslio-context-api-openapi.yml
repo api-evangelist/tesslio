@@ -1,0 +1,892 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Context API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Context
+paths:
+  /experimental/context/lineages/resolve:
+    get:
+      tags:
+      - Context
+      description: 'Resolves a context lineage by coordinates: a source (provider + owner/repo for SCM, or tessl-registry without owner/repo) plus exactly one of slug or occurrence path. `kind` applies only to slug resolution (slug is unique per source and kind); it is ignored for path resolution, since an occurrence path already identifies exactly one lineage regardless of kind. Invalid combinations are rejected with 400.'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: provider
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: owner
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: repo
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: slug
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: path
+        required: false
+      - schema:
+          default: skill
+          anyOf:
+          - type: string
+            enum:
+            - skill
+          - type: string
+            enum:
+            - plugin
+        in: query
+        name: kind
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - context-lineage
+                      attributes:
+                        type: object
+                        required:
+                        - kind
+                        - slug
+                        - name
+                        - visibility
+                        - coordinates
+                        - head
+                        - canonical
+                        - liveness
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          kind:
+                            type: string
+                          slug:
+                            type: string
+                          name:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          visibility:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - public
+                            - type: string
+                              enum:
+                              - private
+                          coordinates:
+                            type: object
+                            required:
+                            - provider
+                            - sourceUrl
+                            - owner
+                            - repo
+                            - registry
+                            - path
+                            - ref
+                            - occurrenceType
+                            properties:
+                              provider:
+                                type: string
+                              sourceUrl:
+                                format: uri
+                                type: string
+                              owner:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              repo:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              registry:
+                                anyOf:
+                                - type: object
+                                  required:
+                                  - workspaceName
+                                  - tileName
+                                  properties:
+                                    workspaceName:
+                                      type: string
+                                    tileName:
+                                      type: string
+                                - type: 'null'
+                              path:
+                                type: string
+                              ref:
+                                type: string
+                              occurrenceType:
+                                type: string
+                          head:
+                            anyOf:
+                            - type: object
+                              required:
+                              - versionId
+                              - fingerprintAlgo
+                              - fingerprint
+                              - bodyFingerprint
+                              - name
+                              - description
+                              properties:
+                                versionId:
+                                  format: uuid
+                                  type: string
+                                fingerprintAlgo:
+                                  type: string
+                                fingerprint:
+                                  type: string
+                                bodyFingerprint:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                name:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                            - type: 'null'
+                          canonical:
+                            anyOf:
+                            - type: object
+                              required:
+                              - lineageId
+                              - electedAt
+                              - electionReason
+                              properties:
+                                lineageId:
+                                  format: uuid
+                                  type: string
+                                electedAt:
+                                  format: date-time
+                                  type: string
+                                electionReason:
+                                  type: string
+                            - type: 'null'
+                          liveness:
+                            type: object
+                            required:
+                            - liveOccurrenceCount
+                            - firstSeenAt
+                            - lastSeenAt
+                            - gone
+                            properties:
+                              liveOccurrenceCount:
+                                type: integer
+                              firstSeenAt:
+                                anyOf:
+                                - format: date-time
+                                  type: string
+                                - type: 'null'
+                              lastSeenAt:
+                                anyOf:
+                                - format: date-time
+                                  type: string
+                                - type: 'null'
+                              gone:
+                                type: boolean
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/context/lineages:
+    get:
+      tags:
+      - Context
+      description: Lists a source's live, visible context lineages of a kind, one row per lineage.
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: filter[provider]
+        required: true
+      - schema:
+          type: string
+        in: query
+        name: filter[owner]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[repo]
+        required: false
+      - schema:
+          default: skill
+          anyOf:
+          - type: string
+            enum:
+            - skill
+          - type: string
+            enum:
+            - plugin
+        in: query
+        name: filter[kind]
+        required: false
+      - schema:
+          default: slug
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - slug
+              - type: string
+                enum:
+                - -slug
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+          - anyOf:
+            - type: string
+              enum:
+              - slug
+            - type: string
+              enum:
+              - -slug
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - context-lineage
+                        attributes:
+                          type: object
+                          required:
+                          - kind
+                          - slug
+                          - name
+                          - visibility
+                          - coordinates
+                          - head
+                          - canonical
+                          - liveness
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            kind:
+                              type: string
+                            slug:
+                              type: string
+                            name:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            visibility:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - public
+                              - type: string
+                                enum:
+                                - private
+                            coordinates:
+                              type: object
+                              required:
+                              - provider
+                              - sourceUrl
+                              - owner
+                              - repo
+                              - registry
+                              - path
+                              - ref
+                              - occurrenceType
+                              properties:
+                                provider:
+                                  type: string
+                                sourceUrl:
+                                  format: uri
+                                  type: string
+                                owner:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                repo:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                registry:
+                                  anyOf:
+                                  - type: object
+                                    required:
+                                    - workspaceName
+                                    - tileName
+                                    properties:
+                                      workspaceName:
+                                        type: string
+                                      tileName:
+                                        type: string
+                                  - type: 'null'
+                                path:
+                                  type: string
+                                ref:
+                                  type: string
+                                occurrenceType:
+                                  type: string
+                            head:
+                              anyOf:
+                              - type: object
+                                required:
+                                - versionId
+                                - fingerprintAlgo
+                                - fingerprint
+                                - bodyFingerprint
+                                - name
+                                - description
+                                properties:
+                                  versionId:
+                                    format: uuid
+                                    type: string
+                                  fingerprintAlgo:
+                                    type: string
+                                  fingerprint:
+                                    type: string
+                                  bodyFingerprint:
+                                    anyOf:
+                                    - type: string
+                                    - type: 'null'
+                                  name:
+                                    anyOf:
+                                    - type: string
+                                    - type: 'null'
+                                  description:
+                                    anyOf:
+                                    - type: string
+                                    - type: 'null'
+                              - type: 'null'
+                            canonical:
+                              anyOf:
+                              - type: object
+                                required:
+                                - lineageId
+                                - electedAt
+                                - electionReason
+                                properties:
+                                  lineageId:
+                                    format: uuid
+                                    type: string
+                                  electedAt:
+                                    format: date-time
+                                    type: string
+                                  electionReason:
+                                    type: string
+                              - type: 'null'
+                            liveness:
+                              type: object
+                              required:
+                              - liveOccurrenceCount
+                              - firstSeenAt
+                              - lastSeenAt
+                              - gone
+                              properties:
+                                liveOccurrenceCount:
+                                  type: integer
+                                firstSeenAt:
+                                  anyOf:
+                                  - format: date-time
+                                    type: string
+                                  - type: 'null'
+                                lastSeenAt:
+                                  anyOf:
+                                  - format: date-time
+                                    type: string
+                                  - type: 'null'
+                                gone:
+                                  type: boolean
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/context/lineages/{lineageId}:
+    get:
+      tags:
+      - Context
+      description: Fetches a context lineage by id.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: lineageId
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - context-lineage
+                      attributes:
+                        type: object
+                        required:
+                        - kind
+                        - slug
+                        - name
+                        - visibility
+                        - coordinates
+                        - head
+                        - canonical
+                        - liveness
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          kind:
+                            type: string
+                          slug:
+                            type: string
+                          name:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          visibility:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - public
+                            - type: string
+                              enum:
+                              - private
+                          coordinates:
+                            type: object
+                            required:
+                            - provider
+                            - sourceUrl
+                            - owner
+                            - repo
+                            - registry
+                            - path
+                            - ref
+                            - occurrenceType
+                            properties:
+                              provider:
+                                type: string
+                              sourceUrl:
+                                format: uri
+                                type: string
+                              owner:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              repo:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              registry:
+                                anyOf:
+                                - type: object
+                                  required:
+                                  - workspaceName
+                                  - tileName
+                                  properties:
+                                    workspaceName:
+                                      type: string
+                                    tileName:
+                                      type: string
+                                - type: 'null'
+                              path:
+                                type: string
+                              ref:
+                                type: string
+                              occurrenceType:
+                                type: string
+                          head:
+                            anyOf:
+                            - type: object
+                              required:
+                              - versionId
+                              - fingerprintAlgo
+                              - fingerprint
+                              - bodyFingerprint
+                              - name
+                              - description
+                              properties:
+                                versionId:
+                                  format: uuid
+                                  type: string
+                                fingerprintAlgo:
+                                  type: string
+                                fingerprint:
+                                  type: string
+                                bodyFingerprint:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                name:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                            - type: 'null'
+                          canonical:
+                            anyOf:
+                            - type: object
+                              required:
+                              - lineageId
+                              - electedAt
+                              - electionReason
+                              properties:
+                                lineageId:
+                                  format: uuid
+                                  type: string
+                                electedAt:
+                                  format: date-time
+                                  type: string
+                                electionReason:
+                                  type: string
+                            - type: 'null'
+                          liveness:
+                            type: object
+                            required:
+                            - liveOccurrenceCount
+                            - firstSeenAt
+                            - lastSeenAt
+                            - gone
+                            properties:
+                              liveOccurrenceCount:
+                                type: integer
+                              firstSeenAt:
+                                anyOf:
+                                - format: date-time
+                                  type: string
+                                - type: 'null'
+                              lastSeenAt:
+                                anyOf:
+                                - format: date-time
+                                  type: string
+                                - type: 'null'
+                              gone:
+                                type: boolean
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

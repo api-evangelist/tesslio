@@ -1,0 +1,110 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Badges API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Badges
+  description: Workspace badge generation.
+paths:
+  /v1/badges/{workspaceName}/{tileName}:
+    get:
+      tags:
+      - Badges
+      description: Returns Shields.io-style JSON for a tile eval-score badge.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: workspaceName
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: tileName
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - schemaVersion
+                - label
+                - message
+                - color
+                properties:
+                  schemaVersion:
+                    type: number
+                    enum:
+                    - 1
+                  label:
+                    type: string
+                  message:
+                    type: string
+                  color:
+                    type: string
+                  logoSvg:
+                    type: string
+                  cacheSeconds:
+                    type: number
+                  isError:
+                    type: boolean
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

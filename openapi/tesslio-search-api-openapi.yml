@@ -1,0 +1,1138 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Search API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Search
+  description: Search across tiles, skills, and repos.
+paths:
+  /experimental/search:
+    get:
+      tags:
+      - Search
+      description: Hybrid keyword + vector search across tiles and skills.
+      parameters:
+      - schema:
+          minLength: 1
+          maxLength: 500
+          type: string
+        in: query
+        name: q
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - text
+          - type: string
+            enum:
+            - hybrid
+          - type: string
+            enum:
+            - semantic
+        in: query
+        name: searchMode
+        required: false
+      - schema:
+          minimum: 1
+          default: 1
+          type: integer
+        in: query
+        name: page[number]
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: integer
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - tile
+          - type: string
+            enum:
+            - skill
+        in: query
+        name: filter[type][eq]
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - score
+          - type: string
+            enum:
+            - -score
+          - type: string
+            enum:
+            - aggregateScore
+          - type: string
+            enum:
+            - -aggregateScore
+          - type: string
+            enum:
+            - qualityScore
+          - type: string
+            enum:
+            - -qualityScore
+          - type: string
+            enum:
+            - impactScore
+          - type: string
+            enum:
+            - -impactScore
+          - type: string
+            enum:
+            - updatedAt
+          - type: string
+            enum:
+            - -updatedAt
+          - type: string
+            enum:
+            - securityLevel
+          - type: string
+            enum:
+            - -securityLevel
+          - type: string
+            enum:
+            - evalImprovementMultiplier
+          - type: string
+            enum:
+            - -evalImprovementMultiplier
+        in: query
+        name: sort
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][eq]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][ne]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][gt]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][gte]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][lt]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][lte]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[workspaceId][like]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][eq]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][ne]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][gt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][gte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][lt]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][lte]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: filter[describes][like]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][eq]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][ne]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][gt]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][gte]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][lt]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][lte]
+        required: false
+      - schema:
+          pattern: ^[a-z]+$
+          type: string
+        in: query
+        name: filter[packageRegistry][like]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured][eq]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[featured][ne]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSkills]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSkills][eq]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSkills][ne]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSteering]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSteering][eq]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasSteering][ne]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasDocs]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasDocs][eq]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[hasDocs][ne]
+        required: false
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includePrivate]
+        required: false
+        description: When true, include private tiles/skills accessible to authenticated users. Defaults to true.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includePrivate][eq]
+        required: false
+        description: When true, include private tiles/skills accessible to authenticated users. Defaults to true.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includePrivate][ne]
+        required: false
+        description: When true, include private tiles/skills accessible to authenticated users. Defaults to true.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][eq]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          type: boolean
+        in: query
+        name: filter[includeInvalid][ne]
+        required: false
+        description: When true, include skills that failed validation. Defaults to false.
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - versions
+          - type: string
+            enum:
+            - tile-skills
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - versions
+              - type: string
+                enum:
+                - tile-skills
+        in: query
+        name: include
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - first
+                    - last
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      first:
+                        format: uri
+                        type: string
+                      last:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - pagination
+                    properties:
+                      pagination:
+                        type: object
+                        required:
+                        - total
+                        - pages
+                        - number
+                        - size
+                        properties:
+                          total:
+                            type: integer
+                          pages:
+                            type: integer
+                          number:
+                            type: integer
+                          size:
+                            type: integer
+                  data:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        required:
+                        - id
+                        - type
+                        - attributes
+                        - relationships
+                        properties:
+                          id:
+                            format: uuid
+                            type: string
+                          type:
+                            type: string
+                            enum:
+                            - tile
+                          attributes:
+                            type: object
+                            required:
+                            - name
+                            - fullName
+                            - describes
+                            - featured
+                            - isPrivate
+                            - createdAt
+                            - updatedAt
+                            - scores
+                            properties:
+                              name:
+                                type: string
+                              fullName:
+                                type: string
+                              describes:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              featured:
+                                type: boolean
+                              isPrivate:
+                                type: boolean
+                              createdAt:
+                                format: date-time
+                                type: string
+                              updatedAt:
+                                format: date-time
+                                type: string
+                              versions:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - fingerprint
+                                  - version
+                                  - major
+                                  - minor
+                                  - patch
+                                  - prerelease
+                                  - summary
+                                  - describes
+                                  - docs
+                                  - hasDocs
+                                  - hasSteering
+                                  - hasSkills
+                                  - archived
+                                  - createdAt
+                                  - evalScore
+                                  - evalBaselineScore
+                                  - evalImprovement
+                                  - evalImprovementMultiplier
+                                  properties:
+                                    fingerprint:
+                                      type: string
+                                    version:
+                                      type: string
+                                    major:
+                                      type: number
+                                    minor:
+                                      type: number
+                                    patch:
+                                      type: number
+                                    prerelease:
+                                      anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    summary:
+                                      type: string
+                                    describes:
+                                      anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    docs:
+                                      anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    hasDocs:
+                                      type: boolean
+                                    hasSteering:
+                                      type: boolean
+                                    hasSkills:
+                                      type: boolean
+                                    archived:
+                                      type: boolean
+                                    createdAt:
+                                      format: date-time
+                                      type: string
+                                    evalScore:
+                                      anyOf:
+                                      - type: integer
+                                      - type: 'null'
+                                    evalBaselineScore:
+                                      anyOf:
+                                      - type: integer
+                                      - type: 'null'
+                                    evalImprovement:
+                                      anyOf:
+                                      - type: integer
+                                      - type: 'null'
+                                    evalImprovementMultiplier:
+                                      anyOf:
+                                      - type: number
+                                      - type: 'null'
+                                    skills:
+                                      type: array
+                                      items:
+                                        type: object
+                                        required:
+                                        - path
+                                        - name
+                                        - description
+                                        properties:
+                                          path:
+                                            type: string
+                                          name:
+                                            anyOf:
+                                            - type: string
+                                            - type: 'null'
+                                          description:
+                                            anyOf:
+                                            - type: string
+                                            - type: 'null'
+                              scores:
+                                type: object
+                                required:
+                                - version
+                                - aggregate
+                                - quality
+                                - impact
+                                - security
+                                - evalAvg
+                                - evalBaseline
+                                - evalImprovement
+                                - evalImprovementMultiplier
+                                - evalCount
+                                - validationErrors
+                                - lastScoredAt
+                                properties:
+                                  version:
+                                    type: string
+                                  aggregate:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  quality:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  impact:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  security:
+                                    anyOf:
+                                    - anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                      - type: string
+                                        enum:
+                                        - CRITICAL
+                                    - type: 'null'
+                                  evalAvg:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalBaseline:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalImprovement:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalImprovementMultiplier:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalCount:
+                                    anyOf:
+                                    - type: integer
+                                    - type: 'null'
+                                  validationErrors:
+                                    type: array
+                                    items:
+                                      type: string
+                                  lastScoredAt:
+                                    anyOf:
+                                    - format: date-time
+                                      type: string
+                                    - type: 'null'
+                          relationships:
+                            type: object
+                            required:
+                            - workspace
+                            properties:
+                              workspace:
+                                type: object
+                                required:
+                                - data
+                                properties:
+                                  data:
+                                    type: object
+                                    required:
+                                    - id
+                                    - type
+                                    - attributes
+                                    properties:
+                                      id:
+                                        format: uuid
+                                        type: string
+                                      type:
+                                        type: string
+                                        enum:
+                                        - workspace
+                                      attributes:
+                                        type: object
+                                        required:
+                                        - name
+                                        properties:
+                                          name:
+                                            type: string
+                      - type: object
+                        required:
+                        - id
+                        - type
+                        - attributes
+                        properties:
+                          id:
+                            format: uuid
+                            type: string
+                          type:
+                            type: string
+                            enum:
+                            - skill
+                          attributes:
+                            type: object
+                            required:
+                            - name
+                            - description
+                            - sourceUrl
+                            - path
+                            - featured
+                            - isPrivate
+                            - createdAt
+                            - updatedAt
+                            - validationPassed
+                            - scores
+                            properties:
+                              name:
+                                type: string
+                              description:
+                                type: string
+                              sourceUrl:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - ''
+                                - format: uri
+                                  minLength: 1
+                                  type: string
+                              path:
+                                type: string
+                              featured:
+                                type: boolean
+                              isPrivate:
+                                type: boolean
+                              createdAt:
+                                format: date-time
+                                type: string
+                              updatedAt:
+                                format: date-time
+                                type: string
+                              versions:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - sourceRef
+                                  - name
+                                  - description
+                                  - createdAt
+                                  properties:
+                                    sourceRef:
+                                      type: string
+                                    name:
+                                      type: string
+                                    description:
+                                      type: string
+                                    createdAt:
+                                      format: date-time
+                                      type: string
+                              validationPassed:
+                                anyOf:
+                                - type: boolean
+                                - type: 'null'
+                              scores:
+                                type: object
+                                required:
+                                - version
+                                - aggregate
+                                - quality
+                                - impact
+                                - security
+                                - evalAvg
+                                - evalBaseline
+                                - evalImprovement
+                                - evalImprovementMultiplier
+                                - evalCount
+                                - validationErrors
+                                - lastScoredAt
+                                properties:
+                                  version:
+                                    type: string
+                                  aggregate:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  quality:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  impact:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  security:
+                                    anyOf:
+                                    - anyOf:
+                                      - type: string
+                                        enum:
+                                        - LOW
+                                      - type: string
+                                        enum:
+                                        - MEDIUM
+                                      - type: string
+                                        enum:
+                                        - HIGH
+                                      - type: string
+                                        enum:
+                                        - CRITICAL
+                                    - type: 'null'
+                                  evalAvg:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalBaseline:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalImprovement:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalImprovementMultiplier:
+                                    anyOf:
+                                    - type: number
+                                    - type: 'null'
+                                  evalCount:
+                                    anyOf:
+                                    - type: integer
+                                    - type: 'null'
+                                  validationErrors:
+                                    type: array
+                                    items:
+                                      type: string
+                                  lastScoredAt:
+                                    anyOf:
+                                    - format: date-time
+                                      type: string
+                                    - type: 'null'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/search/github:
+    get:
+      tags:
+      - Search
+      description: Searches GitHub for repositories matching a query string (cached, top 5). Deprecated alias of GET /experimental/search/repos?provider=github.
+      parameters:
+      - schema:
+          minLength: 1
+          maxLength: 200
+          type: string
+        in: query
+        name: q
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - meta
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - owner
+                      - repo
+                      - repoDescription
+                      - repoStars
+                      - repoUrl
+                      - defaultBranch
+                      properties:
+                        owner:
+                          type: string
+                        repo:
+                          type: string
+                        repoDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        repoStars:
+                          type: integer
+                        repoUrl:
+                          type: string
+                        defaultBranch:
+                          type: string
+                  meta:
+                    type: object
+                    required:
+                    - totalCount
+                    properties:
+                      totalCount:
+                        type: integer
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/search/repos:
+    get:
+      tags:
+      - Search
+      description: Searches a provider (github, gitlab) for public repositories matching a query string (cached, top 5). Providers without public repo search (e.g. bitbucket) return supported=false.
+      parameters:
+      - schema:
+          minLength: 1
+          maxLength: 200
+          type: string
+        in: query
+        name: q
+        required: true
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - github
+          - type: string
+            enum:
+            - gitlab
+          - type: string
+            enum:
+            - bitbucket
+        in: query
+        name: provider
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  meta:
+                    type: object
+                    required:
+                    - totalCount
+                    - supported
+                    properties:
+                      totalCount:
+                        type: integer
+                      supported:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - repo-search-result
+                        attributes:
+                          type: object
+                          required:
+                          - owner
+                          - repo
+                          - description
+                          - stars
+                          - url
+                          - defaultBranch
+                          properties:
+                            owner:
+                              type: string
+                            repo:
+                              type: string
+                            description:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            stars:
+                              type: integer
+                            url:
+                              type: string
+                            defaultBranch:
+                              type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

@@ -1,0 +1,1037 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys MCP API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: MCP
+paths:
+  /experimental/workspaces/{workspaceId}/mcp-servers:
+    get:
+      tags:
+      - MCP
+      description: Lists MCP servers configured for a workspace.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - mcp-server
+                        attributes:
+                          type: object
+                          required:
+                          - authorizationServer
+                          - authState
+                          - authorized
+                          - createdAt
+                          - expiresAt
+                          - gatewayPath
+                          - name
+                          - requiresReauthorization
+                          - scope
+                          - transport
+                          - updatedAt
+                          - upstreamUrl
+                          properties:
+                            authorizationServer:
+                              type: string
+                            authState:
+                              description: 'Derived auth state. "refreshable" is optimistic: the token bundle exists but the gateway may still fail to refresh if the bundle lacks a refresh token.'
+                              anyOf:
+                              - type: string
+                                enum:
+                                - authorized
+                              - type: string
+                                enum:
+                                - refreshable
+                              - type: string
+                                enum:
+                                - requires_reauth
+                            authorized:
+                              type: boolean
+                            createdAt:
+                              format: date-time
+                              type: string
+                            expiresAt:
+                              anyOf:
+                              - format: date-time
+                                type: string
+                              - type: 'null'
+                            gatewayPath:
+                              type: string
+                            name:
+                              type: string
+                            requiresReauthorization:
+                              type: boolean
+                            scope:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            transport:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - http
+                              - type: string
+                                enum:
+                                - sse
+                            updatedAt:
+                              format: date-time
+                              type: string
+                            upstreamUrl:
+                              format: uri
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    post:
+      tags:
+      - MCP
+      description: Registers or updates a workspace MCP server and returns an OAuth authorization URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - name
+              - transport
+              - upstreamUrl
+              properties:
+                name:
+                  minLength: 1
+                  maxLength: 63
+                  type: string
+                oauth:
+                  additionalProperties: false
+                  type: object
+                  properties:
+                    authorizationServerUrl:
+                      format: uri
+                      type: string
+                    clientId:
+                      minLength: 1
+                      type: string
+                    clientSecret:
+                      minLength: 1
+                      type: string
+                    resource:
+                      format: uri
+                      type: string
+                    scope:
+                      minLength: 1
+                      type: string
+                transport:
+                  anyOf:
+                  - type: string
+                    enum:
+                    - http
+                  - type: string
+                    enum:
+                    - sse
+                upstreamUrl:
+                  format: uri
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - mcp-server
+                      attributes:
+                        type: object
+                        required:
+                        - authorizationUrl
+                        - gatewayPath
+                        - name
+                        - transport
+                        - upstreamUrl
+                        properties:
+                          authorizationUrl:
+                            format: uri
+                            type: string
+                          gatewayPath:
+                            type: string
+                          name:
+                            type: string
+                          transport:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - http
+                            - type: string
+                              enum:
+                              - sse
+                          upstreamUrl:
+                            format: uri
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}:
+    delete:
+      tags:
+      - MCP
+      description: Deletes a workspace MCP server. The endpoint is idempotent.
+      parameters:
+      - schema:
+          minLength: 1
+          type: string
+        in: path
+        name: mcpName
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/reauth:
+    post:
+      tags:
+      - MCP
+      description: Starts a fresh OAuth authorization flow for an existing workspace MCP server.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                scope:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          minLength: 1
+          type: string
+        in: path
+        name: mcpName
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - mcp-server
+                      attributes:
+                        type: object
+                        required:
+                        - authorizationUrl
+                        - gatewayPath
+                        - name
+                        - transport
+                        - upstreamUrl
+                        properties:
+                          authorizationUrl:
+                            format: uri
+                            type: string
+                          gatewayPath:
+                            type: string
+                          name:
+                            type: string
+                          transport:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - http
+                            - type: string
+                              enum:
+                              - sse
+                          upstreamUrl:
+                            format: uri
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/callback:
+    post:
+      tags:
+      - MCP
+      description: Completes an MCP OAuth callback by exchanging the authorization code for tokens.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - state
+              properties:
+                code:
+                  minLength: 1
+                  type: string
+                error:
+                  minLength: 1
+                  type: string
+                errorDescription:
+                  minLength: 1
+                  type: string
+                state:
+                  minLength: 1
+                  type: string
+      parameters:
+      - schema:
+          minLength: 1
+          type: string
+        in: path
+        name: mcpName
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: workspaceId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - mcp-server
+                      attributes:
+                        type: object
+                        required:
+                        - authorized
+                        - expiresAt
+                        - name
+                        - scope
+                        - tokenType
+                        properties:
+                          authorized:
+                            type: boolean
+                          expiresAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          name:
+                            type: string
+                          scope:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          tokenType:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

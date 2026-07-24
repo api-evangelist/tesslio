@@ -1,0 +1,545 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Security Review Runs API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Security Review Runs
+paths:
+  /experimental/security-review-runs:
+    post:
+      tags:
+      - Security Review Runs
+      description: Creates a new security review run and starts the security-review workflow.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - uploadKey
+              - workspaceId
+              properties:
+                uploadKey:
+                  type: string
+                workspaceId:
+                  format: uuid
+                  type: string
+                label:
+                  type: string
+                force:
+                  type: boolean
+                metadata:
+                  type: object
+                  properties:
+                    subject:
+                      type: object
+                      required:
+                      - type
+                      - name
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - skill
+                        name:
+                          type: string
+                        path:
+                          type: string
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - security-review-run
+                      attributes:
+                        type: object
+                        required:
+                        - workflowId
+                        - status
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/security-review-runs/{id}:
+    get:
+      tags:
+      - Security Review Runs
+      description: Gets a security review run by ID.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - security-review-run
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - workflowId
+                        - workspaceId
+                        - createdBy
+                        - overallSeverity
+                        - results
+                        - metadata
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          workspaceId:
+                            format: uuid
+                            type: string
+                          createdBy:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          overallSeverity:
+                            anyOf:
+                            - anyOf:
+                              - type: string
+                                enum:
+                                - LOW
+                              - type: string
+                                enum:
+                                - MEDIUM
+                              - type: string
+                                enum:
+                                - HIGH
+                              - type: string
+                                enum:
+                                - CRITICAL
+                            - type: 'null'
+                          results:
+                            anyOf:
+                            - type: object
+                              required:
+                              - verdict
+                              - overallSeverity
+                              - findings
+                              properties:
+                                verdict:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - pass
+                                  - type: string
+                                    enum:
+                                    - fail
+                                overallSeverity:
+                                  anyOf:
+                                  - anyOf:
+                                    - type: string
+                                      enum:
+                                      - LOW
+                                    - type: string
+                                      enum:
+                                      - MEDIUM
+                                    - type: string
+                                      enum:
+                                      - HIGH
+                                    - type: string
+                                      enum:
+                                      - CRITICAL
+                                  - type: 'null'
+                                findings:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                    - severity
+                                    - code
+                                    - title
+                                    - reasoning
+                                    - issueDescription
+                                    properties:
+                                      severity:
+                                        anyOf:
+                                        - type: string
+                                          enum:
+                                          - CRITICAL
+                                        - type: string
+                                          enum:
+                                          - HIGH
+                                        - type: string
+                                          enum:
+                                          - MEDIUM
+                                        - type: string
+                                          enum:
+                                          - LOW
+                                      code:
+                                        type: string
+                                      title:
+                                        type: string
+                                      reasoning:
+                                        type: string
+                                      issueDescription:
+                                        anyOf:
+                                        - type: string
+                                        - type: 'null'
+                            - type: 'null'
+                          metadata:
+                            additionalProperties: true
+                            type: object
+                            required:
+                            - tier
+                            properties:
+                              tier:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - anonymous
+                                - type: string
+                                  enum:
+                                  - authed_free
+                              subject:
+                                type: object
+                                required:
+                                - type
+                                - name
+                                properties:
+                                  type:
+                                    type: string
+                                    enum:
+                                    - skill
+                                  name:
+                                    type: string
+                                  path:
+                                    type: string
+                              source:
+                                type: string
+                              label:
+                                type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

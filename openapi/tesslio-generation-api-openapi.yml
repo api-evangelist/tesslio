@@ -1,0 +1,1631 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Generation API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Generation
+  description: Eval scenario generation runs.
+paths:
+  /experimental/eval-scenarios/generate:
+    post:
+      tags:
+      - Generation
+      description: Starts an LLM-driven eval scenario generation run for a repo commit or tile upload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              properties:
+                workspaceName:
+                  type: string
+                workspaceId:
+                  format: uuid
+                  type: string
+                source:
+                  anyOf:
+                  - type: object
+                    required:
+                    - type
+                    - orgName
+                    - repoName
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - commit
+                      orgName:
+                        type: string
+                      repoName:
+                        type: string
+                      commit:
+                        minLength: 7
+                        maxLength: 82
+                        type: string
+                      pullRequestNumber:
+                        minimum: 1
+                        type: integer
+                      contextPatterns:
+                        type: array
+                        items:
+                          type: string
+                      repoArchiveUpload:
+                        type: object
+                        required:
+                        - archiveUploadKey
+                        - commitDetails
+                        - repoCloneUrl
+                        - defaultBranch
+                        - parentCommitHash
+                        properties:
+                          archiveUploadKey:
+                            description: S3 uploads key for repo archive at HEAD of default branch
+                            type: string
+                          commitDetails:
+                            description: JSON string of pre-extracted commit details
+                            type: string
+                          repoCloneUrl:
+                            description: Clone URL for fixture metadata
+                            type: string
+                          defaultBranch:
+                            type: string
+                          parentCommitHash:
+                            description: Parent commit hash used as the fixture ref
+                            type: string
+                  - type: object
+                    required:
+                    - type
+                    - uploadsS3Key
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - tile-upload
+                      uploadsS3Key:
+                        type: string
+                      scenarioCount:
+                        minimum: 1
+                        maximum: 10
+                        type: integer
+      parameters:
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  meta:
+                    type: object
+                    required:
+                    - generationId
+                    - workflowId
+                    properties:
+                      generationId:
+                        format: uuid
+                        type: string
+                      workflowId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - eval-generation
+                      attributes:
+                        type: object
+                        required:
+                        - workflowId
+                        - source
+                        - metadata
+                        - createdBy
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          source:
+                            anyOf:
+                            - type: object
+                              required:
+                              - type
+                              - orgName
+                              - repoName
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - commit
+                                orgName:
+                                  type: string
+                                repoName:
+                                  type: string
+                                commit:
+                                  minLength: 7
+                                  maxLength: 82
+                                  type: string
+                                pullRequestNumber:
+                                  minimum: 1
+                                  type: integer
+                                contextPatterns:
+                                  type: array
+                                  items:
+                                    type: string
+                                repoArchiveUpload:
+                                  type: object
+                                  required:
+                                  - archiveUploadKey
+                                  - commitDetails
+                                  - repoCloneUrl
+                                  - defaultBranch
+                                  - parentCommitHash
+                                  properties:
+                                    archiveUploadKey:
+                                      description: S3 uploads key for repo archive at HEAD of default branch
+                                      type: string
+                                    commitDetails:
+                                      description: JSON string of pre-extracted commit details
+                                      type: string
+                                    repoCloneUrl:
+                                      description: Clone URL for fixture metadata
+                                      type: string
+                                    defaultBranch:
+                                      type: string
+                                    parentCommitHash:
+                                      description: Parent commit hash used as the fixture ref
+                                      type: string
+                            - type: object
+                              required:
+                              - type
+                              - uploadsS3Key
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - tile-upload
+                                uploadsS3Key:
+                                  type: string
+                                scenarioCount:
+                                  minimum: 1
+                                  maximum: 10
+                                  type: integer
+                          metadata:
+                            type: object
+                            additionalProperties: {}
+                          createdBy:
+                            format: uuid
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/generation-runs:
+    get:
+      tags:
+      - Generation
+      description: Lists eval scenario generation runs (v1) with mine-only/status filters.
+      parameters:
+      - schema:
+          default: -createdAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - createdAt
+              - type: string
+                enum:
+                - -createdAt
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+              - type: string
+                enum:
+                - id
+              - type: string
+                enum:
+                - -id
+          - anyOf:
+            - type: string
+              enum:
+              - createdAt
+            - type: string
+              enum:
+              - -createdAt
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+            - type: string
+              enum:
+              - id
+            - type: string
+              enum:
+              - -id
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          default: true
+          type: boolean
+        in: query
+        name: mineOnly
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: workspaceNameFilter
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pending
+          - type: string
+            enum:
+            - in_progress
+          - type: string
+            enum:
+            - completed
+          - type: string
+            enum:
+            - failed
+        in: query
+        name: status
+        required: false
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - generation-run
+                        attributes:
+                          type: object
+                          required:
+                          - status
+                          - source
+                          - metadata
+                          - data
+                          - createdBy
+                          - workspaceName
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            status:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - pending
+                              - type: string
+                                enum:
+                                - completed
+                              - type: string
+                                enum:
+                                - failed
+                            source:
+                              type: object
+                              additionalProperties: {}
+                            metadata:
+                              type: object
+                              additionalProperties: {}
+                            data:
+                              type: object
+                              required:
+                              - type
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - eval-scenarios
+                            createdBy:
+                              type: object
+                              required:
+                              - id
+                              - firstName
+                              - lastName
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+                                firstName:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                lastName:
+                                  anyOf:
+                                  - type: string
+                                  - type: 'null'
+                            workspaceName:
+                              type: string
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/generation-runs/{id}:
+    get:
+      tags:
+      - Generation
+      description: Use `/experimental/generation-runs-v2/{id}` instead. The v2 endpoint returns a slim per-scenario index and is the path new clients should integrate against.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      deprecated: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - generation-run
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - source
+                        - metadata
+                        - createdBy
+                        - workflowId
+                        - data
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          source:
+                            type: object
+                            additionalProperties: {}
+                          metadata:
+                            type: object
+                            additionalProperties: {}
+                          createdBy:
+                            type: object
+                            required:
+                            - id
+                            - firstName
+                            - lastName
+                            properties:
+                              id:
+                                format: uuid
+                                type: string
+                              firstName:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              lastName:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          data:
+                            type: object
+                            required:
+                            - type
+                            - scenarios
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - eval-scenarios
+                              scenarios:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - id
+                                  - task
+                                  - shortDescription
+                                  - rubric
+                                  - fixture
+                                  - fixtures
+                                  - createdAt
+                                  - updatedAt
+                                  properties:
+                                    id:
+                                      format: uuid
+                                      type: string
+                                    task:
+                                      type: string
+                                    shortDescription:
+                                      anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    rubric:
+                                      type: object
+                                      required:
+                                      - context
+                                      - type
+                                      - checklist
+                                      properties:
+                                        context:
+                                          minLength: 1
+                                          type: string
+                                        type:
+                                          type: string
+                                          enum:
+                                          - weighted_checklist
+                                        checklist:
+                                          minItems: 1
+                                          type: array
+                                          items:
+                                            type: object
+                                            required:
+                                            - name
+                                            - description
+                                            - max_score
+                                            properties:
+                                              name:
+                                                minLength: 1
+                                                type: string
+                                              description:
+                                                minLength: 1
+                                                type: string
+                                              max_score:
+                                                minimum: 0
+                                                type: number
+                                    fixture:
+                                      anyOf:
+                                      - type: object
+                                        additionalProperties: {}
+                                      - type: 'null'
+                                    fixtures:
+                                      type: object
+                                      additionalProperties: {}
+                                    createdAt:
+                                      format: date-time
+                                      type: string
+                                    updatedAt:
+                                      format: date-time
+                                      type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/generation-runs/{id}/download:
+    get:
+      tags:
+      - Generation
+      description: Use `/experimental/generation-runs-v2/{id}/download` instead. The v2 endpoint returns a presigned S3 URL pointing at the canonical `scenarios.tar.gz`; clients fetch and unpack it locally.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      deprecated: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                - meta
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - eval-scenario
+                        attributes:
+                          type: object
+                          required:
+                          - shortDescription
+                          - task
+                          - rubric
+                          - fixture
+                          - fixtures
+                          properties:
+                            shortDescription:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            task:
+                              type: string
+                            rubric:
+                              type: object
+                              required:
+                              - context
+                              - type
+                              - checklist
+                              properties:
+                                context:
+                                  type: string
+                                type:
+                                  type: string
+                                checklist:
+                                  type: array
+                                  items: {}
+                            fixture:
+                              anyOf:
+                              - type: object
+                                additionalProperties: {}
+                              - type: 'null'
+                            fixtures:
+                              type: object
+                              additionalProperties: {}
+                  meta:
+                    type: object
+                    required:
+                    - type
+                    - count
+                    - generationRunId
+                    - status
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - eval-scenarios
+                      count:
+                        type: number
+                      generationRunId:
+                        format: uuid
+                        type: string
+                      status:
+                        anyOf:
+                        - type: string
+                          enum:
+                          - pending
+                        - type: string
+                          enum:
+                          - completed
+                        - type: string
+                          enum:
+                          - failed
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/generation-runs-v2/{id}:
+    get:
+      tags:
+      - Generation
+      description: Fetches a generation run by id. Returns the slim per-scenario index (`name`, `shortDescription`, `checklistSize`); fetch `/download` for the full content.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - generation-run
+                      attributes:
+                        type: object
+                        required:
+                        - status
+                        - source
+                        - metadata
+                        - createdBy
+                        - workflowId
+                        - data
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          status:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - completed
+                            - type: string
+                              enum:
+                              - failed
+                          source:
+                            type: object
+                            additionalProperties: {}
+                          metadata:
+                            type: object
+                            additionalProperties: {}
+                          createdBy:
+                            type: object
+                            required:
+                            - id
+                            - firstName
+                            - lastName
+                            properties:
+                              id:
+                                format: uuid
+                                type: string
+                              firstName:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              lastName:
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                          workflowId:
+                            anyOf:
+                            - type: string
+                            - type: 'null'
+                          data:
+                            type: object
+                            required:
+                            - type
+                            - scenarios
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - eval-scenarios
+                              scenarios:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                  - id
+                                  - name
+                                  - shortDescription
+                                  - checklistSize
+                                  - createdAt
+                                  - updatedAt
+                                  properties:
+                                    id:
+                                      format: uuid
+                                      type: string
+                                    name:
+                                      type: string
+                                    shortDescription:
+                                      anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    checklistSize:
+                                      minimum: 0
+                                      type: integer
+                                    createdAt:
+                                      format: date-time
+                                      type: string
+                                    updatedAt:
+                                      format: date-time
+                                      type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /experimental/generation-runs-v2/{id}/download:
+    get:
+      tags:
+      - Generation
+      description: Returns a presigned URL for downloading the materialized tarball produced by a v2 generation run.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: id
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - generation-run
+                      attributes:
+                        type: object
+                        required:
+                        - presignedUrl
+                        - expiresAt
+                        properties:
+                          presignedUrl:
+                            format: uri
+                            type: string
+                          expiresAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string

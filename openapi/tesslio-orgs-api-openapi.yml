@@ -1,0 +1,3752 @@
+openapi: 3.1.1
+info:
+  title: Tessl Admin Keys Orgs API
+  version: 1.0.0
+  description: Admin-scoped API keys for support tooling.
+servers:
+- url: https://api.tessl.io
+tags:
+- name: Orgs
+  description: Organizations, members, and invitations.
+paths:
+  /v1/users/{userId}/orgs:
+    get:
+      tags:
+      - Orgs
+      description: Lists organizations a user is a member of.
+      parameters:
+      - schema:
+          default: name
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - name
+              - type: string
+                enum:
+                - -name
+          - anyOf:
+            - type: string
+              enum:
+              - name
+            - type: string
+              enum:
+              - -name
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: userId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      - meta
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - org
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - role
+                          - defaultWorkspaceId
+                          - joinedAt
+                          - entitlements
+                          properties:
+                            name:
+                              type: string
+                            role:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - admin
+                              - type: string
+                                enum:
+                                - member
+                            defaultWorkspaceId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            joinedAt:
+                              format: date-time
+                              type: string
+                            entitlements:
+                              type: object
+                              required:
+                              - modelSelection
+                              - analytics
+                              - policyManagement
+                              - projectManagement
+                              - creditOverage
+                              - auditLogAccess
+                              - customReviewPlugins
+                              - advancedInventoryFindings
+                              properties:
+                                modelSelection:
+                                  type: boolean
+                                analytics:
+                                  type: boolean
+                                policyManagement:
+                                  type: boolean
+                                projectManagement:
+                                  type: boolean
+                                creditOverage:
+                                  type: boolean
+                                auditLogAccess:
+                                  type: boolean
+                                customReviewPlugins:
+                                  type: boolean
+                                advancedInventoryFindings:
+                                  type: boolean
+                        meta:
+                          type: object
+                          required:
+                          - allowedActions
+                          properties:
+                            allowedActions:
+                              type: array
+                              items:
+                                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}:
+    get:
+      tags:
+      - Orgs
+      description: Fetches an organization by id.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    - meta
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - org
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - blockPublicTilePublish
+                        - plan
+                        - entitlements
+                        - trialEndsAt
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          blockPublicTilePublish:
+                            type: boolean
+                          plan:
+                            type: object
+                            required:
+                            - code
+                            - displayName
+                            properties:
+                              code:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - free
+                                - type: string
+                                  enum:
+                                  - free-legacy-v1
+                                - type: string
+                                  enum:
+                                  - team-v1
+                                - type: string
+                                  enum:
+                                  - business-v1
+                                - type: string
+                                  enum:
+                                  - enterprise-v1
+                              displayName:
+                                type: string
+                          entitlements:
+                            type: object
+                            required:
+                            - modelSelection
+                            - analytics
+                            - policyManagement
+                            - projectManagement
+                            - creditOverage
+                            - auditLogAccess
+                            - customReviewPlugins
+                            - advancedInventoryFindings
+                            properties:
+                              modelSelection:
+                                type: boolean
+                              analytics:
+                                type: boolean
+                              policyManagement:
+                                type: boolean
+                              projectManagement:
+                                type: boolean
+                              creditOverage:
+                                type: boolean
+                              auditLogAccess:
+                                type: boolean
+                              customReviewPlugins:
+                                type: boolean
+                              advancedInventoryFindings:
+                                type: boolean
+                          trialEndsAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                      meta:
+                        type: object
+                        required:
+                        - allowedActions
+                        properties:
+                          allowedActions:
+                            type: array
+                            items:
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    patch:
+      tags:
+      - Orgs
+      description: Updates an organization (rename, public-publish toggle).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              minProperties: 1
+              type: object
+              properties:
+                name:
+                  minLength: 4
+                  maxLength: 40
+                  pattern: ^[0-9a-z-]+$
+                  type: string
+                blockPublicTilePublish:
+                  type: boolean
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - org
+                      attributes:
+                        type: object
+                        required:
+                        - name
+                        - blockPublicTilePublish
+                        - createdAt
+                        - updatedAt
+                        properties:
+                          name:
+                            type: string
+                          blockPublicTilePublish:
+                            type: boolean
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/invitations:
+    get:
+      tags:
+      - Orgs
+      description: Lists pending invitations for an organization.
+      parameters:
+      - schema:
+          default: -createdAt
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - createdAt
+              - type: string
+                enum:
+                - -createdAt
+          - anyOf:
+            - type: string
+              enum:
+              - createdAt
+            - type: string
+              enum:
+              - -createdAt
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - invitation
+                        attributes:
+                          type: object
+                          required:
+                          - id
+                          - orgId
+                          - email
+                          - role
+                          - state
+                          - inviterUserId
+                          - acceptedByUserId
+                          - acceptedAt
+                          - expiresAt
+                          - createdAt
+                          - updatedAt
+                          - workspaces
+                          properties:
+                            id:
+                              format: uuid
+                              type: string
+                            orgId:
+                              format: uuid
+                              type: string
+                            email:
+                              format: email
+                              type: string
+                            role:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - owner
+                              - type: string
+                                enum:
+                                - manager
+                              - type: string
+                                enum:
+                                - publisher
+                              - type: string
+                                enum:
+                                - member
+                              - type: string
+                                enum:
+                                - consumer
+                            state:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - pending
+                              - type: string
+                                enum:
+                                - accepted
+                              - type: string
+                                enum:
+                                - revoked
+                              - type: string
+                                enum:
+                                - expired
+                            inviterUserId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            acceptedByUserId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            acceptedAt:
+                              anyOf:
+                              - format: date-time
+                                type: string
+                              - type: 'null'
+                            expiresAt:
+                              format: date-time
+                              type: string
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+                            workspaces:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                - id
+                                properties:
+                                  id:
+                                    format: uuid
+                                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    post:
+      tags:
+      - Orgs
+      description: Invites a user (by email) to an organization with the given workspace memberships.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - email
+              - workspaces
+              properties:
+                email:
+                  format: email
+                  type: string
+                role:
+                  anyOf:
+                  - type: string
+                    enum:
+                    - owner
+                  - type: string
+                    enum:
+                    - manager
+                  - type: string
+                    enum:
+                    - publisher
+                  - type: string
+                    enum:
+                    - member
+                  - type: string
+                    enum:
+                    - consumer
+                workspaces:
+                  minItems: 1
+                  type: array
+                  items:
+                    additionalProperties: false
+                    type: object
+                    required:
+                    - id
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - invitation
+                      attributes:
+                        type: object
+                        required:
+                        - id
+                        - orgId
+                        - email
+                        - role
+                        - state
+                        - inviterUserId
+                        - acceptedByUserId
+                        - acceptedAt
+                        - expiresAt
+                        - createdAt
+                        - updatedAt
+                        - workspaces
+                        properties:
+                          id:
+                            format: uuid
+                            type: string
+                          orgId:
+                            format: uuid
+                            type: string
+                          email:
+                            format: email
+                            type: string
+                          role:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - owner
+                            - type: string
+                              enum:
+                              - manager
+                            - type: string
+                              enum:
+                              - publisher
+                            - type: string
+                              enum:
+                              - member
+                            - type: string
+                              enum:
+                              - consumer
+                          state:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - accepted
+                            - type: string
+                              enum:
+                              - revoked
+                            - type: string
+                              enum:
+                              - expired
+                          inviterUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedByUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          expiresAt:
+                            format: date-time
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          workspaces:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Conflict
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Conflict
+                      status:
+                        type: number
+                        enum:
+                        - 409
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/invitations/{invitationId}:
+    delete:
+      tags:
+      - Orgs
+      description: Revokes a pending org invitation. If WorkOS already reports the invitation as accepted, reconciles the local invitation and returns it as accepted.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: invitationId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - invitation
+                      attributes:
+                        type: object
+                        required:
+                        - id
+                        - orgId
+                        - email
+                        - role
+                        - state
+                        - inviterUserId
+                        - acceptedByUserId
+                        - acceptedAt
+                        - expiresAt
+                        - createdAt
+                        - updatedAt
+                        - workspaces
+                        properties:
+                          id:
+                            format: uuid
+                            type: string
+                          orgId:
+                            format: uuid
+                            type: string
+                          email:
+                            format: email
+                            type: string
+                          role:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - owner
+                            - type: string
+                              enum:
+                              - manager
+                            - type: string
+                              enum:
+                              - publisher
+                            - type: string
+                              enum:
+                              - member
+                            - type: string
+                              enum:
+                              - consumer
+                          state:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - accepted
+                            - type: string
+                              enum:
+                              - revoked
+                            - type: string
+                              enum:
+                              - expired
+                          inviterUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedByUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          expiresAt:
+                            format: date-time
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          workspaces:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/invitations/{invitationId}/resend:
+    post:
+      tags:
+      - Orgs
+      description: Resends an org invitation email. Subject to a 2-minute cooldown.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: invitationId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - invitation
+                      attributes:
+                        type: object
+                        required:
+                        - id
+                        - orgId
+                        - email
+                        - role
+                        - state
+                        - inviterUserId
+                        - acceptedByUserId
+                        - acceptedAt
+                        - expiresAt
+                        - createdAt
+                        - updatedAt
+                        - workspaces
+                        properties:
+                          id:
+                            format: uuid
+                            type: string
+                          orgId:
+                            format: uuid
+                            type: string
+                          email:
+                            format: email
+                            type: string
+                          role:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - owner
+                            - type: string
+                              enum:
+                              - manager
+                            - type: string
+                              enum:
+                              - publisher
+                            - type: string
+                              enum:
+                              - member
+                            - type: string
+                              enum:
+                              - consumer
+                          state:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - pending
+                            - type: string
+                              enum:
+                              - accepted
+                            - type: string
+                              enum:
+                              - revoked
+                            - type: string
+                              enum:
+                              - expired
+                          inviterUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedByUserId:
+                            anyOf:
+                            - format: uuid
+                              type: string
+                            - type: 'null'
+                          acceptedAt:
+                            anyOf:
+                            - format: date-time
+                              type: string
+                            - type: 'null'
+                          expiresAt:
+                            format: date-time
+                            type: string
+                          createdAt:
+                            format: date-time
+                            type: string
+                          updatedAt:
+                            format: date-time
+                            type: string
+                          workspaces:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                              - id
+                              properties:
+                                id:
+                                  format: uuid
+                                  type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                description: Too Many Requests
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Too Many Requests
+                      status:
+                        type: number
+                        enum:
+                        - 429
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/members:
+    get:
+      tags:
+      - Orgs
+      description: Lists members of an organization.
+      parameters:
+      - schema:
+          default: username
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - username
+              - type: string
+                enum:
+                - -username
+          - anyOf:
+            - type: string
+              enum:
+              - username
+            - type: string
+              enum:
+              - -username
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][eq]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][ne]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][gt]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][gte]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][lt]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][lte]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: query
+        name: filter[notInWorkspace][like]
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - admin
+          - type: string
+            enum:
+            - member
+        in: query
+        name: role
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - user
+                        attributes:
+                          type: object
+                          required:
+                          - username
+                          - firstName
+                          - lastName
+                          - email
+                          - profilePictureUrl
+                          - role
+                          - joinedAt
+                          properties:
+                            username:
+                              type: string
+                            firstName:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            lastName:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            email:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            profilePictureUrl:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            role:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - admin
+                              - type: string
+                                enum:
+                                - member
+                            joinedAt:
+                              format: date-time
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/members/{userId}/workspaces:
+    get:
+      tags:
+      - Orgs
+      description: Lists an org member's explicit workspace memberships within the org, with both the stored (direct) role and the resolved effective role.
+      parameters:
+      - schema:
+          default: name
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - name
+              - type: string
+                enum:
+                - -name
+          - anyOf:
+            - type: string
+              enum:
+              - name
+            - type: string
+              enum:
+              - -name
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: userId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - workspace
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - directRole
+                          - effectiveRole
+                          - joinedAt
+                          properties:
+                            name:
+                              type: string
+                            directRole:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - owner
+                              - type: string
+                                enum:
+                                - manager
+                              - type: string
+                                enum:
+                                - publisher
+                              - type: string
+                                enum:
+                                - member
+                              - type: string
+                                enum:
+                                - consumer
+                            effectiveRole:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - owner
+                              - type: string
+                                enum:
+                                - manager
+                              - type: string
+                                enum:
+                                - publisher
+                              - type: string
+                                enum:
+                                - member
+                              - type: string
+                                enum:
+                                - consumer
+                            joinedAt:
+                              format: date-time
+                              type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/members/{userId}:
+    patch:
+      tags:
+      - Orgs
+      description: Updates an org member's role. Cannot demote the last admin.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+              - role
+              properties:
+                role:
+                  anyOf:
+                  - type: string
+                    enum:
+                    - admin
+                  - type: string
+                    enum:
+                    - member
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: userId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - user
+                      attributes:
+                        type: object
+                        required:
+                        - role
+                        properties:
+                          role:
+                            anyOf:
+                            - type: string
+                              enum:
+                              - admin
+                            - type: string
+                              enum:
+                              - member
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+    delete:
+      tags:
+      - Orgs
+      description: Removes a member from an organization. Cannot remove the last admin or the user's last org.
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: userId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '204':
+          description: Default Response
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/workspaces:
+    get:
+      tags:
+      - Orgs
+      parameters:
+      - schema:
+          default: name
+          anyOf:
+          - type: array
+            items:
+              anyOf:
+              - type: string
+                enum:
+                - name
+              - type: string
+                enum:
+                - -name
+              - type: string
+                enum:
+                - updatedAt
+              - type: string
+                enum:
+                - -updatedAt
+          - anyOf:
+            - type: string
+              enum:
+              - name
+            - type: string
+              enum:
+              - -name
+            - type: string
+              enum:
+              - updatedAt
+            - type: string
+              enum:
+              - -updatedAt
+        in: query
+        name: sort
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 100
+          default: 100
+          type: number
+        in: query
+        name: page[size]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[after]
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: page[before]
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      - meta
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - workspace
+                        attributes:
+                          type: object
+                          required:
+                          - name
+                          - orgDefaultRole
+                          - createdAt
+                          - updatedAt
+                          properties:
+                            name:
+                              type: string
+                            orgDefaultRole:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - owner
+                                - type: string
+                                  enum:
+                                  - manager
+                                - type: string
+                                  enum:
+                                  - publisher
+                                - type: string
+                                  enum:
+                                  - member
+                                - type: string
+                                  enum:
+                                  - consumer
+                              - type: 'null'
+                            createdAt:
+                              format: date-time
+                              type: string
+                            updatedAt:
+                              format: date-time
+                              type: string
+                        meta:
+                          type: object
+                          required:
+                          - allowedActions
+                          properties:
+                            allowedActions:
+                              type: array
+                              items:
+                                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/audit-events:
+    get:
+      tags:
+      - Orgs
+      description: Lists audit events for an organization. Supports filtering by date range, action, and actor. Returns JSON or CSV.
+      parameters:
+      - schema:
+          format: date-time
+          type: string
+        in: query
+        name: from
+        required: false
+      - schema:
+          format: date-time
+          type: string
+        in: query
+        name: to
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: action
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: actorId
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: targetId
+        required: false
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        required: false
+      - schema:
+          minimum: 1
+          maximum: 1000
+          default: 50
+          type: integer
+        in: query
+        name: limit
+        required: false
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - json
+          - type: string
+            enum:
+            - csv
+        in: query
+        name: format
+        required: false
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - meta
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    - next
+                    - prev
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                      next:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                      prev:
+                        anyOf:
+                        - format: uri
+                          type: string
+                        - type: 'null'
+                  meta:
+                    type: object
+                    required:
+                    - count
+                    properties:
+                      count:
+                        type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - type
+                      - attributes
+                      properties:
+                        id:
+                          format: uuid
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - audit-event
+                        attributes:
+                          type: object
+                          required:
+                          - occurredAt
+                          - action
+                          - outcome
+                          - actorType
+                          - actorId
+                          - actorEmail
+                          - actorLabel
+                          - impersonated
+                          - impersonatorId
+                          - impersonationReason
+                          - targetType
+                          - targetId
+                          - targetLabel
+                          - requestId
+                          - parentEventId
+                          - workspaceId
+                          - metadata
+                          properties:
+                            occurredAt:
+                              format: date-time
+                              type: string
+                            action:
+                              type: string
+                            outcome:
+                              anyOf:
+                              - anyOf:
+                                - type: string
+                                  enum:
+                                  - succeeded
+                                - type: string
+                                  enum:
+                                  - failed
+                              - type: 'null'
+                            actorType:
+                              anyOf:
+                              - type: string
+                                enum:
+                                - user
+                              - type: string
+                                enum:
+                                - api_key_user
+                              - type: string
+                                enum:
+                                - org_api_key_user
+                              - type: string
+                                enum:
+                                - system
+                              - type: string
+                                enum:
+                                - anonymous
+                            actorId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            actorEmail:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            actorLabel:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            impersonated:
+                              type: boolean
+                            impersonatorId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            impersonationReason:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            targetType:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            targetId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            targetLabel:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            requestId:
+                              anyOf:
+                              - type: string
+                              - type: 'null'
+                            parentEventId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            workspaceId:
+                              anyOf:
+                              - format: uuid
+                                type: string
+                              - type: 'null'
+                            metadata:
+                              type: object
+                              additionalProperties: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
+  /v1/orgs/{orgId}/sso:
+    post:
+      tags:
+      - Orgs
+      description: Generates a WorkOS Admin Portal link for SSO configuration. Restricted to org admins.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                returnUrl:
+                  type: string
+      parameters:
+      - schema:
+          format: uuid
+          type: string
+        in: path
+        name: orgId
+        required: true
+      - schema:
+          type: string
+        example: Bearer <token>
+        in: header
+        name: Authorization
+        required: false
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - links
+                - data
+                properties:
+                  links:
+                    type: object
+                    required:
+                    - self
+                    properties:
+                      self:
+                        format: uri
+                        type: string
+                  data:
+                    type: object
+                    required:
+                    - id
+                    - type
+                    - attributes
+                    properties:
+                      id:
+                        format: uuid
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - sso-portal-link
+                      attributes:
+                        type: object
+                        required:
+                        - link
+                        properties:
+                          link:
+                            format: uri
+                            type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Bad Request
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Bad Request
+                      status:
+                        type: number
+                        enum:
+                        - 400
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: Unauthorized
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Unauthorized
+                      status:
+                        type: number
+                        enum:
+                        - 401
+                      message:
+                        type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Forbidden
+                      status:
+                        type: number
+                        enum:
+                        - 403
+                      message:
+                        type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Not Found
+                      status:
+                        type: number
+                        enum:
+                        - 404
+                      message:
+                        type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Internal Server Error
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: object
+                    required:
+                    - title
+                    - status
+                    - message
+                    properties:
+                      title:
+                        type: string
+                        enum:
+                        - Internal Server Error
+                      status:
+                        type: number
+                        enum:
+                        - 500
+                      message:
+                        type: string
