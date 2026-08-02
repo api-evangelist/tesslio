@@ -1,0 +1,71 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tesslio-openapi-original.json
+format: json
+problem_json: false
+note: >-
+  Derived from the HTTP status codes declared across the 225 operations of the
+  Tessl API OpenAPI. The spec does not use application/problem+json (RFC 9457);
+  error bodies are plain JSON. Titles/remediation below are standard HTTP
+  semantics adapted to Tessl's registry/workspace domain.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Malformed request, invalid parameters, or an unparseable body.
+  remediation: Validate query/body parameters against the operation schema.
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid bearer token / API key in the Authorization header.
+  remediation: Run `tessl login` or set a valid TESSL_TOKEN workspace API key.
+- status: 403
+  title: Forbidden
+  meaning: >-
+    Authenticated but not permitted — insufficient workspace/org role, or a
+    Free-plan feature that requires an upgrade (e.g. non-default eval model,
+    custom reviewer plugin).
+  remediation: Check the caller's role, or upgrade the organization plan.
+- status: 404
+  title: Not Found
+  meaning: The tile, plugin, workspace, org, project, or run does not exist.
+  remediation: Verify the workspace/tile/plugin name or resource id.
+- status: 409
+  title: Conflict
+  meaning: >-
+    Resource already exists or a version collision (e.g. publishing a tile/plugin
+    version that already exists).
+  remediation: Bump the version (--bump) or resolve the naming conflict.
+- status: 410
+  title: Gone
+  meaning: The resource was removed/unpublished/archived and is no longer available.
+  remediation: Reference a current version; archived plugins block new installs.
+- status: 422
+  title: Unprocessable Entity
+  meaning: Request was well-formed but semantically invalid (validation failure).
+  remediation: Correct the field values flagged in the response.
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded.
+  remediation: Back off and retry after the indicated interval.
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server-side failure.
+  remediation: Retry; contact support if it persists (tessl feedback).
+- status: 501
+  title: Not Implemented
+  meaning: Operation or capability not yet implemented.
+  remediation: Feature not available; check the changelog for availability.
+- status: 502
+  title: Bad Gateway
+  meaning: Upstream dependency returned an invalid response.
+  remediation: Transient; retry with backoff.
+- status: 503
+  title: Service Unavailable
+  meaning: Service temporarily unavailable (maintenance or overload).
+  remediation: Retry with backoff; check https://status.tessl.io.
+success_codes:
+- status: 200
+  meaning: OK
+- status: 201
+  meaning: Created
+- status: 204
+  meaning: No Content (successful delete/void)

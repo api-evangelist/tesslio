@@ -1,0 +1,5 @@
+Canonical: https://tessl.io/.well-known/security.txt
+Contact: mailto:security@tessl.io
+Expires: 2026-10-01T12:00:00Z
+Hiring: https://tessl.io/careers
+Preferred-Languages: en

@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tessl.io/changelog
+scheme: semver
+subject: Tessl CLI / platform
+current_version: 0.92.0
+docs: https://docs.tessl.io/changelog
+entries:
+- version: 0.92.0
+  breaking: false
+  highlights:
+  - "Hooks in plugins: declare cross-agent hooks via hooks/nativeHooks in plugin.json"
+  - "Signed release verification for CLI install and self-update"
+- version: 0.91.0
+  breaking: false
+  highlights:
+  - "Agent-readiness report: run /agent-ready in the tessl agent to scan a repo"
+  - "tessl launch resume: resume an interrupted or completed cloud launch run"
+  - "Auto-detect workspace for tessl review run / review fix from tessl.json"
+  - "tessl init records selected agents in tessl.json for reproducible installs"
+- version: 0.90.0
+  breaking: true
+  highlights:
+  - "BREAKING: tessl review <target> (without run) now shows help; use tessl review run"
+  - "tessl review run quality / security subcommands (Snyk-powered security scan)"
+  - "Clone skills from GitLab and Bitbucket sources, not just GitHub"
+- version: 0.89.0
+  breaking: false
+  highlights:
+  - "tessl agent out in open beta"
+  - "tessl change risk / verify / review commands for automated code reviews"
+  - "tessl launch skill and tessl mcp proxy (workspace MCP gateway)"

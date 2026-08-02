@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tessl.io/changelog
+versioning:
+  api:
+    scheme: uri-path
+    current: v1
+    experimental_prefix: /experimental
+    docs: https://api.tessl.io/openapi.json
+  cli:
+    scheme: semver
+    current: 0.92.0
+    channels:
+    - latest
+    - beta
+    docs: https://docs.tessl.io/changelog
+deprecation:
+  policy_url: null
+  signals:
+  - "410 Gone status is defined across operations for removed resources"
+  - "npm distribution (@tessl/cli, tessl) marked deprecated in favor of native/Homebrew/winget install"
+  - "operations under /experimental are beta and may change or be removed"
+  - "compound `--agent <agent>:<model>` CLI form deprecated (0.91.0), split into --agent/--model"
+  note: >-
+    Tessl does not publish a formal dated deprecation/sunset policy page; changes
+    are announced in the changelog with Breaking Changes sections.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.tessl.io
+status_page_provider: Atlassian Statuspage (tesslio.statuspage.io)
+support:
+  feedback: tessl feedback
+  faqs: https://docs.tessl.io/support/faqs
+  troubleshooting: https://docs.tessl.io/support/troubleshooting
+beta_surfaces:
+- Scenario management and evals (public beta)
+- tessl agent (open beta)
+- experimental/* API operations
+deprecated_operations: []

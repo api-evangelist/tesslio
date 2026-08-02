@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tessl.io/introduction-to-tessl/set-up-tessl/installation
+note: >-
+  Tessl ships a single first-party client: the `tessl` CLI. Preferred install is
+  the native script or Homebrew; the npm packages are officially published but
+  marked deprecated. No language SDK libraries (JS/Python/etc.) are published —
+  the CLI plus the MCP server are the programmatic surface.
+packages:
+- language: shell
+  registry: script
+  name: tessl
+  url: https://get.tessl.io
+  install: curl -fsSL https://get.tessl.io | sh
+  official: true
+  recommended: true
+- language: shell
+  registry: homebrew
+  name: tesslio/tap/tessl
+  url: https://github.com/tesslio/homebrew-tap
+  install: brew install tesslio/tap/tessl
+  official: true
+- language: shell
+  registry: winget
+  name: tessl.tessl
+  url: https://tessl.io
+  install: winget install tessl.tessl
+  official: true
+- language: javascript
+  registry: npm
+  name: "@tessl/cli"
+  url: https://www.npmjs.com/package/@tessl/cli
+  install: npm install -g @tessl/cli
+  official: true
+  deprecated: true
+  latest: 0.92.0

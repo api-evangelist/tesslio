@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: generated
+note: >-
+  Packaged Agent Skills for Tessl's marquee flows. The Tessl OpenAPI declares no
+  operationIds, so steps are grounded in real HTTP method+path endpoints from
+  openapi/tesslio-openapi-original.json, real MCP tools (mcp/tesslio-mcp.yml), and
+  real CLI commands (cli/tesslio-cli.yml) — never invented identifiers.
+skills:
+- file: tesslio-publish-a-skill.md
+  name: Author and publish a Tessl skill
+  api: openapi/tesslio-openapi-original.json
+  operations:
+  - "POST /v1/tiles"
+  - "GET /v1/tiles/{workspaceName}/{tileName}"
+- file: tesslio-manage-registry-plugins.md
+  name: Search and install plugins from the Tessl registry
+  api: openapi/tesslio-openapi-original.json
+  operations:
+  - "GET /v1/tiles"
+  - "POST /v1/tiles/match"
+  - "GET /v1/users/me"

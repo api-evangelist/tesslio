@@ -1,0 +1,89 @@
+# Tessl Docs
+
+## Tessl
+
+- [What is Tessl?](https://docs.tessl.io/overview/readme.md): The core components of the Tessl platform, the agentic-development problems they solve, and why teams choose Tessl.
+- [Set up Tessl](https://docs.tessl.io/introduction-to-tessl/set-up-tessl.md)
+- [Installation](https://docs.tessl.io/introduction-to-tessl/set-up-tessl/installation.md): A step-by-step guide on how to install,  update or remove the Tessl CLI.
+- [Improve your first skill](https://docs.tessl.io/introduction-to-tessl/improve-your-first-skill.md)
+- [Core concepts](https://docs.tessl.io/introduction-to-tessl/core-concepts.md)
+- [Overview](https://docs.tessl.io/tutorials/tutorials.md): End-to-end walkthroughs for the most common agentic-development workflows on Tessl.
+- [Using Tessl as a package manager](https://docs.tessl.io/tutorials/using-tessl-as-a-package-manager.md): Use Tessl as a package manager for agent context: find and install skills, keep them up to date, and publish your own to a workspace.
+- [Protecting yourself from insecure skills](https://docs.tessl.io/tutorials/protecting-against-insecure-skills.md): Inventory the skills running across your org, read their Snyk-powered security scores, and use install policies to block risky skills before they reach a developer.
+- [Codifying and enforcing your company's skill standards](https://docs.tessl.io/tutorials/codifying-and-enforcing-skill-standards.md): Capture your team's quality bar as a custom review rubric and enforce it on every skill in CI.
+- [Improving a skill](https://docs.tessl.io/tutorials/improving-a-skill.md): Use reviews and evals to measure a skill's impact, find what's holding it back, and ship an improvement with evidence.
+- [Setting up agentic code review](https://docs.tessl.io/tutorials/setting-up-agentic-code-review.md): Set up the Tessl Agent to review pull requests against your team's skills, locally and in CI.
+- [Improving agent code quality](https://docs.tessl.io/tutorials/improving-agent-code-quality.md): Turn recurring agent mistakes into fixes. Mine PRs and session logs with the Tessl Agent, then prove the fix with evals.
+- [Automating repetitive tasks](https://docs.tessl.io/tutorials/automating-repetitive-tasks.md): Identify repetitive work in your development loop and turn it into repeatable, automated workflows with the Tessl Agent.
+- [Administrating Organizations, Workspaces, and Roles](https://docs.tessl.io/administrators/administrating-organizations-workspaces-and-roles.md)
+- [Roles](https://docs.tessl.io/administrators/roles.md): Roles for workspaces and orgs and permissions per role
+- [SSO](https://docs.tessl.io/administrators/sso.md)
+- [Enhance your workflow with skills](https://docs.tessl.io/use/enhance-your-workflow-with-skills.md): Learn how to discover and install skills that enhance your agent's capabilities with procedural workflows
+- [Spec-Driven Development with Tessl](https://docs.tessl.io/use/spec-driven-development-with-tessl.md)
+- [Migrating from tiles to plugins](https://docs.tessl.io/use/tile-to-plugin-migration.md): Guide for migrating from the legacy tile.json format to the new plugin format
+- [Understand your skill estate](https://docs.tessl.io/use/understand-your-skill-estate.md): How to use Tessl Skill Inventory to understand the skills you have across your org and the extent of your skill sprawl.
+- [Overview](https://docs.tessl.io/creating-skills-and-plugins/overview.md): Create a skill or a plugin - the packaged, versioned context you share with your team and your agents.
+- [Create a skill](https://docs.tessl.io/creating-skills-and-plugins/create-a-skill.md): Scaffold a skill, write its SKILL.md, and validate it before you share it.
+- [Create a plugin](https://docs.tessl.io/creating-skills-and-plugins/create-a-plugin.md): Bundle skills, rules, and commands into one versioned plugin, and choose what each piece should be.
+- [Add an MCP server](https://docs.tessl.io/creating-skills-and-plugins/add-an-mcp-server.md): Ship an MCP server inside a plugin to give the agent live tools or data, not just instructions.
+- [Develop and test locally](https://docs.tessl.io/creating-skills-and-plugins/develop-and-test-locally.md): Install a plugin straight from your filesystem so you can test and iterate before publishing.
+- [Publish and update](https://docs.tessl.io/creating-skills-and-plugins/publish-and-update.md): Publish a skill or plugin to the registry, control who can install it, and ship new versions.
+- [Overview](https://docs.tessl.io/improving-your-skills/overview-improving-skills-and-plugins.md)
+- [Check a skill's quality using review](https://docs.tessl.io/improving-your-skills/reviewing-skills.md): Run a review to score how well a skill is written, read the result, and apply fixes.
+- [Migrate from skill review to Tessl Review](https://docs.tessl.io/improving-your-skills/migrate-from-skill-review.md): How to switch from tessl skill review to Tessl Review, and what to expect
+- [Prove a skill works using evaluation](https://docs.tessl.io/improving-your-skills/evaluate-skill-quality-using-scenarios.md): Generate scenarios, run an evaluation, and read the score difference to see whether a skill actually changes what an agent produces.
+- [Troubleshooting reviews and evaluations](https://docs.tessl.io/improving-your-skills/troubleshooting-reviews-and-evals.md): Most problems with reviews and evaluations come down to a few causes. Work through these when something does not behave as expected.
+- [Overview](https://docs.tessl.io/codifying-and-enforcing-your-skill-standards/overview.md): Gate skill quality automatically and define your organisation's standard for what a good skill looks like.
+- [Gate skill quality in CI](https://docs.tessl.io/codifying-and-enforcing-your-skill-standards/gate-skill-quality-in-ci.md): Run a review on every pull request and fail the build when a skill scores below your threshold.
+- [Define your own quality standards](https://docs.tessl.io/codifying-and-enforcing-your-skill-standards/define-your-own-quality-standards.md): Fork the default review rubric to encode your organisation's quality bar, then apply it to every review.
+- [Distributing via registry](https://docs.tessl.io/distribute/distributing-via-registry.md): Distribute, share, and maintain plugins through the Tessl Registry
+- [Sharing with your team and publicly](https://docs.tessl.io/distribute/sharing-plugins-publicly.md): Making your plugins publicly discoverable in the Tessl Registry
+- [Rollout to your repositories](https://docs.tessl.io/distribute/rollout-to-your-repositories.md): Connect Tessl to your codebase to automatically generate, evaluate, and optimize context!
+- [Permissions](https://docs.tessl.io/distribute/rollout-to-your-repositories/permissions.md)
+- [Connect Tessl to GitHub](https://docs.tessl.io/distribute/rollout-to-your-repositories/connect-tessl-to-github.md)
+- [Connect Tessl to GitLab](https://docs.tessl.io/distribute/rollout-to-your-repositories/connect-tessl-to-gitlab.md)
+- [Initialize a repository](https://docs.tessl.io/distribute/rollout-to-your-repositories/initialize-a-repository.md)
+- [Distribute plugins across multiple repositories](https://docs.tessl.io/distribute/rollout-to-your-repositories/distribute-plugins-across-multiple-repositories.md)
+- [Removing the integration](https://docs.tessl.io/distribute/rollout-to-your-repositories/removing-the-integration.md)
+- [Using plugins directly from your repo](https://docs.tessl.io/distribute/repository-plugins.md): Use plugins directly from your repository for codebase-specific context
+- [Promote or claim a skill you have created](https://docs.tessl.io/distribute/promote-or-claim-a-skill-you-have-created.md)
+- [Review, lint & publish with GitHub Actions](https://docs.tessl.io/distribute/review-and-publish-with-github-actions.md)
+- [Overview](https://docs.tessl.io/projects/overview.md): Understand what Tessl projects are and why we need them.
+- [Manage projects from the CLI](https://docs.tessl.io/projects/manage-projects-from-the-cli.md): Create, link, and repair project links from the Tessl CLI.
+- [Repairing projects](https://docs.tessl.io/projects/repairing-projects.md): Understand how to diagnose and fix issues with projects.
+- [Evals](https://docs.tessl.io/projects/evals.md): Understand how eval runs connect to a Tessl project.
+- [Projects in the app](https://docs.tessl.io/projects/projects-in-the-app.md): Browse projects and review project-level evaluations in the Tessl app.
+- [CLI commands](https://docs.tessl.io/reference/cli-commands.md)
+- [Configuration files](https://docs.tessl.io/reference/configuration.md)
+- [Skill schemas](https://docs.tessl.io/reference/skill-schemas.md): How a launchable skill declares typed input and output JSON Schemas, how \`$ref\`s are resolved, and the structured result a cloud launch returns.
+- [Custom agent setup](https://docs.tessl.io/reference/custom-agent-setup.md)
+- [OpenCode](https://docs.tessl.io/reference/custom-agent-setup/opencode.md)
+- [OpenClaw](https://docs.tessl.io/reference/custom-agent-setup/openclaw.md)
+- [Workspaces](https://docs.tessl.io/reference/workspaces.md): Overview of creating and managing Tessl workspaces
+- [MCP tools](https://docs.tessl.io/reference/mcp-tools.md): Overview of Tessl MCP tools for AI coding agents.
+- [MCP gateway](https://docs.tessl.io/reference/mcp-gateway.md): Create a workspace MCP gateway in Tessl and connect to it from any agent with \`tessl mcp proxy\`.
+- [GitHub badges](https://docs.tessl.io/reference/github-badges.md)
+- [Glossary](https://docs.tessl.io/reference/glossary.md): Key concepts and terminology used throughout Tessl.
+- [FAQs](https://docs.tessl.io/support/faqs.md): Find quick answers to the most common questions about Tessl.
+- [Giving feedback](https://docs.tessl.io/support/giving-feedback.md)
+- [Supported platforms](https://docs.tessl.io/support/supported-platforms.md): This page lists the supported version. Even if your favorite platform is not listed, it might still work  as we support many industry standards.
+- [Troubleshooting](https://docs.tessl.io/support/troubleshooting.md)
+- [Changelog](https://docs.tessl.io/changelog.md): Latest version = 0.92.0
+- [Sharing Usage Data](https://docs.tessl.io/legal/sharing-usage-data.md)
+- [Open Source Attribution](https://docs.tessl.io/legal/open-source-attribution.md)
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://docs.tessl.io/overview/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

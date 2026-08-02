@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Tessl API
+  version: 1.0.0
+extends: openapi/tesslio-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-notes: >-
+      Harvested from https://api.tessl.io/openapi.json. The source spec declares
+      no operationIds, no components.schemas (all inline), no securitySchemes,
+      and no in-spec examples; auth, conventions, and error semantics are captured
+      in sibling API Evangelist artifacts.
+    x-authentication: authentication/tesslio-authentication.yml
+    x-conventions: conventions/tesslio-conventions.yml
+    x-errors: errors/tesslio-problem-types.yml
+    x-data-model: data-model/tesslio-data-model.yml
+- target: $.components
+  update:
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        description: >-
+          Bearer token (from `tessl login`) or workspace API key (TESSL_TOKEN)
+          in the Authorization header. Documented by API Evangelist; not present
+          in the source spec.
+- target: $.info
+  update:
+    x-agentic-access: agentic-access/tesslio-agentic-access.yml

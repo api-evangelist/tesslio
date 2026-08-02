@@ -1,0 +1,62 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tessl.io/reference/cli-commands
+name: tessl
+binary: tessl
+package_ref: packages/tesslio-packages.yml
+install:
+  native: curl -fsSL https://get.tessl.io | sh
+  homebrew: brew install tesslio/tap/tessl
+  winget: winget install tessl.tessl
+  npm: npm install -g @tessl/cli   # deprecated
+auth:
+  login: tessl login
+  logout: tessl logout
+  whoami: tessl whoami
+  token_env: TESSL_TOKEN
+command_groups:
+- group: auth
+  commands: [login, logout, whoami]
+- group: setup
+  commands: [init, project create, project link, project repair]
+- group: dependencies
+  commands: [install, search, uninstall, list, outdated, update]
+- group: skill
+  commands: [skill new, skill import, skill lint, skill publish, skill review]
+- group: review
+  commands: [review run, review run quality, review run security, review view, review list, review retry, review fix]
+- group: plugin
+  commands: [plugin new, plugin lint, plugin migrate, plugin pack, plugin info, plugin publish, plugin unpublish, plugin archive]
+- group: org
+  commands: [org list]
+- group: workspace
+  commands: [workspace create, workspace list, workspace delete, workspace add-member, workspace remove-member, workspace list-members, workspace archive, workspace unarchive]
+- group: config
+  commands: [config get, config set, config list, config add, config remove]
+- group: api-key
+  commands: [api-key create, api-key list, api-key delete]
+- group: mcp
+  commands: [mcp start, mcp proxy]
+- group: repo
+  commands: [repo select-commits]
+- group: inventory
+  commands: [inventory import]
+- group: scenario
+  commands: [scenario generate]
+- group: change
+  commands: [change risk, change verify, change review]
+- group: launch
+  commands: [launch skill, launch resume]
+- group: diagnostics
+  commands: [doctor, feedback, cli update]
+key_flows:
+- name: Configure a repo for coding agents
+  commands: [tessl init --agent claude-code, tessl install <workspace/plugin>]
+- name: Publish a skill to the registry
+  commands: [tessl skill new, tessl skill lint, tessl skill publish --public]
+- name: Gate skill quality in CI
+  commands: ["tessl review run ./skill --workspace engteam --json --threshold 80"]
+- name: Security-scan a skill (Snyk)
+  commands: ["tessl review run security ./skill --workspace engteam --fail-on high"]
+- name: Bridge an agent to a workspace MCP server
+  commands: [tessl mcp proxy engteam/linear]

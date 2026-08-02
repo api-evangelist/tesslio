@@ -1,0 +1,72 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tesslio-openapi-original.json
+docs: https://docs.tessl.io/
+summary: >-
+  Cross-cutting request/response semantics for the Tessl API (api.tessl.io/v1),
+  derived from the published OpenAPI plus the Tessl documentation. The API is a
+  JSON REST API with cursor pagination, a rich bracketed filter grammar, and
+  bearer-token auth. No idempotency-key contract is documented or present in the
+  spec.
+base_url: https://api.tessl.io
+authentication:
+  style: bearer token / workspace API key in the Authorization header
+  ref: authentication/tesslio-authentication.yml
+versioning:
+  style: uri-path
+  stable_prefix: /v1
+  experimental_prefix: /experimental
+  note: >-
+    Stable operations live under /v1; beta/preview operations live under
+    /experimental and may change without notice.
+pagination:
+  style: cursor
+  params:
+  - cursor
+  - count
+  note: >-
+    List endpoints accept a `cursor` opaque token and a `count` page size;
+    responses carry the next cursor for forward paging.
+filtering:
+  style: bracketed-field-operator
+  grammar: filter[<field>][<op>]=<value>
+  operators:
+  - eq
+  - ne
+  - gt
+  - gte
+  - lt
+  - lte
+  - like
+  example: filter[category][eq]=security&filter[archived][ne]=true
+  note: >-
+    Many list endpoints support a filter[field][op] query grammar; a bare
+    filter[field]=value implies eq.
+sorting:
+  note: List endpoints accept sort/order style parameters where documented per operation.
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header or idempotent-retry contract is documented in the
+    Tessl API or present in the OpenAPI parameters.
+content_types:
+  request: application/json
+  response: application/json
+  uploads: multipart via POST /v1/uploads and presigned URLs
+error_envelope:
+  format: json
+  problem_json: false
+  ref: errors/tesslio-problem-types.yml
+  note: >-
+    Error responses are JSON (not RFC 9457 application/problem+json). Common
+    status codes: 400, 401, 403, 404, 409, 410, 422, 429, 500, 501, 502, 503.
+rate_limiting:
+  documented: partial
+  note: >-
+    A 429 Too Many Requests response is defined on at least one operation;
+    limits are not published in a dedicated rate-limit reference.
+cross_references:
+  authentication: authentication/tesslio-authentication.yml
+  errors: errors/tesslio-problem-types.yml
+  lifecycle: lifecycle/tesslio-lifecycle.yml
+  data_model: data-model/tesslio-data-model.yml

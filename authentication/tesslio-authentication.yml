@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tessl.io/introduction-to-tessl/set-up-tessl/installation
+docs: https://docs.tessl.io/administrators/sso
+note: >-
+  The published OpenAPI (https://api.tessl.io/openapi.json) does not declare
+  components.securitySchemes; every operation instead accepts an Authorization
+  request-header parameter. The auth model below is captured from the Tessl docs
+  and CLI reference rather than derived from the spec.
+summary:
+  types:
+  - http-bearer
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - deviceCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  in: header
+  parameter: Authorization
+  description: >-
+    API requests to api.tessl.io are authorized with a bearer token in the
+    Authorization header. Interactive users obtain one via `tessl login`;
+    automation uses a workspace API key exported as TESSL_TOKEN.
+  sources:
+  - openapi/tesslio-openapi-original.json
+- name: workspaceApiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  token_env: TESSL_TOKEN
+  scope: workspace
+  roles:
+  - member
+  - publisher
+  - manager
+  - owner
+  management:
+    create: tessl api-key create
+    list: tessl api-key list
+    delete: tessl api-key delete
+    api: POST /v1/orgs/{orgId}/api-keys, POST /v1/experimental/workspaces/{workspaceId}/api-keys
+  expiry: optional ISO-8601 expiry date per key
+  description: >-
+    Workspace-scoped API keys created per workspace with a role and optional
+    expiry; used in CI by setting TESSL_TOKEN.
+- name: deviceAuthorization
+  type: oauth2
+  flow: deviceCode
+  authorizationUrl: https://auth.tessl.io/device
+  identity_providers:
+  - GitHub
+  - Google
+  description: >-
+    `tessl login` runs an OAuth 2.0 device-authorization flow at
+    auth.tessl.io/device; the user confirms a device code in the browser after
+    signing in with GitHub or Google. Enterprise SSO is available for orgs.
+- name: sso
+  type: openIdConnect
+  scope: organization
+  docs: https://docs.tessl.io/administrators/sso
+  description: Organization-level Single Sign-On for enterprise accounts.

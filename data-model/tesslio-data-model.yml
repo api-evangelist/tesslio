@@ -1,0 +1,103 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tesslio-openapi-original.json
+note: >-
+  Entity-relationship graph derived from the Tessl API path hierarchy (177 paths,
+  225 operations). The OpenAPI inlines all schemas (components.schemas is empty)
+  and declares no operationIds, so relationships are inferred from nested path
+  segments rather than $ref links.
+entities:
+- name: org
+  path: /v1/orgs/{orgId}
+  description: Top-level organization / billing boundary.
+- name: workspace
+  path: /v1/workspaces/{workspaceId}
+  description: Private collection of plugins/skills within an org, with members and roles.
+- name: user
+  path: /v1/users/{userId}
+- name: tile
+  path: /v1/tiles/{workspaceName}/{tileName}
+  description: Versioned packaged context (legacy tile; superseded by plugin format).
+- name: plugin
+  description: Versioned bundle of skills, rules, docs, and MCP servers (current format).
+- name: skill
+  path: /experimental/skills/{id}
+  description: Packaged agent operating instructions (SKILL.md).
+- name: project
+  path: /v1/projects/{projectId}
+  description: Stable home tying eval runs to a repository.
+- name: api_key
+  path: /v1/orgs/{orgId}/api-keys
+- name: skill_inventory
+  path: /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}
+- name: eval_run
+  path: /experimental/eval-runs/{id}
+- name: review_run
+  path: /experimental/review-runs/{id}
+- name: fix_run
+  path: /experimental/fix-runs/{id}
+- name: launch_run
+  path: /experimental/launch-runs/{id}
+- name: generation_run
+  path: /experimental/generation-runs/{id}
+- name: environment
+  path: /experimental/environments/{id}
+- name: task
+  path: /experimental/tasks/{id}
+- name: mcp_server
+  path: /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}
+- name: integration
+  path: /experimental/workspaces/{workspaceId}/integrations/{integrationId}
+relationships:
+- from: workspace
+  to: org
+  type: belongs_to
+  via: orgId
+- from: org
+  to: workspace
+  type: has_many
+  via: /orgs/{orgId}/workspaces
+- from: org
+  to: api_key
+  type: has_many
+  via: /orgs/{orgId}/api-keys
+- from: org
+  to: member
+  type: has_many
+  via: /orgs/{orgId}/members
+- from: tile
+  to: workspace
+  type: belongs_to
+  via: workspaceName
+- from: tile
+  to: tile_version
+  type: has_many
+  via: /tiles/{workspaceName}/{tileName}/versions
+- from: project
+  to: workspace
+  type: belongs_to
+  via: workspace
+- from: eval_run
+  to: project
+  type: belongs_to
+  via: project
+- from: skill_inventory
+  to: workspace
+  type: belongs_to
+  via: workspaceNameOrID
+- from: workspace
+  to: mcp_server
+  type: has_many
+  via: /workspaces/{workspaceId}/mcp-servers
+- from: workspace
+  to: integration
+  type: has_many
+  via: /workspaces/{workspaceId}/integrations
+- from: workspace
+  to: member
+  type: has_many
+  via: /workspaces/{workspaceId}/members
+- from: user
+  to: org
+  type: has_many
+  via: /users/{userId}/orgs

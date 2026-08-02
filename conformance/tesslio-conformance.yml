@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tesslio-openapi-original.json
+note: >-
+  Cross-cutting standards the Tessl API and platform conform to, derived from the
+  OpenAPI and the docs. Tessl is an agent-enablement / skills registry platform,
+  not a regulated-data API, so financial/health standards are not applicable.
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: Published OpenAPI 3.1.1 document at https://api.tessl.io/openapi.json
+- id: oauth2-device-flow
+  conforms: true
+  evidence: "`tessl login` uses OAuth 2.0 device authorization at auth.tessl.io/device (RFC 8628)"
+- id: oidc-social-login
+  conforms: true
+  evidence: Sign-in via GitHub and Google identity providers; org-level SSO
+- id: mcp
+  conforms: true
+  evidence: First-party Model Context Protocol server (tessl mcp start) + workspace MCP gateway
+- id: agent-skills-spec
+  conforms: true
+  evidence: "Skills validated against the Agent Skills specification (agentskills.io/specification) via `tessl skill lint`"
+- id: model-context-protocol-gateway
+  conforms: true
+  evidence: tessl mcp proxy bridges agents to workspace-registered upstream MCP servers
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses are plain JSON, not application/problem+json
+- id: cursor-pagination
+  conforms: true
+  evidence: List operations use cursor + count parameters
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false

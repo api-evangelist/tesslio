@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://docs.tessl.io/reference/mcp-tools
+servers:
+- name: Tessl Registry MCP
+  transport: stdio
+  command: tessl mcp start
+  description: >-
+    Local stdio MCP server giving AI coding agents tools to search, install, and
+    manage plugins from the Tessl registry. Configured automatically by
+    `tessl init --agent <name>` for claude-code, cursor, gemini, codex, copilot,
+    openhands, openclaw and others.
+  auth: OAuth via `tessl login` (device flow) or TESSL_TOKEN
+  tools:
+  - name: login
+    description: Authenticate with Tessl to access registry features.
+  - name: search
+    description: Search for plugins in the Tessl registry by name, PURL, or HTTP URL.
+  - name: install
+    description: Install plugins into your project, or sync all missing plugins from tessl.json.
+  - name: uninstall
+    description: Uninstall a plugin from your project.
+  - name: status
+    description: Check authentication status and plugin synchronization status for your project.
+- name: Tessl Workspace MCP Gateway
+  transport: stdio
+  command: tessl mcp proxy <workspace>/<mcp>
+  description: >-
+    Stdio proxy that bridges a coding agent to an external MCP server registered
+    in a Tessl workspace, so a team shares one upstream integration without each
+    member re-running its OAuth flow.
+  docs: https://docs.tessl.io/reference/mcp-gateway
+  auth: tessl login or TESSL_TOKEN

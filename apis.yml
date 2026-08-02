@@ -1,27 +1,547 @@
 aid: tesslio
 name: tessl.io
-description: 'tessl.io is a company surfaced as a portfolio company of index-ventures and added to the
-  API Evangelist network as a stub for enrichment. Sector: ai-ml. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  Tessl is an agent-enablement platform for spec-driven and agentic software
+  development. It provides a registry of versioned "tiles"/plugins (10,000+
+  library docs) and 3,000+ searchable Agent Skills, a CLI for authoring, linting,
+  reviewing, and publishing skills and plugins, server-side quality reviews and
+  Snyk-powered security scanning, eval/scenario tooling to prove a skill changes
+  agent behavior, org/workspace governance with install policies, and a
+  first-party Model Context Protocol (MCP) server plus a workspace MCP gateway so
+  AI coding agents can discover and install the right context. Backed by Index
+  Ventures. The public REST API (api.tessl.io) exposes 225 operations across
+  tiles, skills, workspaces, orgs, projects, evals, and integrations.
 url: https://raw.githubusercontent.com/api-evangelist/tesslio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - index-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://cdn.sanity.io/images/ojuglg5y/production/fa12cfb35dd51f280b764adf7122a6c0f7911e12-2400x1260.png?w=1200&fit=max&auto=format
 tags:
 - Company
 - Ai Ml
-apis: []
+- Agent Enablement
+- Agentic Development
+- Developer Tools
+- Skills Registry
+- Model Context Protocol
+- Spec-Driven Development
+- Code Review
+- CLI
+apis:
+- aid: tesslio:tesslio-admin-keys-api
+  name: tessl.io Admin Keys API
+  description: Admin-scoped API keys for support tooling.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Admin Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-admin-keys-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-agent-logs-api
+  name: tessl.io Agent Logs API
+  description: Agent and hosted-execution log uploads.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Agent Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-agent-logs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-api-keys-api
+  name: tessl.io API Keys API
+  description: Workspace and organization API keys.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-api-keys-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-badges-api
+  name: tessl.io Badges API
+  description: Workspace badge generation.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Badges
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-badges-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-billing-api
+  name: tessl.io Billing API
+  description: The Billing API from tessl.io — 4 operation(s) for billing.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-billing-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-capacity-api
+  name: tessl.io Capacity API
+  description: Sandbox and capacity-lease scheduling.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Capacity
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-capacity-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-cli-api
+  name: tessl.io CLI API
+  description: Endpoints used by the Tessl CLI.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - CLI
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-cli-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-context-api
+  name: tessl.io Context API
+  description: The Context API from tessl.io — 3 operation(s) for context.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Context
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-context-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-curated-lists-api
+  name: tessl.io Curated Lists API
+  description: Curated tile lists and items.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Curated Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-curated-lists-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-environments-api
+  name: tessl.io Environments API
+  description: The Environments API from tessl.io — 2 operation(s) for environments.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-environments-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-evals-api
+  name: tessl.io Evals API
+  description: Eval runs, scenarios, and solution scoring.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Evals
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-evals-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-fix-runs-api
+  name: tessl.io Fix Runs API
+  description: The Fix Runs API from tessl.io — 4 operation(s) for fix runs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Fix Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-fix-runs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-generation-api
+  name: tessl.io Generation API
+  description: Eval scenario generation runs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Generation
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-generation-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-installpolicy-api
+  name: tessl.io InstallPolicy API
+  description: The InstallPolicy API from tessl.io — 2 operation(s) for installpolicy.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - InstallPolicy
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-installpolicy-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-integrations-api
+  name: tessl.io Integrations API
+  description: Third-party integrations (GitHub, GitLab, etc).
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-integrations-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-launch-runs-api
+  name: tessl.io Launch Runs API
+  description: The Launch Runs API from tessl.io — 4 operation(s) for launch runs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Launch Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-launch-runs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-llm-api
+  name: tessl.io LLM API
+  description: The LLM API from tessl.io — 2 operation(s) for llm.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - LLM
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-llm-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-managedprojectpolicy-api
+  name: tessl.io ManagedProjectPolicy API
+  description: The ManagedProjectPolicy API from tessl.io — 1 operation(s) for managedprojectpolicy.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - ManagedProjectPolicy
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-managedprojectpolicy-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-mcp-api
+  name: tessl.io MCP API
+  description: The MCP API from tessl.io — 4 operation(s) for mcp.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - MCP
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-mcp-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-orgs-api
+  name: tessl.io Orgs API
+  description: Organizations, members, and invitations.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Orgs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-orgs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-policy-api
+  name: tessl.io Policy API
+  description: The Policy API from tessl.io — 3 operation(s) for policy.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-policy-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-projects-api
+  name: tessl.io Projects API
+  description: Workspace projects.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-projects-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-publishpolicy-api
+  name: tessl.io PublishPolicy API
+  description: The PublishPolicy API from tessl.io — 1 operation(s) for publishpolicy.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - PublishPolicy
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-publishpolicy-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-repos-api
+  name: tessl.io Repos API
+  description: Source-control repository helpers.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Repos
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-repos-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-review-runs-api
+  name: tessl.io Review Runs API
+  description: The Review Runs API from tessl.io — 3 operation(s) for review runs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Review Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-review-runs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-reviews-api
+  name: tessl.io Reviews API
+  description: The Reviews API from tessl.io — 3 operation(s) for reviews.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-reviews-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-search-api
+  name: tessl.io Search API
+  description: Search across tiles, skills, and repos.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-search-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-security-review-runs-api
+  name: tessl.io Security Review Runs API
+  description: The Security Review Runs API from tessl.io — 2 operation(s) for security review runs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Security Review Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-security-review-runs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-skillinventory-api
+  name: tessl.io SkillInventory API
+  description: The SkillInventory API from tessl.io — 24 operation(s) for skillinventory.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - SkillInventory
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-skillinventory-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-skills-api
+  name: tessl.io Skills API
+  description: Skill discovery, reviews, and security checks.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Skills
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-skills-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-tasks-api
+  name: tessl.io Tasks API
+  description: The Tasks API from tessl.io — 8 operation(s) for tasks.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-tasks-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-tiles-api
+  name: tessl.io Tiles API
+  description: Tile catalog, versions, and metadata.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Tiles
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-tiles-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-users-api
+  name: tessl.io Users API
+  description: User accounts and identity.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-users-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-workflows-api
+  name: tessl.io Workflows API
+  description: Background workflow executions and repository workflow configs.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-workflows-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
+- aid: tesslio:tesslio-workspaces-api
+  name: tessl.io Workspaces API
+  description: Workspaces and workspace membership.
+  humanURL: https://docs.tessl.io/
+  baseURL: https://api.tessl.io
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/tesslio-workspaces-api-openapi.yml
+  - type: APIReference
+    url: https://api.tessl.io/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: OpenAPI
+  url: openapi/tesslio-openapi-original.json
+- type: Overlay
+  url: overlays/tesslio-openapi-overlay.yaml
+- type: Authentication
+  url: authentication/tesslio-authentication.yml
+- type: Conventions
+  url: conventions/tesslio-conventions.yml
+- type: ErrorCatalog
+  url: errors/tesslio-problem-types.yml
+- type: DataModel
+  url: data-model/tesslio-data-model.yml
+- type: Conformance
+  url: conformance/tesslio-conformance.yml
+- type: Lifecycle
+  url: lifecycle/tesslio-lifecycle.yml
+- type: StatusPage
+  url: https://status.tessl.io
+- type: Deprecation
+  url: https://docs.tessl.io/changelog
+- type: ChangeLog
+  url: changelog/tesslio-changelog.yml
+- type: CLI
+  url: cli/tesslio-cli.yml
+- type: Packages
+  url: packages/tesslio-packages.yml
+- type: SDKs
+  url: packages/tesslio-packages.yml
+- type: MCPServer
+  url: mcp/tesslio-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/tesslio-agentic-access.yml
+- type: WellKnown
+  url: well-known/tesslio-well-known.yml
+- type: SecurityTxt
+  url: well-known/tesslio-security.txt
+- type: VulnerabilityDisclosure
+  url: security/tesslio-vulnerability-disclosure.yml
+- type: Security
+  url: https://tessl.io/.well-known/security.txt
+- type: DomainSecurity
+  url: security/tesslio-domain-security.yml
+- type: TrustCenter
+  url: https://trust.tessl.io
+- type: DeveloperPortal
+  url: https://docs.tessl.io/
+- type: Documentation
+  url: https://docs.tessl.io/
+- type: APIReference
+  url: https://api.tessl.io/docs
+- type: GettingStarted
+  url: https://docs.tessl.io/introduction-to-tessl/set-up-tessl
+- type: LLMsTxt
+  url: llms/tesslio-llms.txt
+- type: Support
+  url: https://docs.tessl.io/support/faqs
+- type: Blog
+  url: https://tessl.io/blog
+- type: GitHubOrganization
+  url: https://github.com/tesslio
+- type: Pricing
+  url: https://tessl.io/pricing
+- type: SignUp
+  url: https://app.tessl.io
+- type: Registry
+  url: https://tessl.io/registry
 - type: Website
-  url: http://tessl.io
+  url: https://tessl.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1
