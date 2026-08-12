@@ -471,7 +471,7 @@ maintainers:
   email: info@apis.io
 common:
 - type: OpenAPI
-  url: openapi/tesslio-openapi-original.json
+  url: openapi/_original/tesslio-openapi-original.json
 - type: Overlay
   url: overlays/tesslio-openapi-overlay.yaml
 - type: Authentication
