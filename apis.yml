@@ -28,7 +28,7 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-21'
 image: https://cdn.sanity.io/images/ojuglg5y/production/fa12cfb35dd51f280b764adf7122a6c0f7911e12-2400x1260.png?w=1200&fit=max&auto=format
