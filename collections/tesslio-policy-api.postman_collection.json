@@ -1,0 +1,1740 @@
+{
+  "item": [
+    {
+      "id": "39d84ba6-57a0-4ae4-b4eb-ba9e54c2e337",
+      "name": "Policy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d835ffcf-10f3-4c4c-9ec5-1150c4f4cb38",
+          "name": "Evaluate generic policy action decisions for a batch of requests",
+          "request": {
+            "name": "Evaluate generic policy action decisions for a batch of requests",
+            "description": {
+              "content": "Returns generic policy decisions and follow-up requests for registered policy actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "policy",
+                "evaluate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"workspaceSlug\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dba0f0c2-270d-4b3e-954a-c948ff50d423",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"workspaceSlug\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://OnQrG.ucueKv3o8eou2rFNKLhLgYpGwJogekxl94+loG59ilSpOYEKGKvfW\"\n  },\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"policy-evaluation\",\n    \"attributes\": {\n      \"policyVersion\": \"string\",\n      \"orgId\": \"string\",\n      \"evaluationId\": \"string\",\n      \"decisions\": [\n        {\n          \"id\": \"string\",\n          \"action\": \"install\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"requiresInteractiveConfirmation\": true,\n          \"resolvedSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"fallbackSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"minimumReleaseAgeDays\": 758\n        },\n        {\n          \"id\": \"string\",\n          \"action\": \"install\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"requiresInteractiveConfirmation\": true,\n          \"resolvedSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"fallbackSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"minimumReleaseAgeDays\": 7719\n        }\n      ],\n      \"additionalRequests\": [\n        {\n          \"id\": \"string\",\n          \"action\": \"install\",\n          \"source\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"origin\": \"managed-project.required\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"action\": \"install\",\n          \"source\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"origin\": \"managed-project.required\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1003e013-293a-4bc5-bdd1-9a740782f72f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"workspaceSlug\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Bad Request\",\n    \"status\": 400,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20d08c0b-9912-41c5-939c-0ca52a76bca1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"workspaceSlug\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccd9a591-2730-4453-a84c-039ca0c72c6a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"action\": \"<string>\",\n      \"source\": \"\"\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"id\": \"<string>\",\n      \"workspaceSlug\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed71f384-d70b-4918-8307-95ff8b22ac87",
+          "name": "Returns the raw policy doc stored for a specific target. All section×target combinations are accepted; sections that do not apply to a given target are stored but have no effect at evaluation time.",
+          "request": {
+            "name": "Returns the raw policy doc stored for a specific target. All section×target combinations are accepted; sections that do not apply to a given target are stored but have no effect at evaluation time.",
+            "description": {
+              "content": "Returns the raw policy doc stored for a specific target. All section×target combinations are accepted; sections that do not apply to a given target are stored but have no effect at evaluation time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":targetType",
+                ":targetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetType",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "targetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82ed7d5e-c515-4308-b081-6a13402c8b10",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://PwaahOTXqdNCOitBwIzIkuL.dmRj+YMbLGge9MdoSKl.A7ZgMNRSBAHxzV8EPo\"\n  },\n  \"data\": {\n    \"id\": \"a692a82c-d7a6-aa1f-3386-1b27b5c2bd9f\",\n    \"type\": \"policy\",\n    \"attributes\": {\n      \"targetType\": \"org\",\n      \"targetId\": \"41f9cad0-b1f2-96a3-8ef3-b92b3f49159a\",\n      \"policyDoc\": {\n        \"version\": 1,\n        \"install\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToWarn\": \"LOW\",\n              \"minSeverityToBlock\": \"LOW\"\n            },\n            \"sourceRestriction\": {\n              \"registryScope\": \"all\",\n              \"allowGitSources\": true,\n              \"gitSourceAllowlist\": [\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                },\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              ]\n            },\n            \"minimumReleaseAge\": {\n              \"days\": 7631\n            }\n          }\n        },\n        \"publish\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToBlock\": \"MEDIUM\"\n            }\n          }\n        },\n        \"dependencies\": {\n          \"rules\": {\n            \"requiredDependencies\": {\n              \"key_0\": {\n                \"version\": \"string\"\n              }\n            }\n          }\n        }\n      },\n      \"updatedAt\": \"2002-10-06T18:40:54.386Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d044072b-afcc-4fa6-b9fa-2b4bc01899c5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98dc5581-4818-4b5c-9dcc-8b694b936936",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdf53307-4732-4942-a5dc-15e24f339522",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4d4b4c-0f1b-4d6d-9f02-c09409d2d733",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4bd0284-683d-4bc8-b8ab-bc3f1fdb58bd",
+          "name": "Writes the sections present in the request body to the target, merging with any existing sections not mentioned. Callers only need to include the sections they intend to set — omitted sections are preserved unchanged. To clear a section, delete the row and re-create it without that section. All section×target combinations are accepted on the backend; sections that are irrelevant to a given target are stored but have no effect at evaluation time. Requires org-level edit permission on the owning org regardless of target type.",
+          "request": {
+            "name": "Writes the sections present in the request body to the target, merging with any existing sections not mentioned. Callers only need to include the sections they intend to set — omitted sections are preserved unchanged. To clear a section, delete the row and re-create it without that section. All section×target combinations are accepted on the backend; sections that are irrelevant to a given target are stored but have no effect at evaluation time. Requires org-level edit permission on the owning org regardless of target type.",
+            "description": {
+              "content": "Writes the sections present in the request body to the target, merging with any existing sections not mentioned. Callers only need to include the sections they intend to set — omitted sections are preserved unchanged. To clear a section, delete the row and re-create it without that section. All section×target combinations are accepted on the backend; sections that are irrelevant to a given target are stored but have no effect at evaluation time. Requires org-level edit permission on the owning org regardless of target type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":targetType",
+                ":targetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetType",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "targetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cb1e28e-57a7-46e6-b007-667ed822bdff",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://PwaahOTXqdNCOitBwIzIkuL.dmRj+YMbLGge9MdoSKl.A7ZgMNRSBAHxzV8EPo\"\n  },\n  \"data\": {\n    \"id\": \"a692a82c-d7a6-aa1f-3386-1b27b5c2bd9f\",\n    \"type\": \"policy\",\n    \"attributes\": {\n      \"targetType\": \"org\",\n      \"targetId\": \"41f9cad0-b1f2-96a3-8ef3-b92b3f49159a\",\n      \"policyDoc\": {\n        \"version\": 1,\n        \"install\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToWarn\": \"LOW\",\n              \"minSeverityToBlock\": \"LOW\"\n            },\n            \"sourceRestriction\": {\n              \"registryScope\": \"all\",\n              \"allowGitSources\": true,\n              \"gitSourceAllowlist\": [\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                },\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              ]\n            },\n            \"minimumReleaseAge\": {\n              \"days\": 7631\n            }\n          }\n        },\n        \"publish\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToBlock\": \"MEDIUM\"\n            }\n          }\n        },\n        \"dependencies\": {\n          \"rules\": {\n            \"requiredDependencies\": {\n              \"key_0\": {\n                \"version\": \"string\"\n              }\n            }\n          }\n        }\n      },\n      \"updatedAt\": \"2002-10-06T18:40:54.386Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c75079e1-283c-458e-a479-2bf179d044b7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2491cbf7-f5a7-4ab6-809f-d6e72346191d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c3b5284-5011-4d97-8e70-321a042f511e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76e5a4ac-c888-4c76-aadb-905aeb3529c2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"install\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToWarn\": \"<string>\",\n          \"minSeverityToBlock\": \"<string>\"\n        },\n        \"sourceRestriction\": {\n          \"registryScope\": \"<string>\",\n          \"allowGitSources\": \"<boolean>\",\n          \"gitSourceAllowlist\": [\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            },\n            {\n              \"host\": \"<string>\",\n              \"path\": [\n                \"<string>\"\n              ]\n            }\n          ]\n        },\n        \"minimumReleaseAge\": {\n          \"days\": \"<integer>\"\n        }\n      }\n    },\n    \"publish\": {\n      \"rules\": {\n        \"securityThreshold\": {\n          \"minSeverityToBlock\": \"<string>\"\n        }\n      }\n    },\n    \"dependencies\": {\n      \"rules\": {\n        \"requiredDependencies\": {\n          \"key_0\": {\n            \"version\": \"<string>\"\n          },\n          \"key_1\": {\n            \"version\": \"<string>\"\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "000cc6d0-69dc-401e-b399-2cb74efe4999",
+          "name": "Deletes the policy row for a specific target. Requires org-level edit permission on the owning org regardless of target type.",
+          "request": {
+            "name": "Deletes the policy row for a specific target. Requires org-level edit permission on the owning org regardless of target type.",
+            "description": {
+              "content": "Deletes the policy row for a specific target. Requires org-level edit permission on the owning org regardless of target type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":targetType",
+                ":targetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetType",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "targetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a91e801-3832-485d-9955-26773884abad",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d599e624-3b37-4410-853b-d18c35fca757",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d9f48e1-e22f-47de-8e02-95812bf0da4e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81575a77-a7af-497c-9f99-fb4cd1012340",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99275a36-ce0e-463f-ae7c-e18d6dc685fc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fb3bbae-5690-48b9-868e-d70162777625",
+          "name": "Returns the effective policy for a target by merging the full hierarchy (org → workspace → managed_project) with strictest-wins semantics. Each field reflects the strictest value set at any level; absent fields at all levels are absent in the result. Pass `?provenance=true` to also receive `policySource`: per-field arrays of the levels that set each value, ordered strictest-first.",
+          "request": {
+            "name": "Returns the effective policy for a target by merging the full hierarchy (org → workspace → managed_project) with strictest-wins semantics. Each field reflects the strictest value set at any level; absent fields at all levels are absent in the result. Pass `?provenance=true` to also receive `policySource`: per-field arrays of the levels that set each value, ordered strictest-first.",
+            "description": {
+              "content": "Returns the effective policy for a target by merging the full hierarchy (org → workspace → managed_project) with strictest-wins semantics. Each field reflects the strictest value set at any level; absent fields at all levels are absent in the result. Pass `?provenance=true` to also receive `policySource`: per-field arrays of the levels that set each value, ordered strictest-first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":targetType",
+                ":targetId",
+                "effective"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provenance",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "targetType",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "targetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b77c08e9-8c6c-4af2-aacc-69b914103616",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId",
+                    "effective"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provenance",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://frFYPrVgVFccNwLPZXPMKtZByizWZL.qikB143pXh+CzaQW,O5r3nTienGFqhHPP.HB0AaDkJb+aIs8JVMVWjzs5QBZdZijrQ2HNDps1vMI81C\"\n  },\n  \"data\": {\n    \"id\": \"cb6da7a2-9324-acde-966a-654fd835e802\",\n    \"type\": \"policy\",\n    \"attributes\": {\n      \"targetType\": \"org\",\n      \"targetId\": \"aa307697-00f3-3e29-2152-0f721d067fd7\",\n      \"effectivePolicyDoc\": {\n        \"version\": 1,\n        \"install\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToWarn\": \"LOW\",\n              \"minSeverityToBlock\": \"LOW\"\n            },\n            \"sourceRestriction\": {\n              \"registryScope\": \"all\",\n              \"allowGitSources\": true,\n              \"gitSourceAllowlist\": [\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                },\n                {\n                  \"host\": \"string\",\n                  \"path\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              ]\n            },\n            \"minimumReleaseAge\": {\n              \"days\": 1940\n            }\n          }\n        },\n        \"publish\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToBlock\": \"MEDIUM\"\n            }\n          }\n        },\n        \"dependencies\": {\n          \"rules\": {\n            \"requiredDependencies\": {\n              \"key_0\": {\n                \"version\": \"string\"\n              },\n              \"key_1\": {\n                \"version\": \"string\"\n              },\n              \"key_2\": {\n                \"version\": \"string\"\n              }\n            }\n          }\n        }\n      },\n      \"policySource\": {\n        \"install\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToWarn\": [\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"c3568510-ebbe-824f-c18f-a5519f6a964a\"\n                },\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"e8e9ba96-71fc-2fc7-c2a6-6186f5410a6b\"\n                }\n              ],\n              \"minSeverityToBlock\": [\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"c6cc3886-4ab4-d68e-2b95-41d977d12544\"\n                },\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"b07029f9-7724-ab12-9794-656acff6bbc1\"\n                }\n              ]\n            },\n            \"sourceRestriction\": {\n              \"registryScope\": [\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"4771727a-0647-f115-5bac-ef09d5c5cec7\"\n                },\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"de663eb3-38d7-fc3c-b303-dfaf6979f606\"\n                }\n              ],\n              \"allowGitSources\": [\n                {\n                  \"value\": false,\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"26fcf0e2-e8e0-db82-7a22-580a6e318235\"\n                },\n                {\n                  \"value\": false,\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"47080549-c39f-5f9c-6b81-83b92ae6aafa\"\n                }\n              ]\n            },\n            \"minimumReleaseAge\": {\n              \"days\": [\n                {\n                  \"value\": 8662,\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"9392d4e3-3d0f-e865-2bfb-07b3fab66346\"\n                },\n                {\n                  \"value\": 7668,\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"9fa377a0-914b-5f2f-e213-35932c14a20a\"\n                }\n              ]\n            }\n          }\n        },\n        \"publish\": {\n          \"rules\": {\n            \"securityThreshold\": {\n              \"minSeverityToBlock\": [\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"6bfcc423-bdf1-a9c7-2cb4-ecf0c97970ce\"\n                },\n                {\n                  \"value\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"b0062a54-e4f7-bce4-71e1-8ce280121622\"\n                }\n              ]\n            }\n          }\n        },\n        \"dependencies\": {\n          \"rules\": {\n            \"requiredDependencies\": {\n              \"key_0\": [\n                {\n                  \"value\": {\n                    \"version\": {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"7ae8d8cc-cdf9-a115-38e3-0ddad9655f0d\"\n                },\n                {\n                  \"value\": {\n                    \"version\": {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  },\n                  \"targetType\": {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  \"targetId\": \"c7be553c-b874-3712-6e38-fba4e052146c\"\n                }\n              ]\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9feb2927-3e7d-4471-98ea-4ccc3277a3fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId",
+                    "effective"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provenance",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fde289b-c56e-4736-8f1f-723e7e420c8c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId",
+                    "effective"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provenance",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eff04b76-05d3-41ff-acf2-2800983dc07d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId",
+                    "effective"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provenance",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dea5b175-7e16-44b1-bd89-52da6eba72ab",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":targetType",
+                    ":targetId",
+                    "effective"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provenance",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "targetType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "targetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "002c7fa8-94a3-42de-bd3a-b94e120ce8ae",
+    "name": "Tessl Admin Keys Policy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

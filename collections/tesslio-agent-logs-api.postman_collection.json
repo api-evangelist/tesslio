@@ -1,0 +1,217 @@
+{
+  "item": [
+    {
+      "id": "10c86922-4c6a-43c2-8e3c-0e7084c8b147",
+      "name": "Agent Logs",
+      "description": {
+        "content": "Agent and hosted-execution log uploads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "06c1cc5c-c59c-4ab2-84c5-dc9556d630df",
+          "name": "Issues a presigned S3 URL for uploading an agent session log captured by the Tessl CLI or supported coding-agent integrations.",
+          "request": {
+            "name": "Issues a presigned S3 URL for uploading an agent session log captured by the Tessl CLI or supported coding-agent integrations.",
+            "description": {
+              "content": "Issues a presigned S3 URL for uploading an agent session log captured by the Tessl CLI or supported coding-agent integrations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "agent-logs",
+                "presigned-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"<string>\",\n  \"projectPath\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"capturedAt\": \"<dateTime>\",\n  \"contentType\": \"application/json\",\n  \"contentEncoding\": \"<string>\",\n  \"schemaVersion\": \"<number>\",\n  \"launchRunId\": \"<uuid>\",\n  \"metadata\": {\n    \"cliVersion\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"arch\": \"<string>\",\n    \"osType\": \"<string>\",\n    \"osRelease\": \"<string>\",\n    \"nodeVersion\": \"<string>\",\n    \"gitRepo\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2479a607-b564-445d-bc63-80288d4017cd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "agent-logs",
+                    "presigned-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"projectPath\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"capturedAt\": \"<dateTime>\",\n  \"contentType\": \"application/json\",\n  \"contentEncoding\": \"<string>\",\n  \"schemaVersion\": \"<number>\",\n  \"launchRunId\": \"<uuid>\",\n  \"metadata\": {\n    \"cliVersion\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"arch\": \"<string>\",\n    \"osType\": \"<string>\",\n    \"osRelease\": \"<string>\",\n    \"nodeVersion\": \"<string>\",\n    \"gitRepo\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presignedUrl\": \"http://shasYsNBKKF.bpvrAjFmT6TFAnB3iNV3loZLm5ZHQlYMR5u2DSEJVXabb4aB4qilIKg-vyQvjTwfq5\",\n  \"expiresIn\": 4019.121200276099\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16cb1934-3873-494a-892a-d5bfe1e0c8b1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "agent-logs",
+                    "presigned-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"projectPath\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"capturedAt\": \"<dateTime>\",\n  \"contentType\": \"application/json\",\n  \"contentEncoding\": \"<string>\",\n  \"schemaVersion\": \"<number>\",\n  \"launchRunId\": \"<uuid>\",\n  \"metadata\": {\n    \"cliVersion\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"arch\": \"<string>\",\n    \"osType\": \"<string>\",\n    \"osRelease\": \"<string>\",\n    \"nodeVersion\": \"<string>\",\n    \"gitRepo\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3069ad05-441c-4137-b2db-c281d31e229b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "agent-logs",
+                    "presigned-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"projectPath\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"capturedAt\": \"<dateTime>\",\n  \"contentType\": \"application/json\",\n  \"contentEncoding\": \"<string>\",\n  \"schemaVersion\": \"<number>\",\n  \"launchRunId\": \"<uuid>\",\n  \"metadata\": {\n    \"cliVersion\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"arch\": \"<string>\",\n    \"osType\": \"<string>\",\n    \"osRelease\": \"<string>\",\n    \"nodeVersion\": \"<string>\",\n    \"gitRepo\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dead6746-1792-4c0b-90cf-109da3435da1",
+    "name": "Tessl Admin Keys Agent Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Launch Runs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Launch Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/launch-runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/launch-runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists launch runs in the workspaces the caller can view, newest-first."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/launch-runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/launch-runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a launch run and starts the CloudLaunch workflow against it."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/launch-runs/{id}/resume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/launch-runs/:id/resume",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resumes a completed launch run: creates a new child run that reruns the CloudLaunch recipe with the parent run’s workspace restored, so the launch agent continues its prior session."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/launch-runs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/launch-runs/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a launch run by ID, including progress while pending and a failure reason when failed."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/launch-runs/{id}/logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/launch-runs/:id/logs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the raw provider JSONL transcript for a launch run's agent logs. Serves the most recently captured session as a single transcript; `204 No Content` means no session has been uploaded (or its upload has not completed) yet."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

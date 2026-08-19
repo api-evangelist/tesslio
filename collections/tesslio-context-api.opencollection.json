@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Context API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/context/lineages/resolve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/context/lineages/resolve",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Resolves a context lineage by coordinates: a source (provider + owner/repo for SCM, or tessl-registry without owner/repo) plus exactly one of slug or occurrence path. `kind` applies only to slug resolution (slug is unique per source and kind); it is ignored for path resolution, since an occurrence path already identifies exactly one lineage regardless of kind. Invalid combinations are rejected with 400."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/context/lineages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/context/lineages",
+            "params": [
+              {
+                "name": "filter[provider]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[owner]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[repo]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[kind]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists a source's live, visible context lineages of a kind, one row per lineage."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/context/lineages/{lineageId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/context/lineages/:lineageId",
+            "params": [
+              {
+                "name": "lineageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a context lineage by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Repos API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Repos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/repos/{orgName}/{repoName}/commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/repos/:orgName/:repoName/commits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "author",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "repoName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists commits on a repository's default branch via the workspace's SCM integration. Supports keyword/author/date filtering."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

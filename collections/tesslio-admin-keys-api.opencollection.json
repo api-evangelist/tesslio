@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/orgs/{orgId}/api-keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/api-keys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists admin API keys for an organization."
+        },
+        {
+          "info": {
+            "name": "POST /v1/orgs/{orgId}/api-keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/api-keys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a new admin API key for an organization."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/orgs/{orgId}/api-keys/{apiKeyId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/api-keys/:apiKeyId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "apiKeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revokes an admin API key for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

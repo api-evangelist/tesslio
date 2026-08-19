@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Agent Logs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /experimental/agent-logs/presigned-url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/agent-logs/presigned-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a presigned S3 URL for uploading an agent session log captured by the Tessl CLI or supported coding-agent integrations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

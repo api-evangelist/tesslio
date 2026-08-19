@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Generation API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /experimental/eval-scenarios/generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/eval-scenarios/generate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts an LLM-driven eval scenario generation run for a repo commit or tile upload."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/generation-runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/generation-runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mineOnly",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists eval scenario generation runs (v1) with mine-only/status filters."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/generation-runs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/generation-runs/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use `/experimental/generation-runs-v2/{id}` instead. The v2 endpoint returns a slim per-scenario index and is the path new clients should integrate against."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/generation-runs/{id}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/generation-runs/:id/download",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use `/experimental/generation-runs-v2/{id}/download` instead. The v2 endpoint returns a presigned S3 URL pointing at the canonical `scenarios.tar.gz`; clients fetch and unpack it locally."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/generation-runs-v2/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/generation-runs-v2/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a generation run by id. Returns the slim per-scenario index (`name`, `shortDescription`, `checklistSize`); fetch `/download` for the full content."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/generation-runs-v2/{id}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/generation-runs-v2/:id/download",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a presigned URL for downloading the materialized tarball produced by a v2 generation run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

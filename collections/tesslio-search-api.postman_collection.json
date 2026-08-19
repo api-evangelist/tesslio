@@ -1,0 +1,1377 @@
+{
+  "item": [
+    {
+      "id": "5c8d30f8-37af-4305-b0d5-f8f3c16a12fd",
+      "name": "Search",
+      "description": {
+        "content": "Search across tiles, skills, and repos.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a518dc77-983b-4331-8a64-dbb05656d6b7",
+          "name": "Hybrid keyword + vector search across tiles and skills.",
+          "request": {
+            "name": "Hybrid keyword + vector search across tiles and skills.",
+            "description": {
+              "content": "Hybrid keyword + vector search across tiles and skills.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchMode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[type][eq]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][eq]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][ne]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][gt]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][gte]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][lt]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][lte]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceId][like]",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][eq]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][ne]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][gt]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][gte]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][lt]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][lte]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[describes][like]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][eq]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][ne]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][gt]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][gte]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][lt]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][lte]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[packageRegistry][like]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[featured]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[featured][eq]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[featured][ne]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSkills]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSkills][eq]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSkills][ne]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSteering]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSteering][eq]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasSteering][ne]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasDocs]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasDocs][eq]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[hasDocs][ne]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includePrivate]",
+                  "value": "<boolean>",
+                  "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includePrivate][eq]",
+                  "value": "<boolean>",
+                  "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includePrivate][ne]",
+                  "value": "<boolean>",
+                  "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includeInvalid]",
+                  "value": "<boolean>",
+                  "description": "When true, include skills that failed validation. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includeInvalid][eq]",
+                  "value": "<boolean>",
+                  "description": "When true, include skills that failed validation. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[includeInvalid][ne]",
+                  "value": "<boolean>",
+                  "description": "When true, include skills that failed validation. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8042ffb2-0145-4b84-aeb2-de1f0e949081",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchMode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[type][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceId]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][eq]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][ne]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][like]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[describes]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[featured]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://jBiTtFJt.wfsuPnG6XnzaxImKYCN6ArGjV3VpbYqqtrcl8gmk\",\n    \"first\": \"https://VdwArtPyORCQBtolIhKMQeDePFQU.gcJGu7CHbjNLr6O6iD.3GRYajM,8EbPGLpBb+ivB\",\n    \"last\": \"http://EmUERhgcZp.fjLAwfRD+qA5L0E2KqHXRcNzvF\",\n    \"next\": \"http://DLvYl.lacqy2R,BKrWNje0Wxd\",\n    \"prev\": \"https://MsAfDunNKuUUqtteZ.keovcpXbEUBLvsq,SCmtwlpyauu1M1WFlxdZl34rEL268pp1S.ioSViQ,\"\n  },\n  \"meta\": {\n    \"pagination\": {\n      \"total\": 7379,\n      \"pages\": 4745,\n      \"number\": 9663,\n      \"size\": 9916\n    }\n  },\n  \"data\": [\n    {\n      \"id\": \"54ae4f29-da39-9a42-7608-413fd4f294f4\",\n      \"type\": \"tile\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"fullName\": \"string\",\n        \"describes\": \"string\",\n        \"featured\": true,\n        \"isPrivate\": false,\n        \"createdAt\": \"1990-04-25T10:56:51.631Z\",\n        \"updatedAt\": \"1960-10-26T06:34:10.819Z\",\n        \"scores\": {\n          \"version\": \"string\",\n          \"aggregate\": 5967.706441136202,\n          \"quality\": 7179.781326478851,\n          \"impact\": 7602.355826486879,\n          \"security\": \"LOW\",\n          \"evalAvg\": 8166.598772978884,\n          \"evalBaseline\": 141.80385435033526,\n          \"evalImprovement\": 8456.73897474022,\n          \"evalImprovementMultiplier\": 3469.4675000950383,\n          \"evalCount\": 3821,\n          \"validationErrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"lastScoredAt\": \"2014-09-20T23:03:32.926Z\"\n        },\n        \"versions\": [\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 5503.971073707531,\n            \"minor\": 3617.069026338302,\n            \"patch\": 3393.0354674185514,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": false,\n            \"hasSteering\": true,\n            \"hasSkills\": true,\n            \"archived\": true,\n            \"createdAt\": \"1950-12-13T13:48:28.269Z\",\n            \"evalScore\": 7602,\n            \"evalBaselineScore\": 5162,\n            \"evalImprovement\": 5542,\n            \"evalImprovementMultiplier\": 7378.879031648754,\n            \"skills\": [\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 7268.569816545637,\n            \"minor\": 3285.001393540038,\n            \"patch\": 5896.37436664511,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": false,\n            \"hasSteering\": false,\n            \"hasSkills\": true,\n            \"archived\": false,\n            \"createdAt\": \"2018-10-02T19:56:57.430Z\",\n            \"evalScore\": 9152,\n            \"evalBaselineScore\": 1170,\n            \"evalImprovement\": 9989,\n            \"evalImprovementMultiplier\": 2379.941607332079,\n            \"skills\": [\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      },\n      \"relationships\": {\n        \"workspace\": {\n          \"data\": {\n            \"id\": \"04018dd4-f56f-278e-5674-b4c25dc6af0e\",\n            \"type\": \"workspace\",\n            \"attributes\": {\n              \"name\": \"string\"\n            }\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"4a4d4c2d-4605-7e24-7a2f-1339910ac967\",\n      \"type\": \"tile\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"fullName\": \"string\",\n        \"describes\": \"string\",\n        \"featured\": true,\n        \"isPrivate\": false,\n        \"createdAt\": \"2023-12-16T14:59:03.416Z\",\n        \"updatedAt\": \"2018-09-29T18:29:40.257Z\",\n        \"scores\": {\n          \"version\": \"string\",\n          \"aggregate\": 9481.873490365519,\n          \"quality\": 9229.937233574163,\n          \"impact\": 3847.117848462629,\n          \"security\": \"LOW\",\n          \"evalAvg\": 9224.700396454027,\n          \"evalBaseline\": 4666.384184364753,\n          \"evalImprovement\": 6381.018454353192,\n          \"evalImprovementMultiplier\": 7238.879314111533,\n          \"evalCount\": 1388,\n          \"validationErrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"lastScoredAt\": \"1961-07-14T06:18:02.494Z\"\n        },\n        \"versions\": [\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 7684.776933371344,\n            \"minor\": 325.32927726390494,\n            \"patch\": 5868.791360242543,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": false,\n            \"hasSteering\": true,\n            \"hasSkills\": true,\n            \"archived\": false,\n            \"createdAt\": \"2024-02-21T23:34:03.839Z\",\n            \"evalScore\": 330,\n            \"evalBaselineScore\": 7889,\n            \"evalImprovement\": 8032,\n            \"evalImprovementMultiplier\": 6476.350421782146,\n            \"skills\": [\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 1188.5114711007716,\n            \"minor\": 1521.4618797057267,\n            \"patch\": 613.6275980867412,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": true,\n            \"hasSteering\": false,\n            \"hasSkills\": false,\n            \"archived\": true,\n            \"createdAt\": \"1987-07-15T06:48:24.976Z\",\n            \"evalScore\": 231,\n            \"evalBaselineScore\": 4605,\n            \"evalImprovement\": 1652,\n            \"evalImprovementMultiplier\": 7731.097350557888,\n            \"skills\": [\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"path\": \"string\",\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"description\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      },\n      \"relationships\": {\n        \"workspace\": {\n          \"data\": {\n            \"id\": \"07082d20-1115-017a-87a9-6c6557d53c51\",\n            \"type\": \"workspace\",\n            \"attributes\": {\n              \"name\": \"string\"\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c9777e-d343-4bbe-b95b-a0b27ae6ce09",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchMode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[type][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceId]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][eq]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][ne]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][like]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[describes]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[featured]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "220d56b8-e996-4b35-b15f-448030d3d2a1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchMode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[number]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "filter[type][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceId]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][eq]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][ne]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][gte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lt]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][lte]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[workspaceId][like]",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "filter[describes]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[describes][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][eq]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][ne]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[packageRegistry][like]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[featured]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[featured][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSkills][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasSteering][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[hasDocs][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includePrivate][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][eq]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter[includeInvalid][ne]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e12b529-a0bb-41bb-a8b3-13d47a62194f",
+          "name": "Searches GitHub for repositories matching a query string (cached, top 5). Deprecated alias of GET /experimental/search/repos?provider=github.",
+          "request": {
+            "name": "Searches GitHub for repositories matching a query string (cached, top 5). Deprecated alias of GET /experimental/search/repos?provider=github.",
+            "description": {
+              "content": "Searches GitHub for repositories matching a query string (cached, top 5). Deprecated alias of GET /experimental/search/repos?provider=github.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "search",
+                "github"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46eaad32-cdd0-4f7a-99c6-276a83bd7236",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "github"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"owner\": \"string\",\n      \"repo\": \"string\",\n      \"repoDescription\": \"string\",\n      \"repoStars\": 6437,\n      \"repoUrl\": \"string\",\n      \"defaultBranch\": \"string\"\n    },\n    {\n      \"owner\": \"string\",\n      \"repo\": \"string\",\n      \"repoDescription\": \"string\",\n      \"repoStars\": 2541,\n      \"repoUrl\": \"string\",\n      \"defaultBranch\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"totalCount\": 2660\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9734aa79-ce88-421f-8f91-ae2ef4ebd4f6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "github"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de2287a0-fead-444e-b5e8-bffe71f5dda9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "github"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "646f1861-7bf0-42f0-b08b-e38ba836607c",
+          "name": "Searches a provider (github, gitlab) for public repositories matching a query string (cached, top 5). Providers without public repo search (e.g. bitbucket) return supported=false.",
+          "request": {
+            "name": "Searches a provider (github, gitlab) for public repositories matching a query string (cached, top 5). Providers without public repo search (e.g. bitbucket) return supported=false.",
+            "description": {
+              "content": "Searches a provider (github, gitlab) for public repositories matching a query string (cached, top 5). Providers without public repo search (e.g. bitbucket) return supported=false.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "search",
+                "repos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ac2d8e7-9386-448d-baee-ccacb1e74c47",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "repos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://iXTW.hvln0QIeQmLDSHbWQFjN63IZIwGt+WgfkU2eoXCuCD\"\n  },\n  \"meta\": {\n    \"totalCount\": 3397,\n    \"supported\": false\n  },\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"repo-search-result\",\n      \"attributes\": {\n        \"owner\": \"string\",\n        \"repo\": \"string\",\n        \"description\": \"string\",\n        \"stars\": 9675,\n        \"url\": \"string\",\n        \"defaultBranch\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"repo-search-result\",\n      \"attributes\": {\n        \"owner\": \"string\",\n        \"repo\": \"string\",\n        \"description\": \"string\",\n        \"stars\": 8610,\n        \"url\": \"string\",\n        \"defaultBranch\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a279834f-7b08-46cf-8c20-f65cee44458a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "repos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da28b091-bd1f-4d2d-a018-6250499dd48a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "search",
+                    "repos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "96310c11-0368-43bb-bfde-775639dc4a0b",
+    "name": "Tessl Admin Keys Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

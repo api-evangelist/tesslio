@@ -1,0 +1,352 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Tasks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/tasks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceName]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[status][eq]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List tasks in a workspace, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/tasks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create-or-get a task by `idempotencyKey`. Emits `task.created`; when `startImmediately` (default true) and inputs are supplied, kicks off the first run."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/tasks/by-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/tasks/by-link",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Find a task by its (workspace, link type, link value) triple. 404 when no match exists."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/tasks/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/tasks/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a task by id, including its current run, pending-input count, links, and the latest event tail."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/tasks/{id}/events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/tasks/:id/events",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List events for a task, ordered ascending by id. Filterable by event type(s) and/or runId."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/tasks/{id}/events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/tasks/:id/events",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Write a client-emitted task event (`user_input.received`, `input.requested`, `run.progress`). Backend-owned lifecycle events (`task.created`, `run.*`, `task.cancelled`) MUST be rejected with 400."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/tasks/{id}/inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/tasks/:id/inputs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Thin sugar over POST /tasks/{id}/events that fires exactly one `user_input.received`."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/tasks/{id}/runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/tasks/:id/runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List a task's `launch_run`s newest-first, each with status, failureReason, extracted links, the `run.created`/`run.completed` event ids, and its `resumeOfLaunchRunId` lineage."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/tasks/{id}/cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/tasks/:id/cancel",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a task: terminates the current run's Temporal workflow (if any), emits `task.cancelled`, and sets status to `cancelled`."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/task-events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/task-events",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Workspace-wide task-event feed. Same item shape as `GET /tasks/{id}/events`. Filterable by event type(s), taskId, or a `since` timestamp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

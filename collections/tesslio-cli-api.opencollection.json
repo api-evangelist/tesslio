@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys CLI API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CLI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/cli-env",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/cli-env",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Returns the combined environment: a LiteLLM API key, the LLM gateway base URL, and telemetry credentials."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/cli-env/llm-key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/cli-env/llm-key",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Issues a LiteLLM API key for direct-to-LLM traffic. The key is unrestricted, unscoped, and valid for 30 days."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/cli-env/config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/cli-env/config"
+          },
+          "docs": "Returns static configuration: the LLM gateway base URL and telemetry credentials. No per-user secret is issued, so authentication is optional."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

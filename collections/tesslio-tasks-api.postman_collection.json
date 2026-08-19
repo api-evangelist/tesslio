@@ -1,0 +1,3668 @@
+{
+  "item": [
+    {
+      "id": "80b5e082-6470-4706-94db-a7ca04f320c9",
+      "name": "Tasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f02ff713-8a6e-4698-b353-74dffed9c990",
+          "name": "Create-or-get a task by `idempotencyKey`. Emits `task.created`; when `startImmediately` (default true) and inputs are supplied, kicks off the first run.",
+          "request": {
+            "name": "Create-or-get a task by `idempotencyKey`. Emits `task.created`; when `startImmediately` (default true) and inputs are supplied, kicks off the first run.",
+            "description": {
+              "content": "Create-or-get a task by `idempotencyKey`. Emits `task.created`; when `startImmediately` (default true) and inputs are supplied, kicks off the first run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6ecc560-e5c6-425e-9de9-d67480c0d695",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://jgtRVGlyQroHBetS.affd0lfLAsody7A6DWeRFyeMjklztSa,F9vL5-tE+yUYu\"\n  },\n  \"data\": {\n    \"id\": \"4021bdbd-f7ca-cf4f-49ab-5f3a31c378a2\",\n    \"type\": \"task\",\n    \"attributes\": {\n      \"status\": \"running\",\n      \"definition\": {\n        \"skillRef\": \"string\",\n        \"repoUrl\": \"string\",\n        \"agent\": \"string\",\n        \"baseBranch\": \"string\",\n        \"model\": \"string\",\n        \"environmentId\": \"8ac5dc72-9644-675d-9ba5-b4f0f731c248\"\n      },\n      \"inputs\": {\n        \"key_0\": {}\n      },\n      \"currentRunId\": \"bcf3886d-e3ee-9802-fb4b-1b85ce80e36a\",\n      \"links\": [\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"ab1e862b-4ace-6682-b10c-4977cb9837b5\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"502eddf9-650a-6c87-90cc-beb759419df7\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        }\n      ],\n      \"createdBy\": \"7b939778-573e-457b-6a16-f95c7cfbbd96\",\n      \"createdAt\": \"2011-07-12T06:56:00.993Z\",\n      \"updatedAt\": \"2012-12-05T08:32:14.635Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ac8b1c4-9237-4412-ae1f-9ae651cdcf8e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://jgtRVGlyQroHBetS.affd0lfLAsody7A6DWeRFyeMjklztSa,F9vL5-tE+yUYu\"\n  },\n  \"data\": {\n    \"id\": \"4021bdbd-f7ca-cf4f-49ab-5f3a31c378a2\",\n    \"type\": \"task\",\n    \"attributes\": {\n      \"status\": \"running\",\n      \"definition\": {\n        \"skillRef\": \"string\",\n        \"repoUrl\": \"string\",\n        \"agent\": \"string\",\n        \"baseBranch\": \"string\",\n        \"model\": \"string\",\n        \"environmentId\": \"8ac5dc72-9644-675d-9ba5-b4f0f731c248\"\n      },\n      \"inputs\": {\n        \"key_0\": {}\n      },\n      \"currentRunId\": \"bcf3886d-e3ee-9802-fb4b-1b85ce80e36a\",\n      \"links\": [\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"ab1e862b-4ace-6682-b10c-4977cb9837b5\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"502eddf9-650a-6c87-90cc-beb759419df7\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        }\n      ],\n      \"createdBy\": \"7b939778-573e-457b-6a16-f95c7cfbbd96\",\n      \"createdAt\": \"2011-07-12T06:56:00.993Z\",\n      \"updatedAt\": \"2012-12-05T08:32:14.635Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dfc1af4-03da-458d-bf3d-edc5beae640d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b25911-57e1-4a64-9e29-cf9334dbef89",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be37a27b-3eaf-4e56-8a1e-03acc3888f80",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1b2f0ab-575a-419d-8db0-94acd99ecf8a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspaceName\": \"<string>\",\n  \"idempotencyKey\": \"<string>\",\n  \"definition\": {\n    \"skillRef\": \"<string>\",\n    \"repoUrl\": \"<string>\",\n    \"agent\": \"<string>\",\n    \"baseBranch\": \"<string>\",\n    \"model\": \"<string>\",\n    \"environmentId\": \"<uuid>\"\n  },\n  \"inputs\": {\n    \"key_0\": {}\n  },\n  \"links\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"displayLabel\": \"<string>\",\n      \"displayTitle\": \"<string>\",\n      \"displayUrl\": \"<string>\"\n    }\n  ],\n  \"initialUserInput\": {\n    \"text\": \"<string>\"\n  },\n  \"startImmediately\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfdf60bf-6726-4c43-877d-036aa466798d",
+          "name": "List tasks in a workspace, optionally filtered by status.",
+          "request": {
+            "name": "List tasks in a workspace, optionally filtered by status.",
+            "description": {
+              "content": "List tasks in a workspace, optionally filtered by status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[workspaceName]",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status][eq]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b9280e9-eb8b-449a-85f9-565bf3f1f1b8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status][eq]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://ApHrftVc.toeyUvD5lwjw-\",\n    \"next\": \"http://SYjvdzDZJShNoGDxaUidXinbgKExw.jzkyGH8O1qTfx3bmLVWBxllU\",\n    \"prev\": \"https://XgQEvQFBZCmAStEg.crPfVHhev-GtJyffrsumDlsTrnnzrgFMngaFOXKV5HeoYl\"\n  },\n  \"meta\": {\n    \"count\": 3339.1745681601737\n  },\n  \"data\": [\n    {\n      \"id\": \"bbdea8df-0a02-7163-2914-f89617f4e7e6\",\n      \"type\": \"task\",\n      \"attributes\": {\n        \"status\": \"running\",\n        \"definition\": {\n          \"skillRef\": \"string\",\n          \"repoUrl\": \"string\",\n          \"agent\": \"string\",\n          \"baseBranch\": \"string\",\n          \"model\": \"string\",\n          \"environmentId\": \"a9dd1f10-5fa5-cd2f-1c88-c66edcd1ef98\"\n        },\n        \"currentRunId\": \"156adbbd-8d60-8963-8338-d5c4061add7d\",\n        \"linkCount\": 2769,\n        \"createdAt\": \"2021-12-29T10:46:14.388Z\",\n        \"updatedAt\": \"1978-01-12T20:25:36.678Z\"\n      }\n    },\n    {\n      \"id\": \"a57a3592-19f5-d1ab-1a38-fbd5e5dca8fc\",\n      \"type\": \"task\",\n      \"attributes\": {\n        \"status\": \"running\",\n        \"definition\": {\n          \"skillRef\": \"string\",\n          \"repoUrl\": \"string\",\n          \"agent\": \"string\",\n          \"baseBranch\": \"string\",\n          \"model\": \"string\",\n          \"environmentId\": \"3173b62b-f00f-9327-0ac3-a3bfe435d1c8\"\n        },\n        \"currentRunId\": \"116849b3-cea0-04ce-cfc8-44998c5dd604\",\n        \"linkCount\": 5647,\n        \"createdAt\": \"1969-10-07T05:19:20.635Z\",\n        \"updatedAt\": \"2011-08-11T18:05:10.830Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f38d5ce2-5ed9-4228-b85c-8934d9af499b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status][eq]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19594f9c-c2f0-4968-87f4-e47d6eee54f0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status][eq]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d015fa9-b53c-45bf-88ef-309f11f5b37d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status][eq]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bc4e348-455e-4432-8f5f-78b11df30af5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[workspaceName]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[status][eq]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1980e56-7d36-4da3-b581-3776c023b0f5",
+          "name": "Find a task by its (workspace, link type, link value) triple. 404 when no match exists.",
+          "request": {
+            "name": "Find a task by its (workspace, link type, link value) triple. 404 when no match exists.",
+            "description": {
+              "content": "Find a task by its (workspace, link type, link value) triple. 404 when no match exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                "by-link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c4c6b2c-caf0-46d9-8249-88f2781e10a7",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    "by-link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://lnWRBqxtwZbU.mdzgbaXevdABIOEdnyiNVLA-NSP3NIauL5Z.LTWIkkTrlf2dpoUKdc.Ee1Qr7o-P\"\n  },\n  \"data\": {\n    \"id\": \"82309473-08d5-d553-7252-a5fde5228143\",\n    \"type\": \"task\",\n    \"attributes\": {\n      \"status\": \"running\",\n      \"definition\": {\n        \"skillRef\": \"string\",\n        \"repoUrl\": \"string\",\n        \"agent\": \"string\",\n        \"baseBranch\": \"string\",\n        \"model\": \"string\",\n        \"environmentId\": \"386fcbed-6cb4-3800-af50-1838c09b311b\"\n      },\n      \"inputs\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"currentRun\": {\n        \"id\": \"ca377903-e0fe-1174-eb15-b05cf08a6759\",\n        \"status\": \"string\",\n        \"progress\": {\n          \"key_0\": {}\n        }\n      },\n      \"pendingInputCount\": 2429,\n      \"links\": [\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"4f62c274-6f92-7f0e-f43e-605be83e0b79\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"fdc54acf-1dc8-0b6f-09b0-3123b597061c\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        }\n      ],\n      \"latestEvents\": [\n        {\n          \"id\": \"32f2a17a-a201-2d3d-cae7-f9f6e0e940e7\",\n          \"type\": \"task-event\",\n          \"attributes\": {\n            \"taskId\": \"6b9c1ec8-08fa-8e46-4b0f-eae147b660b7\",\n            \"runId\": \"aadcb3dc-68b4-892b-ab21-1aa44815953c\",\n            \"actor\": {\n              \"kind\": \"trigger\",\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"createdAt\": \"1990-11-29T16:13:42.216Z\",\n            \"type\": \"task.created\",\n            \"payload\": {\n              \"definition\": {\n                \"skillRef\": \"string\",\n                \"repoUrl\": \"string\",\n                \"agent\": \"string\",\n                \"baseBranch\": \"string\",\n                \"model\": \"string\",\n                \"environmentId\": \"7315f4fb-e277-3960-7f93-255f3e8ce9cb\"\n              },\n              \"inputs\": {\n                \"key_0\": {}\n              }\n            }\n          }\n        },\n        {\n          \"id\": \"ab321579-d86f-c4da-5bf9-210a37602610\",\n          \"type\": \"task-event\",\n          \"attributes\": {\n            \"taskId\": \"a88f7c41-aa04-2175-e6e2-954c47aeec05\",\n            \"runId\": \"6521cccd-7e5c-2375-bf35-bc8e623ba4d6\",\n            \"actor\": {\n              \"kind\": \"trigger\",\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"createdAt\": \"2023-09-09T08:42:50.920Z\",\n            \"type\": \"task.created\",\n            \"payload\": {\n              \"definition\": {\n                \"skillRef\": \"string\",\n                \"repoUrl\": \"string\",\n                \"agent\": \"string\",\n                \"baseBranch\": \"string\",\n                \"model\": \"string\",\n                \"environmentId\": \"4cd79961-4bc4-8c5e-771e-ea03137bce8d\"\n              },\n              \"inputs\": {\n                \"key_0\": {},\n                \"key_1\": {}\n              }\n            }\n          }\n        }\n      ],\n      \"workspaceName\": \"string\",\n      \"createdAt\": \"1946-12-22T01:13:46.216Z\",\n      \"updatedAt\": \"1970-05-19T22:16:51.366Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f00936ae-b4e2-4b34-aba2-3dc6b5dc49a8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    "by-link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47ce108e-69b2-41a9-82bc-e737d9273db1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    "by-link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee593e4-c1b0-47c8-b683-6b9d5e2a949a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    "by-link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "797ae4f8-795d-4c3a-b91a-7cb7e19cf353",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    "by-link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a666847-6b44-40a8-9624-669ffa3ae369",
+          "name": "Get a task by id, including its current run, pending-input count, links, and the latest event tail.",
+          "request": {
+            "name": "Get a task by id, including its current run, pending-input count, links, and the latest event tail.",
+            "description": {
+              "content": "Get a task by id, including its current run, pending-input count, links, and the latest event tail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "071f6d24-bd1d-494d-8c27-8ded5838bce4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://lnWRBqxtwZbU.mdzgbaXevdABIOEdnyiNVLA-NSP3NIauL5Z.LTWIkkTrlf2dpoUKdc.Ee1Qr7o-P\"\n  },\n  \"data\": {\n    \"id\": \"82309473-08d5-d553-7252-a5fde5228143\",\n    \"type\": \"task\",\n    \"attributes\": {\n      \"status\": \"running\",\n      \"definition\": {\n        \"skillRef\": \"string\",\n        \"repoUrl\": \"string\",\n        \"agent\": \"string\",\n        \"baseBranch\": \"string\",\n        \"model\": \"string\",\n        \"environmentId\": \"386fcbed-6cb4-3800-af50-1838c09b311b\"\n      },\n      \"inputs\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"currentRun\": {\n        \"id\": \"ca377903-e0fe-1174-eb15-b05cf08a6759\",\n        \"status\": \"string\",\n        \"progress\": {\n          \"key_0\": {}\n        }\n      },\n      \"pendingInputCount\": 2429,\n      \"links\": [\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"4f62c274-6f92-7f0e-f43e-605be83e0b79\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"fdc54acf-1dc8-0b6f-09b0-3123b597061c\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        }\n      ],\n      \"latestEvents\": [\n        {\n          \"id\": \"32f2a17a-a201-2d3d-cae7-f9f6e0e940e7\",\n          \"type\": \"task-event\",\n          \"attributes\": {\n            \"taskId\": \"6b9c1ec8-08fa-8e46-4b0f-eae147b660b7\",\n            \"runId\": \"aadcb3dc-68b4-892b-ab21-1aa44815953c\",\n            \"actor\": {\n              \"kind\": \"trigger\",\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"createdAt\": \"1990-11-29T16:13:42.216Z\",\n            \"type\": \"task.created\",\n            \"payload\": {\n              \"definition\": {\n                \"skillRef\": \"string\",\n                \"repoUrl\": \"string\",\n                \"agent\": \"string\",\n                \"baseBranch\": \"string\",\n                \"model\": \"string\",\n                \"environmentId\": \"7315f4fb-e277-3960-7f93-255f3e8ce9cb\"\n              },\n              \"inputs\": {\n                \"key_0\": {}\n              }\n            }\n          }\n        },\n        {\n          \"id\": \"ab321579-d86f-c4da-5bf9-210a37602610\",\n          \"type\": \"task-event\",\n          \"attributes\": {\n            \"taskId\": \"a88f7c41-aa04-2175-e6e2-954c47aeec05\",\n            \"runId\": \"6521cccd-7e5c-2375-bf35-bc8e623ba4d6\",\n            \"actor\": {\n              \"kind\": \"trigger\",\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"createdAt\": \"2023-09-09T08:42:50.920Z\",\n            \"type\": \"task.created\",\n            \"payload\": {\n              \"definition\": {\n                \"skillRef\": \"string\",\n                \"repoUrl\": \"string\",\n                \"agent\": \"string\",\n                \"baseBranch\": \"string\",\n                \"model\": \"string\",\n                \"environmentId\": \"4cd79961-4bc4-8c5e-771e-ea03137bce8d\"\n              },\n              \"inputs\": {\n                \"key_0\": {},\n                \"key_1\": {}\n              }\n            }\n          }\n        }\n      ],\n      \"workspaceName\": \"string\",\n      \"createdAt\": \"1946-12-22T01:13:46.216Z\",\n      \"updatedAt\": \"1970-05-19T22:16:51.366Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf015cd1-f4f3-4ec7-9a24-113236ed7ab1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af15b891-0bac-4966-8142-39cc8d59d071",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d16f44-8b42-46d1-9529-2d8e2eefb7eb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea1a6d4d-5585-4819-9ab4-8d7c585a32ce",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99ef4a73-d686-48b5-b81e-41accbc45e2d",
+          "name": "List events for a task, ordered ascending by id. Filterable by event type(s) and/or runId.",
+          "request": {
+            "name": "List events for a task, ordered ascending by id. Filterable by event type(s) and/or runId.",
+            "description": {
+              "content": "List events for a task, ordered ascending by id. Filterable by event type(s) and/or runId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "runId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b87d941-d655-4a12-a00e-80497c15ec4a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://VrcauZRq.gcOWrkq4PEegIsgA89\",\n    \"next\": \"https://fNmhrokkqLlRTSgz.jbvMK+ZTbcUZSE64K6DUMdnoDnqKijIHBAJs-LM6.JjQ6jeCVfmAO.i7f-Wgycu1EOq\",\n    \"prev\": \"http://oAqSZOAMd.qgtumNHQkGjCMa3ftxmZ,6Wxy3MOJh-47+AXQ1JH.7ilC.otO\"\n  },\n  \"meta\": {\n    \"count\": 5953.011126645049\n  },\n  \"data\": [\n    {\n      \"id\": \"76d88aa2-36c7-42a9-9d0d-23b89562afdb\",\n      \"type\": \"task-event\",\n      \"attributes\": {\n        \"taskId\": \"128eb5ed-64e8-8fa5-2932-5284d19defb4\",\n        \"runId\": \"953d0543-7b12-b72b-7219-afdda4c8ec6c\",\n        \"actor\": {\n          \"kind\": \"trigger\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        \"createdAt\": \"2021-06-07T15:20:26.271Z\",\n        \"type\": \"task.created\",\n        \"payload\": {\n          \"definition\": {\n            \"skillRef\": \"string\",\n            \"repoUrl\": \"string\",\n            \"agent\": \"stri\",\n            \"baseBranch\": \"string\",\n            \"model\": \"string\",\n            \"environmentId\": \"1ba96580-afcf-7ba2-b7ca-2e6480527dd1\"\n          },\n          \"inputs\": {\n            \"key_0\": {}\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"2221d9ea-00ab-aace-7211-97c213c7a04b\",\n      \"type\": \"task-event\",\n      \"attributes\": {\n        \"taskId\": \"445cf303-4243-b2ff-86a2-c44699100bc7\",\n        \"runId\": \"787f685f-1ae5-2522-4064-aa633ab619c2\",\n        \"actor\": {\n          \"kind\": \"trigger\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        \"createdAt\": \"1976-03-17T05:22:04.445Z\",\n        \"type\": \"task.created\",\n        \"payload\": {\n          \"definition\": {\n            \"skillRef\": \"string\",\n            \"repoUrl\": \"string\",\n            \"agent\": \"string\",\n            \"baseBranch\": \"string\",\n            \"model\": \"string\",\n            \"environmentId\": \"af87c0d3-e858-99f1-de63-1e8f89910fe9\"\n          },\n          \"inputs\": {\n            \"key_0\": {}\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e319742-9332-4fb2-9ef5-59a97d04f81b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d397ca70-2baa-43fe-a135-447788389d23",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "479680fd-edcb-49c8-9397-b96f9b439d05",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46ab8222-7efd-4768-a46a-4ec21bcfe0c2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77d1a289-b794-4f78-9a3e-8dddef8f54c3",
+          "name": "Write a client-emitted task event (`user_input.received`, `input.requested`, `run.progress`). Backend-owned lifecycle events (`task.created`, `run.*`, `task.cancelled`) MUST be rejected with 400.",
+          "request": {
+            "name": "Write a client-emitted task event (`user_input.received`, `input.requested`, `run.progress`). Backend-owned lifecycle events (`task.created`, `run.*`, `task.cancelled`) MUST be rejected with 400.",
+            "description": {
+              "content": "Write a client-emitted task event (`user_input.received`, `input.requested`, `run.progress`). Backend-owned lifecycle events (`task.created`, `run.*`, `task.cancelled`) MUST be rejected with 400.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "323d0a80-1c6d-48ba-b129-25f3ccd04d7e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://RSgjLBoCNhakKWz.xtgDAVUCMgXIL\"\n  },\n  \"data\": {\n    \"id\": \"118aeb9e-a71a-ec97-5f73-65fce6176195\",\n    \"type\": \"task-event\",\n    \"attributes\": {\n      \"taskId\": \"acd41a4e-6123-ba97-e47f-f934fc343555\",\n      \"runId\": \"42b57e94-4357-2756-d990-d81828d775e9\",\n      \"actor\": {\n        \"kind\": \"trigger\",\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"createdAt\": \"1953-01-06T16:15:27.124Z\",\n      \"type\": \"task.created\",\n      \"payload\": {\n        \"definition\": {\n          \"skillRef\": \"string\",\n          \"repoUrl\": \"string\",\n          \"agent\": \"string\",\n          \"baseBranch\": \"string\",\n          \"model\": \"str\",\n          \"environmentId\": \"7a932b2f-71ea-8974-d5e6-6dc1dadd7a62\"\n        },\n        \"inputs\": {\n          \"key_0\": {}\n        }\n      }\n    }\n  },\n  \"meta\": {\n    \"task\": {\n      \"id\": \"ba836b8b-e728-e8f3-8f1d-3cee4451eb4d\",\n      \"status\": \"running\",\n      \"currentRunId\": \"12cad4f4-4b69-a41a-dd43-7195f21c24ba\"\n    },\n    \"startedRun\": {\n      \"launchRunId\": \"0872184c-dd5c-52c3-c4e1-7ba8787e2185\",\n      \"temporalWorkflowId\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e18d81fe-d8f3-4b4b-86a7-e2c89c7a519a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac3a9a5c-b702-4778-9276-4aa308025fb6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30f747ee-1711-4447-ac59-8994fac3e0c0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c232a258-6172-44f5-af37-f1f0d238fa74",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": {\n    \"text\": \"<string>\",\n    \"structured\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"inResponseTo\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d311e0f-9890-4a93-b999-39f2c29056a5",
+          "name": "Thin sugar over POST /tasks/{id}/events that fires exactly one `user_input.received`.",
+          "request": {
+            "name": "Thin sugar over POST /tasks/{id}/events that fires exactly one `user_input.received`.",
+            "description": {
+              "content": "Thin sugar over POST /tasks/{id}/events that fires exactly one `user_input.received`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id",
+                "inputs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d2ee384-0203-460f-9b87-7ec8fcdd5a35",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://RSgjLBoCNhakKWz.xtgDAVUCMgXIL\"\n  },\n  \"data\": {\n    \"id\": \"118aeb9e-a71a-ec97-5f73-65fce6176195\",\n    \"type\": \"task-event\",\n    \"attributes\": {\n      \"taskId\": \"acd41a4e-6123-ba97-e47f-f934fc343555\",\n      \"runId\": \"42b57e94-4357-2756-d990-d81828d775e9\",\n      \"actor\": {\n        \"kind\": \"trigger\",\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"createdAt\": \"1953-01-06T16:15:27.124Z\",\n      \"type\": \"task.created\",\n      \"payload\": {\n        \"definition\": {\n          \"skillRef\": \"string\",\n          \"repoUrl\": \"string\",\n          \"agent\": \"string\",\n          \"baseBranch\": \"string\",\n          \"model\": \"str\",\n          \"environmentId\": \"7a932b2f-71ea-8974-d5e6-6dc1dadd7a62\"\n        },\n        \"inputs\": {\n          \"key_0\": {}\n        }\n      }\n    }\n  },\n  \"meta\": {\n    \"task\": {\n      \"id\": \"ba836b8b-e728-e8f3-8f1d-3cee4451eb4d\",\n      \"status\": \"running\",\n      \"currentRunId\": \"12cad4f4-4b69-a41a-dd43-7195f21c24ba\"\n    },\n    \"startedRun\": {\n      \"launchRunId\": \"0872184c-dd5c-52c3-c4e1-7ba8787e2185\",\n      \"temporalWorkflowId\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bb09f3d-2328-4d2f-9f2c-2a02921534aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e0d9b4d-c0c9-404c-8f33-83850f81d9e4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e54fb603-a63e-40b5-8694-4b1c587e944d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db3e77ca-3589-4aed-b72e-131b0c00e04c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"structured\": {\n    \"key_0\": {}\n  },\n  \"inResponseTo\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2189a2e1-c5c7-4846-9828-05c2d206e509",
+          "name": "List a task's `launch_run`s newest-first, each with status, failureReason, extracted links, the `run.created`/`run.completed` event ids, and its `resumeOfLaunchRunId` lineage.",
+          "request": {
+            "name": "List a task's `launch_run`s newest-first, each with status, failureReason, extracted links, the `run.created`/`run.completed` event ids, and its `resumeOfLaunchRunId` lineage.",
+            "description": {
+              "content": "List a task's `launch_run`s newest-first, each with status, failureReason, extracted links, the `run.created`/`run.completed` event ids, and its `resumeOfLaunchRunId` lineage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad3b4eea-10eb-4fbb-a705-9e8ea1100234",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://RuHYdVUpkUhxqkGUibTGZCapQozWajh.yswuCCtjhXaa6KnobFL9touceen.XltBuIu2aj5ee7lOM7\",\n    \"next\": \"https://qsQAIlcea.dpohscHdpNDRP0tXmOKal0FV,ppqmzJa\",\n    \"prev\": \"http://XTOrln.vmexocIxfkNp-X2YozyYLd14dV1t2q4hIV5bGljnzegoAO0Vmts334y.24x\"\n  },\n  \"meta\": {\n    \"count\": 4529.487844726882\n  },\n  \"data\": [\n    {\n      \"id\": \"085a3fc9-343e-5f72-f6fb-2d2707926db4\",\n      \"type\": \"launch-run\",\n      \"attributes\": {\n        \"status\": \"string\",\n        \"failureReason\": {\n          \"key_0\": {}\n        },\n        \"runCreatedEventId\": \"81c52c22-1b40-91e5-7485-ad1a7e425419\",\n        \"runCompletedEventId\": \"a60e91f6-b25e-f37f-e988-decda8b83dd4\",\n        \"resumeOfLaunchRunId\": \"74105f5e-de94-857a-6daa-8a7c924d37eb\",\n        \"createdAt\": \"1954-08-12T00:28:34.858Z\",\n        \"links\": [\n          {\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"eventId\": \"695dd612-e9a3-f843-ca0d-3401bc6fd9a1\",\n            \"displayLabel\": \"string\",\n            \"displayTitle\": \"string\",\n            \"displayUrl\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"eventId\": \"fe623f78-1a29-d590-2280-1a9c6b8a8029\",\n            \"displayLabel\": \"string\",\n            \"displayTitle\": \"string\",\n            \"displayUrl\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"e06ccf1f-4a17-5f54-7b6a-bfef228e2d6f\",\n      \"type\": \"launch-run\",\n      \"attributes\": {\n        \"status\": \"string\",\n        \"failureReason\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"runCreatedEventId\": \"da05841d-6c70-9765-22ab-8dd1a4bb6358\",\n        \"runCompletedEventId\": \"3dba0226-83a2-4b38-5a53-c00b80e8eadf\",\n        \"resumeOfLaunchRunId\": \"3e24f97d-1aa2-a8c3-5fd9-fb477bbd3e90\",\n        \"createdAt\": \"1984-07-09T17:11:01.088Z\",\n        \"links\": [\n          {\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"eventId\": \"d36ce9d3-74e8-8c8f-b182-53ab568b69ec\",\n            \"displayLabel\": \"string\",\n            \"displayTitle\": \"string\",\n            \"displayUrl\": \"string\"\n          },\n          {\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"eventId\": \"8f05565e-754a-03f9-2f2c-8a6874a56d54\",\n            \"displayLabel\": \"string\",\n            \"displayTitle\": \"string\",\n            \"displayUrl\": \"string\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e044d1c-e988-4e03-937e-318f893e0961",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebb73c87-aaea-4802-a204-17f9df5356b0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5931741d-d1b2-4314-be8b-733a6b175ccc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a7f1890-b8fe-4e80-8dc2-e4455625239d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce9964b4-8d59-4a03-b54d-c37a8572ee88",
+          "name": "Cancel a task: terminates the current run's Temporal workflow (if any), emits `task.cancelled`, and sets status to `cancelled`.",
+          "request": {
+            "name": "Cancel a task: terminates the current run's Temporal workflow (if any), emits `task.cancelled`, and sets status to `cancelled`.",
+            "description": {
+              "content": "Cancel a task: terminates the current run's Temporal workflow (if any), emits `task.cancelled`, and sets status to `cancelled`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "tasks",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ccd1156-0b7c-4ec7-9cf5-0bb9691922ee",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://jgtRVGlyQroHBetS.affd0lfLAsody7A6DWeRFyeMjklztSa,F9vL5-tE+yUYu\"\n  },\n  \"data\": {\n    \"id\": \"4021bdbd-f7ca-cf4f-49ab-5f3a31c378a2\",\n    \"type\": \"task\",\n    \"attributes\": {\n      \"status\": \"running\",\n      \"definition\": {\n        \"skillRef\": \"string\",\n        \"repoUrl\": \"string\",\n        \"agent\": \"string\",\n        \"baseBranch\": \"string\",\n        \"model\": \"string\",\n        \"environmentId\": \"8ac5dc72-9644-675d-9ba5-b4f0f731c248\"\n      },\n      \"inputs\": {\n        \"key_0\": {}\n      },\n      \"currentRunId\": \"bcf3886d-e3ee-9802-fb4b-1b85ce80e36a\",\n      \"links\": [\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"ab1e862b-4ace-6682-b10c-4977cb9837b5\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"value\": \"string\",\n          \"eventId\": \"502eddf9-650a-6c87-90cc-beb759419df7\",\n          \"displayLabel\": \"string\",\n          \"displayTitle\": \"string\",\n          \"displayUrl\": \"string\"\n        }\n      ],\n      \"createdBy\": \"7b939778-573e-457b-6a16-f95c7cfbbd96\",\n      \"createdAt\": \"2011-07-12T06:56:00.993Z\",\n      \"updatedAt\": \"2012-12-05T08:32:14.635Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c6c0fd9-eb93-4323-a0d7-a23d34a081ee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d492e4e4-2f12-44ca-866c-9e0b19ff3249",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d8fe68e-3950-4eef-b6c5-ced433163e54",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26b3be52-6d49-4524-8775-73c8d4060659",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "tasks",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ae00965-085e-4209-b9a7-e1581a665419",
+          "name": "Workspace-wide task-event feed. Same item shape as `GET /tasks/{id}/events`. Filterable by event type(s), taskId, or a `since` timestamp.",
+          "request": {
+            "name": "Workspace-wide task-event feed. Same item shape as `GET /tasks/{id}/events`. Filterable by event type(s), taskId, or a `since` timestamp.",
+            "description": {
+              "content": "Workspace-wide task-event feed. Same item shape as `GET /tasks/{id}/events`. Filterable by event type(s), taskId, or a `since` timestamp.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "task-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "taskId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fe48808-b405-4a8b-886b-41c473828f72",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "task-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://VrcauZRq.gcOWrkq4PEegIsgA89\",\n    \"next\": \"https://fNmhrokkqLlRTSgz.jbvMK+ZTbcUZSE64K6DUMdnoDnqKijIHBAJs-LM6.JjQ6jeCVfmAO.i7f-Wgycu1EOq\",\n    \"prev\": \"http://oAqSZOAMd.qgtumNHQkGjCMa3ftxmZ,6Wxy3MOJh-47+AXQ1JH.7ilC.otO\"\n  },\n  \"meta\": {\n    \"count\": 5953.011126645049\n  },\n  \"data\": [\n    {\n      \"id\": \"76d88aa2-36c7-42a9-9d0d-23b89562afdb\",\n      \"type\": \"task-event\",\n      \"attributes\": {\n        \"taskId\": \"128eb5ed-64e8-8fa5-2932-5284d19defb4\",\n        \"runId\": \"953d0543-7b12-b72b-7219-afdda4c8ec6c\",\n        \"actor\": {\n          \"kind\": \"trigger\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        \"createdAt\": \"2021-06-07T15:20:26.271Z\",\n        \"type\": \"task.created\",\n        \"payload\": {\n          \"definition\": {\n            \"skillRef\": \"string\",\n            \"repoUrl\": \"string\",\n            \"agent\": \"stri\",\n            \"baseBranch\": \"string\",\n            \"model\": \"string\",\n            \"environmentId\": \"1ba96580-afcf-7ba2-b7ca-2e6480527dd1\"\n          },\n          \"inputs\": {\n            \"key_0\": {}\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"2221d9ea-00ab-aace-7211-97c213c7a04b\",\n      \"type\": \"task-event\",\n      \"attributes\": {\n        \"taskId\": \"445cf303-4243-b2ff-86a2-c44699100bc7\",\n        \"runId\": \"787f685f-1ae5-2522-4064-aa633ab619c2\",\n        \"actor\": {\n          \"kind\": \"trigger\",\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        \"createdAt\": \"1976-03-17T05:22:04.445Z\",\n        \"type\": \"task.created\",\n        \"payload\": {\n          \"definition\": {\n            \"skillRef\": \"string\",\n            \"repoUrl\": \"string\",\n            \"agent\": \"string\",\n            \"baseBranch\": \"string\",\n            \"model\": \"string\",\n            \"environmentId\": \"af87c0d3-e858-99f1-de63-1e8f89910fe9\"\n          },\n          \"inputs\": {\n            \"key_0\": {}\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd703d52-0f82-478f-a5c9-d75a803949d3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "task-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4db464d3-624a-4191-8725-af1aea4a0d1b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "task-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fc2087d-417a-4b94-adac-b2efaa332412",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "task-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d67c465-07b2-4ebc-ad42-57bc22873047",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "task-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "30d98c47-fd08-434f-a543-17d0c0e7db3b",
+    "name": "Tessl Admin Keys Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

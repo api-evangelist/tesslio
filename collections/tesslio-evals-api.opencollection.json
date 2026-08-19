@@ -1,0 +1,400 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Evals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Evals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/eval-suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/eval-suite",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the eval suite (scenarios + latest run status) for a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mineOnly",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tileNameFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contextType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "subjectType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "visibility",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists eval runs filtered by context-fixture type, status, visibility, and creator."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches an eval run by id, including scenarios, solutions, and progress."
+        },
+        {
+          "info": {
+            "name": "PATCH /experimental/eval-runs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/experimental/eval-runs/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an eval run's visibility (private, public_view, public_download)."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs/{id}/debug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs/:id/debug",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns Temporal workflow metadata and recipe-run metrics for an eval run. Tessl staff only."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs/{id}/solutions/{solutionId}/files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs/:id/solutions/:solutionId/files",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "solutionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Streams the tar.gz of an eval-run solution's files."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/eval-runs-v2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/eval-runs-v2",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an eval run."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/eval-runs-v2:check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/eval-runs-v2:check",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks an eval run up front: validates the agent/model selection, workspace access, and the modelSelection entitlement from the selection alone, with no fixture data."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs/agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs/agents",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Lists agents and models available for eval runs, with the default selection."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/eval-runs/repo-results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/eval-runs/repo-results",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Removed — always returns 410. Use GET /eval-runs/:id instead."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/eval-scenarios/generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/eval-scenarios/generate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts an LLM-driven eval scenario generation run for a repo commit or tile upload."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/eval-runs/{id}/retry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/eval-runs/:id/retry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retries a failed eval run by creating a new run with the same config."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills/{id}/request-evals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills/:id/request-evals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a skill-index eval workflow for a standalone skill."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:provider/:owner/:repo/:skillName/eval-suite",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "skillName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the eval suite (latest run + scenarios) for a skill identified by provider/owner/repo/name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

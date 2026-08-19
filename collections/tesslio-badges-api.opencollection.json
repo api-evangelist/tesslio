@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Badges API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Badges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/badges/{workspaceName}/{tileName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/badges/:workspaceName/:tileName",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns Shields.io-style JSON for a tile eval-score badge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

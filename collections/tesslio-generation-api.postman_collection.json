@@ -1,0 +1,2001 @@
+{
+  "item": [
+    {
+      "id": "79edd201-add4-43d2-812a-db946d4bab73",
+      "name": "Generation",
+      "description": {
+        "content": "Eval scenario generation runs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "deec7d0f-b25f-407e-8af2-445810472ab1",
+          "name": "Starts an LLM-driven eval scenario generation run for a repo commit or tile upload.",
+          "request": {
+            "name": "Starts an LLM-driven eval scenario generation run for a repo commit or tile upload.",
+            "description": {
+              "content": "Starts an LLM-driven eval scenario generation run for a repo commit or tile upload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "eval-scenarios",
+                "generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8c70c5b-0827-4c63-ae8d-e7d5738decd0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "eval-scenarios",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://LXzFmvgBvjFmlmCxNKypaDcQBhNcXX.dwkBRwA3W\"\n  },\n  \"meta\": {\n    \"generationId\": \"04bc336e-8ff5-8cc0-fd4d-2441b3c3eb6c\",\n    \"workflowId\": \"string\"\n  },\n  \"data\": {\n    \"id\": \"2e2e2e26-ef7a-91bc-f965-12c70a44dd58\",\n    \"type\": \"eval-generation\",\n    \"attributes\": {\n      \"workflowId\": \"string\",\n      \"source\": {\n        \"type\": \"commit\",\n        \"orgName\": \"string\",\n        \"repoName\": \"string\",\n        \"commit\": \"stringstring\",\n        \"pullRequestNumber\": 3024,\n        \"contextPatterns\": [\n          \"string\",\n          \"string\"\n        ],\n        \"repoArchiveUpload\": {\n          \"archiveUploadKey\": \"string\",\n          \"commitDetails\": \"string\",\n          \"repoCloneUrl\": \"string\",\n          \"defaultBranch\": \"string\",\n          \"parentCommitHash\": \"string\"\n        }\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"createdBy\": \"2a2888bd-5dbe-7a95-22aa-41bc6bbb7d69\",\n      \"createdAt\": \"1996-03-29T23:13:07.580Z\",\n      \"updatedAt\": \"2005-08-23T05:10:57.121Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19491230-4848-4fca-83d0-0c698d66d21e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "eval-scenarios",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c22f32d-9a6f-4abe-8029-42dc9d5775e2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "eval-scenarios",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea8416c9-cdb6-4f5c-a096-49e35df987f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "eval-scenarios",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0334ccc5-6d58-407d-a66d-8d59df02cbf6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "eval-scenarios",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"type\": \"<string>\",\n    \"orgName\": \"<string>\",\n    \"repoName\": \"<string>\",\n    \"commit\": \"<string>\",\n    \"pullRequestNumber\": \"<integer>\",\n    \"contextPatterns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"repoArchiveUpload\": {\n      \"archiveUploadKey\": \"<string>\",\n      \"commitDetails\": \"<string>\",\n      \"repoCloneUrl\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"parentCommitHash\": \"<string>\"\n    }\n  },\n  \"workspaceName\": \"<string>\",\n  \"workspaceId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f2f9eb3-3170-4fa8-abf8-148e17e0db00",
+          "name": "Lists eval scenario generation runs (v1) with mine-only/status filters.",
+          "request": {
+            "name": "Lists eval scenario generation runs (v1) with mine-only/status filters.",
+            "description": {
+              "content": "Lists eval scenario generation runs (v1) with mine-only/status filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "generation-runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mineOnly",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspaceNameFilter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de1b72ec-74ee-4212-bcf4-c7b50c215421",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mineOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "workspaceNameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://Fug.ozrmA774x4N0wqzH3x.PBMYq4PTlbFAkm94V-JgqiW2CutRAwuDNviG-ZwC\",\n    \"next\": \"https://WrYZRCZ.kgeRLfk2XLLIArgyeeIuuw+wQGJD-aPmMwFTgVRegER\",\n    \"prev\": \"https://EMiFXxFKSFXoWOUAGYDAa.pok-uek4UdWY6XgcC3gaP9MxHGkHBpET\"\n  },\n  \"meta\": {\n    \"count\": 2742.939094915651\n  },\n  \"data\": [\n    {\n      \"id\": \"871c7262-7e97-6081-571f-43f2de9cc38f\",\n      \"type\": \"generation-run\",\n      \"attributes\": {\n        \"status\": \"pending\",\n        \"source\": {\n          \"key_0\": {}\n        },\n        \"metadata\": {\n          \"key_0\": {}\n        },\n        \"data\": {\n          \"type\": \"eval-scenarios\"\n        },\n        \"createdBy\": {\n          \"id\": \"f8d52591-fe5a-82a7-9096-bc1f8a48407f\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"workspaceName\": \"string\",\n        \"createdAt\": \"1976-01-31T22:06:47.547Z\",\n        \"updatedAt\": \"2021-11-21T20:30:55.392Z\"\n      }\n    },\n    {\n      \"id\": \"9f68d82c-6f10-830a-0f5a-944f568f335a\",\n      \"type\": \"generation-run\",\n      \"attributes\": {\n        \"status\": \"pending\",\n        \"source\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"metadata\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"data\": {\n          \"type\": \"eval-scenarios\"\n        },\n        \"createdBy\": {\n          \"id\": \"7cdb0b94-23f1-b774-2b23-1027f14cd0b8\",\n          \"firstName\": \"string\",\n          \"lastName\": \"string\"\n        },\n        \"workspaceName\": \"string\",\n        \"createdAt\": \"2011-06-17T21:58:04.351Z\",\n        \"updatedAt\": \"1988-04-16T01:42:34.902Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5db9258b-1ccc-4e4c-94de-91fde1a7f164",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mineOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "workspaceNameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e303b7c-c6bd-4be5-9603-c0083fb42cc8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mineOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "workspaceNameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fa72e72-d658-455d-96da-e5c92024ffda",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mineOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "workspaceNameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6efbe443-e43c-42a8-8f7d-cacffd8b6246",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mineOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "workspaceNameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a3f3097-8144-4e0d-97bc-bc5f0cd90726",
+          "name": "Use `/experimental/generation-runs-v2/{id}` instead. The v2 endpoint returns a slim per-scenario index and is the path new clients should integrate against.",
+          "request": {
+            "name": "Use `/experimental/generation-runs-v2/{id}` instead. The v2 endpoint returns a slim per-scenario index and is the path new clients should integrate against.",
+            "description": {
+              "content": "Use `/experimental/generation-runs-v2/{id}` instead. The v2 endpoint returns a slim per-scenario index and is the path new clients should integrate against.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "generation-runs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d39bf190-077a-4994-a862-93190f5fb812",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://UPWpvWhrxgw.oxeTPc2VIq9p2XHhE11D54KZ8MzpWiq1H0Bz2Pz5m1sQHQzpFh6L1\"\n  },\n  \"data\": {\n    \"id\": \"281d7a48-591f-ca16-45a3-3d1e5a0dc7b7\",\n    \"type\": \"generation-run\",\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"source\": {\n        \"key_0\": {}\n      },\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"createdBy\": {\n        \"id\": \"cfbcc93b-e805-1aea-1ec0-11686652976c\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\"\n      },\n      \"workflowId\": \"string\",\n      \"data\": {\n        \"type\": \"eval-scenarios\",\n        \"scenarios\": [\n          {\n            \"id\": \"945a5065-2e39-23ac-d86f-b921673284f1\",\n            \"task\": \"string\",\n            \"shortDescription\": \"string\",\n            \"rubric\": {\n              \"context\": \"string\",\n              \"type\": \"weighted_checklist\",\n              \"checklist\": [\n                {\n                  \"name\": \"string\",\n                  \"description\": \"string\",\n                  \"max_score\": 6659.686798026872\n                }\n              ]\n            },\n            \"fixture\": {\n              \"key_0\": {},\n              \"key_1\": {}\n            },\n            \"fixtures\": {\n              \"key_0\": {}\n            },\n            \"createdAt\": \"1996-12-11T23:54:10.784Z\",\n            \"updatedAt\": \"1951-06-29T04:41:03.309Z\"\n          },\n          {\n            \"id\": \"3c40a32f-5394-5b6a-c1b1-d0285fd09cbb\",\n            \"task\": \"string\",\n            \"shortDescription\": \"string\",\n            \"rubric\": {\n              \"context\": \"str\",\n              \"type\": \"weighted_checklist\",\n              \"checklist\": [\n                {\n                  \"name\": \"string\",\n                  \"description\": \"string\",\n                  \"max_score\": 5132.444170671584\n                }\n              ]\n            },\n            \"fixture\": {\n              \"key_0\": {}\n            },\n            \"fixtures\": {\n              \"key_0\": {},\n              \"key_1\": {}\n            },\n            \"createdAt\": \"2013-10-16T00:06:57.753Z\",\n            \"updatedAt\": \"1998-11-08T14:42:42.095Z\"\n          }\n        ]\n      },\n      \"createdAt\": \"2025-09-24T05:09:54.008Z\",\n      \"updatedAt\": \"1954-03-10T10:13:59.147Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2883eeae-3415-40ba-82d1-c805e786f44f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49b94b54-d45f-435d-90de-f61d589d88a8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff956650-e8f6-4283-aaba-16b7a27902d3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b08c088-f511-4496-8789-6cdf0c4c00b8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4456f58d-9a96-4f5f-b6fa-26424ff884d9",
+          "name": "Use `/experimental/generation-runs-v2/{id}/download` instead. The v2 endpoint returns a presigned S3 URL pointing at the canonical `scenarios.tar.gz`; clients fetch and unpack it locally.",
+          "request": {
+            "name": "Use `/experimental/generation-runs-v2/{id}/download` instead. The v2 endpoint returns a presigned S3 URL pointing at the canonical `scenarios.tar.gz`; clients fetch and unpack it locally.",
+            "description": {
+              "content": "Use `/experimental/generation-runs-v2/{id}/download` instead. The v2 endpoint returns a presigned S3 URL pointing at the canonical `scenarios.tar.gz`; clients fetch and unpack it locally.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "generation-runs",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0b4b9dd-7873-4db7-9bc9-2e1b3141ef73",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://QBSgWZQVTzxkYUIz.bpxB7t\"\n  },\n  \"data\": [\n    {\n      \"id\": \"0d592be9-001a-e9d7-ea8b-cf2f73d59ebf\",\n      \"type\": \"eval-scenario\",\n      \"attributes\": {\n        \"shortDescription\": \"string\",\n        \"task\": \"string\",\n        \"rubric\": {\n          \"context\": \"string\",\n          \"type\": \"string\"\n        },\n        \"fixture\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"fixtures\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      }\n    },\n    {\n      \"id\": \"d8db9301-6b12-100e-b76b-a4fb649cb2f8\",\n      \"type\": \"eval-scenario\",\n      \"attributes\": {\n        \"shortDescription\": \"string\",\n        \"task\": \"string\",\n        \"rubric\": {\n          \"context\": \"string\",\n          \"type\": \"string\"\n        },\n        \"fixture\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        \"fixtures\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      }\n    }\n  ],\n  \"meta\": {\n    \"type\": \"eval-scenarios\",\n    \"count\": 491.0509071091862,\n    \"generationRunId\": \"d2e587dc-275b-052e-83fc-ed2f1072a899\",\n    \"status\": \"pending\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "641182f9-1027-41fe-ac3e-ca8ff360eee4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dd3fd09-48bc-4fd0-ab17-8fd21c434b45",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "579e47c6-3261-45e8-8eaf-db4979906dac",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b02a967-0f2f-4b1d-a5bd-8e9b7736daea",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "281882ae-c9a1-49d1-a752-0de744b8e71e",
+          "name": "Fetches a generation run by id. Returns the slim per-scenario index (`name`, `shortDescription`, `checklistSize`); fetch `/download` for the full content.",
+          "request": {
+            "name": "Fetches a generation run by id. Returns the slim per-scenario index (`name`, `shortDescription`, `checklistSize`); fetch `/download` for the full content.",
+            "description": {
+              "content": "Fetches a generation run by id. Returns the slim per-scenario index (`name`, `shortDescription`, `checklistSize`); fetch `/download` for the full content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "generation-runs-v2",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4efe7258-c8b7-4cd3-9b7f-4556c11f329a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://mzrqGSkzwGKkPirZPAHo.suidnshUSETOnJWebbFlNkIOSfPXIBmM+\"\n  },\n  \"data\": {\n    \"id\": \"8bc943eb-7eb7-4e02-3aa7-d487ce899e39\",\n    \"type\": \"generation-run\",\n    \"attributes\": {\n      \"status\": \"pending\",\n      \"source\": {\n        \"key_0\": {}\n      },\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"createdBy\": {\n        \"id\": \"8ed41fae-052a-4757-bd22-7a93764b7ff8\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\"\n      },\n      \"workflowId\": \"string\",\n      \"data\": {\n        \"type\": \"eval-scenarios\",\n        \"scenarios\": [\n          {\n            \"id\": \"030ec7d6-026d-0870-858e-bbf2f0016c53\",\n            \"name\": \"string\",\n            \"shortDescription\": \"string\",\n            \"checklistSize\": 8064,\n            \"createdAt\": \"1991-05-28T05:44:28.251Z\",\n            \"updatedAt\": \"2003-09-02T00:25:10.506Z\"\n          },\n          {\n            \"id\": \"96f5ad80-87c1-b53b-7a68-b648cd50325d\",\n            \"name\": \"string\",\n            \"shortDescription\": \"string\",\n            \"checklistSize\": 7549,\n            \"createdAt\": \"1947-07-27T13:43:44.779Z\",\n            \"updatedAt\": \"1973-04-30T16:30:09.580Z\"\n          }\n        ]\n      },\n      \"createdAt\": \"1999-01-14T11:46:57.376Z\",\n      \"updatedAt\": \"1979-05-25T07:12:09.134Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afcec36a-563d-49af-8dd3-c3c4efdb815d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cff110b-0296-4970-aa44-f86122d3ba05",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5374dbe4-ffb9-485f-98c0-c6e97c1627aa",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4db0fa90-0211-467b-9da6-b4baa50c0287",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26ee582b-7325-4ee8-ae97-90ca9dedb6fe",
+          "name": "Returns a presigned URL for downloading the materialized tarball produced by a v2 generation run.",
+          "request": {
+            "name": "Returns a presigned URL for downloading the materialized tarball produced by a v2 generation run.",
+            "description": {
+              "content": "Returns a presigned URL for downloading the materialized tarball produced by a v2 generation run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "generation-runs-v2",
+                ":id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fa846a3-b963-4339-98be-e3a0498e707e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://egLtZuokYhiVjJXDsHNFzWjZSBSQmvkC.apnhLUgDbuhTWv\"\n  },\n  \"data\": {\n    \"id\": \"67d13711-ac4e-4982-a07c-cdd234429d6d\",\n    \"type\": \"generation-run\",\n    \"attributes\": {\n      \"presignedUrl\": \"http://nQPLqsCBHREFtpHMKZvkOOLVViSLMS.dypuiU2molYQ5bLMvXK7MYlmbltnBc8E.Z73xN7MPVVLESYwszbkbYUhQMfJN1QyCvE-HNkuOIhlK\",\n      \"expiresAt\": \"1990-06-11T15:42:54.564Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d6d66e0-17f8-48e4-a42b-047508c6bf17",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f61866b3-9b12-4886-a92d-739973dbcaf0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0b124af-e7b4-4dcf-a225-453a5e9b3492",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af70dd3f-f04f-4f67-af60-f44b112522cf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "generation-runs-v2",
+                    ":id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dacd4e3f-f0b7-4a88-9a77-cdc9353c5516",
+    "name": "Tessl Admin Keys Generation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

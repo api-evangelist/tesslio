@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Billing API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start a Team upgrade checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/billing/checkout-sessions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Stripe Checkout session (subscription mode) for the Team plan. Returns the hosted checkout URL to redirect to. Stripe creates the customer and recurring subscription; the org is provisioned by the Stripe webhook once checkout completes."
+        },
+        {
+          "info": {
+            "name": "GET /v1/orgs/{orgId}/billing/subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/billing/subscription",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "The org's current plan and self-serve subscription status."
+        },
+        {
+          "info": {
+            "name": "Cancel a Team subscription at period end",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/billing/subscription",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules the org to revert to free at the end of the current billing period by setting cancel_at_period_end on its Stripe subscription. Team stays active until the period ends; the plan flips to free on the customer.subscription.deleted webhook."
+        },
+        {
+          "info": {
+            "name": "GET /v1/orgs/{orgId}/credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/credits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "The org's credit account: current-window usage against the advertised limit and the plan. Pass `?include=bundles` to also include the catalogue of purchasable top-up bundles in the response."
+        },
+        {
+          "info": {
+            "name": "Start a credit-bundle checkout (top up)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/credits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Stripe Checkout session (payment mode) to buy a one-off credit bundle. Returns the hosted checkout URL to redirect to; Stripe charges the card at checkout and the credits are granted by the Stripe webhook once payment completes. Requires the org to be on the Team plan."
+        },
+        {
+          "info": {
+            "name": "GET /v1/orgs/{orgId}/credits/usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/credits/usage",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[actionCode]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[timestamp][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[timestamp][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Paginated, filterable log of the org's billing_event usage rows (one row per idempotency key), with credit totals for the filtered range. Org-admin only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

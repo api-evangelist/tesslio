@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "5486880f-b431-457b-b02c-eac8e835ed6f",
+      "name": "Curated Lists",
+      "description": {
+        "content": "Curated tile lists and items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8e14eb49-e30b-4d55-81d4-9ef771695c3f",
+          "name": "/experimental/curated-lists/:slug",
+          "request": {
+            "name": "/experimental/curated-lists/:slug",
+            "description": {},
+            "url": {
+              "path": [
+                "experimental",
+                "curated-lists",
+                ":slug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0c8a09f-f6ab-4c8f-a2e8-a59bf66e4d53",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "curated-lists",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://gTUtWyjOcPsJIDcANBjMerpSYXrfAERmz.dqdRAvyLYvz3NNRsMs8P2G5zqQQ05TTd,0LvxV0r5Pe5irnvW5h6L.,IRWu.bY\"\n  },\n  \"meta\": {\n    \"count\": 4934.903314979781\n  },\n  \"data\": [\n    {\n      \"id\": \"a73a817d-b70f-61d3-6024-568794cfb0f1\",\n      \"type\": \"tile\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"fullName\": \"string\",\n        \"describes\": \"string\",\n        \"featured\": true,\n        \"isPrivate\": true,\n        \"createdAt\": \"1964-03-03T18:34:46.202Z\",\n        \"updatedAt\": \"1963-04-25T01:05:43.599Z\",\n        \"score\": 2810,\n        \"scores\": {\n          \"version\": \"string\",\n          \"aggregate\": 152.23852463377207,\n          \"quality\": 1669.7929733769722,\n          \"impact\": 6543.11456781812,\n          \"security\": \"LOW\",\n          \"evalAvg\": 5497.613941914859,\n          \"evalBaseline\": 2514.504355361705,\n          \"evalImprovement\": 3910.468429135613,\n          \"evalImprovementMultiplier\": 2162.216363211057,\n          \"evalCount\": 5970,\n          \"validationErrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"lastScoredAt\": \"1988-01-26T15:25:10.656Z\"\n        },\n        \"versions\": [\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 6763.951623122995,\n            \"minor\": 4539.5387021772285,\n            \"patch\": 1794.921933439485,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": true,\n            \"hasSteering\": false,\n            \"hasSkills\": true,\n            \"archived\": true,\n            \"createdAt\": \"2025-11-19T10:13:02.321Z\",\n            \"evalScore\": 4216,\n            \"evalBaselineScore\": 7911,\n            \"evalImprovement\": 7636,\n            \"evalImprovementMultiplier\": 139.1080951997048\n          },\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 160.59535277400005,\n            \"minor\": 2754.293915629904,\n            \"patch\": 964.936379455007,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": true,\n            \"hasSteering\": true,\n            \"hasSkills\": false,\n            \"archived\": true,\n            \"createdAt\": \"1994-11-05T00:32:19.082Z\",\n            \"evalScore\": 1766,\n            \"evalBaselineScore\": 639,\n            \"evalImprovement\": 1299,\n            \"evalImprovementMultiplier\": 2572.2340949680865\n          }\n        ]\n      },\n      \"relationships\": {\n        \"workspace\": {\n          \"data\": {\n            \"id\": \"476bb199-ef7f-f8de-2299-7eb9266fa5d5\",\n            \"type\": \"workspace\",\n            \"attributes\": {\n              \"name\": \"string\"\n            }\n          }\n        }\n      },\n      \"meta\": {\n        \"key_0\": 4219.006077638533\n      }\n    },\n    {\n      \"id\": \"3700a908-7abe-5949-9153-965b5ad69c7d\",\n      \"type\": \"tile\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"fullName\": \"string\",\n        \"describes\": \"string\",\n        \"featured\": true,\n        \"isPrivate\": false,\n        \"createdAt\": \"2004-11-26T13:41:11.343Z\",\n        \"updatedAt\": \"1994-06-07T06:10:30.365Z\",\n        \"score\": 9016,\n        \"scores\": {\n          \"version\": \"string\",\n          \"aggregate\": 1879.612286352793,\n          \"quality\": 4953.410461620066,\n          \"impact\": 8958.07041629489,\n          \"security\": \"LOW\",\n          \"evalAvg\": 2531.585675492923,\n          \"evalBaseline\": 2884.1984301588454,\n          \"evalImprovement\": 7995.117638755176,\n          \"evalImprovementMultiplier\": 1467.7358775721227,\n          \"evalCount\": 6053,\n          \"validationErrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"lastScoredAt\": \"2007-11-11T18:09:37.768Z\"\n        },\n        \"versions\": [\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 7136.581242564631,\n            \"minor\": 6632.8441523228585,\n            \"patch\": 6699.799695161362,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": true,\n            \"hasSteering\": false,\n            \"hasSkills\": false,\n            \"archived\": false,\n            \"createdAt\": \"2018-12-13T19:38:35.776Z\",\n            \"evalScore\": 826,\n            \"evalBaselineScore\": 9046,\n            \"evalImprovement\": 9110,\n            \"evalImprovementMultiplier\": 4578.219871572727\n          },\n          {\n            \"fingerprint\": \"string\",\n            \"version\": \"string\",\n            \"major\": 8739.320632638264,\n            \"minor\": 8664.00265928503,\n            \"patch\": 5196.413191178405,\n            \"prerelease\": \"string\",\n            \"summary\": \"string\",\n            \"describes\": \"string\",\n            \"docs\": \"string\",\n            \"hasDocs\": true,\n            \"hasSteering\": true,\n            \"hasSkills\": false,\n            \"archived\": true,\n            \"createdAt\": \"2008-12-01T15:10:41.114Z\",\n            \"evalScore\": 8187,\n            \"evalBaselineScore\": 9823,\n            \"evalImprovement\": 7239,\n            \"evalImprovementMultiplier\": 1059.0338481448734\n          }\n        ]\n      },\n      \"relationships\": {\n        \"workspace\": {\n          \"data\": {\n            \"id\": \"072d469c-ea92-1481-8e12-05575a505273\",\n            \"type\": \"workspace\",\n            \"attributes\": {\n              \"name\": \"string\"\n            }\n          }\n        }\n      },\n      \"meta\": {\n        \"key_0\": 1848.6898203128367,\n        \"key_1\": 2869.0176026269264,\n        \"key_2\": 7748.954136400998\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d237e4b8-4db7-4ec9-9bd7-7dbf0f061286",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "curated-lists",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "750cb253-5dbd-4df3-bf7a-45775d48fefc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "curated-lists",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5ec69fea-dac0-41be-b6a4-c762cb19382a",
+    "name": "Tessl Admin Keys Curated Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchMode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[type][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[includePrivate]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+              },
+              {
+                "name": "filter[includePrivate][eq]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+              },
+              {
+                "name": "filter[includePrivate][ne]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include private tiles/skills accessible to authenticated users. Defaults to true."
+              },
+              {
+                "name": "filter[includeInvalid]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][eq]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][ne]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Hybrid keyword + vector search across tiles and skills."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/search/github",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/search/github",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches GitHub for repositories matching a query string (cached, top 5). Deprecated alias of GET /experimental/search/repos?provider=github."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/search/repos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/search/repos",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches a provider (github, gitlab) for public repositories matching a query string (cached, top 5). Providers without public repo search (e.g. bitbucket) return supported=false."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

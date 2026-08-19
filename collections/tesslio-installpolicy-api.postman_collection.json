@@ -1,0 +1,1188 @@
+{
+  "item": [
+    {
+      "id": "b3241a7f-f02f-4ebc-b962-ee2b0bdb0c8a",
+      "name": "InstallPolicy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37d7a90e-309e-4a02-a02d-10a3aa1db890",
+          "name": "Evaluate an install policy decision for a batch of plugin sources",
+          "request": {
+            "name": "Evaluate an install policy decision for a batch of plugin sources",
+            "description": {
+              "content": "Returns a per-source allow/warn/block decision plus structured reasons. For users who belong to multiple orgs, the lowest-sorted org id wins and a warning is logged — set up an org-scoped API key to avoid the picker's arbitrary choice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "install",
+                "policy",
+                "evaluate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sources\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"tesslProjectId\": \"<string>\",\n      \"workspaceSlug\": \"<string>\",\n      \"manifestPath\": \"<string>\",\n      \"gitRemoteUrl\": \"<string>\",\n      \"gitCommitSha\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ef7f87a-3c9c-4929-9a8d-b58ca0fbc5ee",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "install",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sources\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"tesslProjectId\": \"<string>\",\n      \"workspaceSlug\": \"<string>\",\n      \"manifestPath\": \"<string>\",\n      \"gitRemoteUrl\": \"<string>\",\n      \"gitCommitSha\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"http://DGaFcUTzPwoYPKIsQRqBxMJcr.bagtGljfHE4Chkc+x5a\"\n  },\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"install-policy-evaluation\",\n    \"attributes\": {\n      \"policyVersion\": \"string\",\n      \"orgId\": \"string\",\n      \"decisions\": [\n        {\n          \"id\": \"string\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"requiresInteractiveConfirmation\": false,\n          \"resolvedSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"fallbackSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"minimumReleaseAgeDays\": 9810\n        },\n        {\n          \"id\": \"string\",\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"requiresInteractiveConfirmation\": true,\n          \"resolvedSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"fallbackSource\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"minimumReleaseAgeDays\": 3619\n        }\n      ],\n      \"additionalSources\": [\n        {\n          \"id\": \"string\",\n          \"source\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"source\": {\n            \"id\": \"string\",\n            \"source\": \"registry\",\n            \"tile\": {\n              \"workspaceName\": \"string\",\n              \"tileName\": \"string\",\n              \"version\": \"string\"\n            }\n          },\n          \"decision\": \"allow\",\n          \"reasons\": [\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"kind\": \"security-finding\",\n              \"ruleId\": \"string\",\n              \"severity\": \"info\",\n              \"code\": \"string\",\n              \"message\": \"string\",\n              \"details\": {\n                \"securityLevel\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"securityStatus\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"findings\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"registryUrl\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a2104c5-7c3f-4f13-a7cd-d89ab0e793be",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "install",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sources\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"tesslProjectId\": \"<string>\",\n      \"workspaceSlug\": \"<string>\",\n      \"manifestPath\": \"<string>\",\n      \"gitRemoteUrl\": \"<string>\",\n      \"gitCommitSha\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1175e894-4700-4af4-a9ff-3cab9aced031",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "install",
+                    "policy",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sources\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tile\": {\n        \"workspaceName\": \"<string>\",\n        \"tileName\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    }\n  ],\n  \"clientVersion\": \"<string>\",\n  \"context\": {\n    \"isCi\": \"<boolean>\",\n    \"runId\": \"<string>\",\n    \"project\": {\n      \"tesslProjectId\": \"<string>\",\n      \"workspaceSlug\": \"<string>\",\n      \"manifestPath\": \"<string>\",\n      \"gitRemoteUrl\": \"<string>\",\n      \"gitCommitSha\": \"<string>\"\n    }\n  },\n  \"acceptedWarnings\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4746ca6-bb72-4902-88ff-86cc3a087eea",
+          "name": "Returns the install policy for the organization, falling back to the default policy when no row exists.",
+          "request": {
+            "name": "Returns the install policy for the organization, falling back to the default policy when no row exists.",
+            "description": {
+              "content": "Returns the install policy for the organization, falling back to the default policy when no row exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orgs",
+                ":orgId",
+                "install-policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "orgId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54ff81f9-7d66-42f9-8022-bc83fb27952a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://CzPdMhrrDbafBHjhk.igzmLc-eOW-8lsHx\"\n  },\n  \"data\": {\n    \"id\": \"863a7230-88b8-587f-289c-2f48580c4c42\",\n    \"type\": \"install-policy\",\n    \"attributes\": {\n      \"policyDoc\": {\n        \"version\": 1,\n        \"rules\": {\n          \"securityThreshold\": {\n            \"minSeverityToWarn\": \"LOW\",\n            \"minSeverityToBlock\": \"LOW\"\n          },\n          \"sourceRestriction\": {\n            \"registryScope\": \"all\",\n            \"allowGitSources\": true,\n            \"gitSourceAllowlist\": [\n              {\n                \"host\": \"string\",\n                \"path\": [\n                  \"string\"\n                ]\n              },\n              {\n                \"host\": \"string\",\n                \"path\": [\n                  \"string\"\n                ]\n              }\n            ]\n          },\n          \"minimumReleaseAge\": {\n            \"days\": 4600\n          }\n        }\n      },\n      \"isDefault\": true,\n      \"updatedAt\": \"1961-02-21T03:30:03.510Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe18505a-0591-4c14-bd8e-7bb5490f8b69",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b0ea6be-6020-44a8-ad0a-5d122827e468",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f02e4f0-cab9-4551-8fa4-0cc601221a25",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4bef957-1641-40fe-a620-416c479587c0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3335cc5-7f6b-4d3b-bb84-a519be38fbfb",
+          "name": "Upserts the install policy for the organization.",
+          "request": {
+            "name": "Upserts the install policy for the organization.",
+            "description": {
+              "content": "Upserts the install policy for the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orgs",
+                ":orgId",
+                "install-policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "orgId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5fdd94f3-1e34-487d-a398-bbd341124f1d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://CzPdMhrrDbafBHjhk.igzmLc-eOW-8lsHx\"\n  },\n  \"data\": {\n    \"id\": \"863a7230-88b8-587f-289c-2f48580c4c42\",\n    \"type\": \"install-policy\",\n    \"attributes\": {\n      \"policyDoc\": {\n        \"version\": 1,\n        \"rules\": {\n          \"securityThreshold\": {\n            \"minSeverityToWarn\": \"LOW\",\n            \"minSeverityToBlock\": \"LOW\"\n          },\n          \"sourceRestriction\": {\n            \"registryScope\": \"all\",\n            \"allowGitSources\": true,\n            \"gitSourceAllowlist\": [\n              {\n                \"host\": \"string\",\n                \"path\": [\n                  \"string\"\n                ]\n              },\n              {\n                \"host\": \"string\",\n                \"path\": [\n                  \"string\"\n                ]\n              }\n            ]\n          },\n          \"minimumReleaseAge\": {\n            \"days\": 4600\n          }\n        }\n      },\n      \"isDefault\": true,\n      \"updatedAt\": \"1961-02-21T03:30:03.510Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfd15644-670e-41a8-9e81-b489754f8d31",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "693a6af5-c4f8-46fb-96a5-aa86d7c43bfc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "905abf32-6aff-44e3-95cc-51072cfe1e4e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0eebb01-5bf8-409f-882e-585ad81b00c5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyDoc\": {\n    \"version\": \"<number>\",\n    \"rules\": {\n      \"securityThreshold\": {\n        \"minSeverityToWarn\": \"<string>\",\n        \"minSeverityToBlock\": \"<string>\"\n      },\n      \"sourceRestriction\": {\n        \"registryScope\": \"<string>\",\n        \"allowGitSources\": \"<boolean>\",\n        \"gitSourceAllowlist\": [\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          },\n          {\n            \"host\": \"<string>\",\n            \"path\": [\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"minimumReleaseAge\": {\n        \"days\": \"<integer>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "728f5e6e-f2f0-464b-a322-8514a56bdad5",
+          "name": "Deletes the install policy for the organization, reverting to the default policy. Idempotent.",
+          "request": {
+            "name": "Deletes the install policy for the organization, reverting to the default policy. Idempotent.",
+            "description": {
+              "content": "Deletes the install policy for the organization, reverting to the default policy. Idempotent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orgs",
+                ":orgId",
+                "install-policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "orgId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c38cd61-9022-404b-b24b-c542f18bbe48",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "73bebfae-6b11-441e-b559-636356754f67",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Unauthorized\",\n    \"status\": 401,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b33136e4-7e30-4100-83c3-11fb4ed2980b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Forbidden\",\n    \"status\": 403,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9fb16e7-8432-4285-94c7-dd0d110f0a93",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c65bc4d-861e-44ca-af96-bed437e90b67",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orgs",
+                    ":orgId",
+                    "install-policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "orgId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Authorization",
+                    "value": "Bearer <token>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8c267f37-6c51-41c3-b40d-475a94a83cc6",
+    "name": "Tessl Admin Keys InstallPolicy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

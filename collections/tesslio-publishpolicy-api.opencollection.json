@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys PublishPolicy API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PublishPolicy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/orgs/{orgId}/publish-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/orgs/:orgId/publish-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the publish policy for the organization, falling back to the default policy when no row exists. A persisted policy that no longer matches the current schema surfaces as a 500 rather than silently downgrading to the default."
+        },
+        {
+          "info": {
+            "name": "PUT /experimental/orgs/{orgId}/publish-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/experimental/orgs/:orgId/publish-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts the publish policy for the organization."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/orgs/{orgId}/publish-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/orgs/:orgId/publish-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the publish policy for the organization, reverting to the default policy. Idempotent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

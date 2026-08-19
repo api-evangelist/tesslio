@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys MCP API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MCP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/mcp-servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists MCP servers configured for a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers or updates a workspace MCP server and returns an OAuth authorization URL."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace MCP server. The endpoint is idempotent."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/reauth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName/reauth",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a fresh OAuth authorization flow for an existing workspace MCP server."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName/callback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes an MCP OAuth callback by exchanging the authorization code for tokens."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

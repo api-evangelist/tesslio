@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Fix Runs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fix Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /experimental/fix-runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/fix-runs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new fix run and starts the iterative improve→review workflow."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/fix-runs/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/fix-runs/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a fix run by ID, including baseline and final scores, the applied summary of changes, and progress while pending."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/fix-runs/{id}/cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/fix-runs/:id/cancel",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Requests cancellation of a fix run: cancels its Temporal workflow so in-flight sandbox work stops. Idempotent – a no-op for a run that has already finished."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/fix-runs/{id}/bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/fix-runs/:id/bundle",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a presigned URL for downloading the applied fix bundle produced by a fix run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

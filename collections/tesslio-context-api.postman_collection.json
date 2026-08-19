@@ -1,0 +1,781 @@
+{
+  "item": [
+    {
+      "id": "f6075c62-9e09-48df-893f-312fe9d756e1",
+      "name": "Context",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df651c47-d9a0-4ac4-bfb9-4a533c0b0e66",
+          "name": "Resolves a context lineage by coordinates: a source (provider + owner/repo for SCM, or tessl-registry without owner/repo) plus exactly one of slug or occurrence path. `kind` applies only to slug resolution (slug is unique per source and kind); it is ignored for path resolution, since an occurrence path already identifies exactly one lineage regardless of kind. Invalid combinations are rejected with 400.",
+          "request": {
+            "name": "Resolves a context lineage by coordinates: a source (provider + owner/repo for SCM, or tessl-registry without owner/repo) plus exactly one of slug or occurrence path. `kind` applies only to slug resolution (slug is unique per source and kind); it is ignored for path resolution, since an occurrence path already identifies exactly one lineage regardless of kind. Invalid combinations are rejected with 400.",
+            "description": {
+              "content": "Resolves a context lineage by coordinates: a source (provider + owner/repo for SCM, or tessl-registry without owner/repo) plus exactly one of slug or occurrence path. `kind` applies only to slug resolution (slug is unique per source and kind); it is ignored for path resolution, since an occurrence path already identifies exactly one lineage regardless of kind. Invalid combinations are rejected with 400.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "context",
+                "lineages",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "repo",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a24d329d-5401-4170-bd2c-c8de7a17d541",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://Bt.fghMgkfqPFS9MomqoCPZb9\"\n  },\n  \"data\": {\n    \"id\": \"be11cdac-0116-356e-d889-117b8903d728\",\n    \"type\": \"context-lineage\",\n    \"attributes\": {\n      \"kind\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"visibility\": \"public\",\n      \"coordinates\": {\n        \"provider\": \"string\",\n        \"sourceUrl\": \"http://NutZ.daulNAB7rkyqpt7EFGIIazCK\",\n        \"owner\": \"string\",\n        \"repo\": \"string\",\n        \"registry\": {\n          \"workspaceName\": \"string\",\n          \"tileName\": \"string\"\n        },\n        \"path\": \"string\",\n        \"ref\": \"string\",\n        \"occurrenceType\": \"string\"\n      },\n      \"head\": {\n        \"versionId\": \"3ea0e3bf-fbd0-bbaf-fd43-f54307040a11\",\n        \"fingerprintAlgo\": \"string\",\n        \"fingerprint\": \"string\",\n        \"bodyFingerprint\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      \"canonical\": {\n        \"lineageId\": \"31c52de2-e4f0-d839-b0f2-38a5f044c77d\",\n        \"electedAt\": \"1997-12-08T11:41:16.175Z\",\n        \"electionReason\": \"string\"\n      },\n      \"liveness\": {\n        \"liveOccurrenceCount\": 8012,\n        \"firstSeenAt\": \"2017-10-19T13:19:25.744Z\",\n        \"lastSeenAt\": \"1951-08-11T19:14:10.768Z\",\n        \"gone\": false\n      },\n      \"createdAt\": \"1949-02-11T01:31:18.389Z\",\n      \"updatedAt\": \"1978-10-20T16:41:44.496Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f121820-1336-4d05-a296-6711f0b9ccc7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bad05fa-f715-4d7f-a877-c44c23adfd62",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e12642-5eef-4baa-893e-5f0feca2359c",
+          "name": "Lists a source's live, visible context lineages of a kind, one row per lineage.",
+          "request": {
+            "name": "Lists a source's live, visible context lineages of a kind, one row per lineage.",
+            "description": {
+              "content": "Lists a source's live, visible context lineages of a kind, one row per lineage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "context",
+                "lineages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[provider]",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[owner]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[repo]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[kind]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51ec6e17-05d7-4c5b-a0ba-b8cdaa3f22f4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[provider]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[owner]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[repo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[kind]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://QoEinwpeBt.kbgJHWOeBSOvD+YlhZ4cGseXjP\",\n    \"next\": \"https://lmIRhdsUB.mnslLIYuZbWrxbtJw\",\n    \"prev\": \"http://NJF.panKrZJO2WjCAvzyo8V.yRilbxWHHu8NEY9H4z\"\n  },\n  \"meta\": {\n    \"count\": 7025.5949900477\n  },\n  \"data\": [\n    {\n      \"id\": \"de38ec76-025c-5a69-3149-d9bbd341b42d\",\n      \"type\": \"context-lineage\",\n      \"attributes\": {\n        \"kind\": \"string\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"visibility\": \"public\",\n        \"coordinates\": {\n          \"provider\": \"string\",\n          \"sourceUrl\": \"http://ccvlIxohntQpFyokiIA.snP7kKJHhCOIwrM2D2XxtPAy,J66zrNLypKjCSZiR-TYBHtLiwLGkcnlo\",\n          \"owner\": \"string\",\n          \"repo\": \"string\",\n          \"registry\": {\n            \"workspaceName\": \"string\",\n            \"tileName\": \"string\"\n          },\n          \"path\": \"string\",\n          \"ref\": \"string\",\n          \"occurrenceType\": \"string\"\n        },\n        \"head\": {\n          \"versionId\": \"2d1bd671-13c4-f5c2-3e2b-221f9e23e298\",\n          \"fingerprintAlgo\": \"string\",\n          \"fingerprint\": \"string\",\n          \"bodyFingerprint\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"canonical\": {\n          \"lineageId\": \"7fa915d0-1647-c070-61fa-cacb46b9dcd7\",\n          \"electedAt\": \"1993-10-26T02:35:18.160Z\",\n          \"electionReason\": \"string\"\n        },\n        \"liveness\": {\n          \"liveOccurrenceCount\": 9198,\n          \"firstSeenAt\": \"1985-08-24T15:12:57.143Z\",\n          \"lastSeenAt\": \"1990-01-28T23:50:41.813Z\",\n          \"gone\": false\n        },\n        \"createdAt\": \"2023-02-12T15:44:04.460Z\",\n        \"updatedAt\": \"1949-07-31T07:04:15.005Z\"\n      }\n    },\n    {\n      \"id\": \"eccdd6d2-75bc-8473-c489-378eb0c8e74a\",\n      \"type\": \"context-lineage\",\n      \"attributes\": {\n        \"kind\": \"string\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"visibility\": \"public\",\n        \"coordinates\": {\n          \"provider\": \"string\",\n          \"sourceUrl\": \"http://jDNPzcWMEykXpXtJf.eepwMCBgFSmMDEMugMvKh0HA.KrEvxc\",\n          \"owner\": \"string\",\n          \"repo\": \"string\",\n          \"registry\": {\n            \"workspaceName\": \"string\",\n            \"tileName\": \"string\"\n          },\n          \"path\": \"string\",\n          \"ref\": \"string\",\n          \"occurrenceType\": \"string\"\n        },\n        \"head\": {\n          \"versionId\": \"4ca4645c-0b7b-0838-ef8d-e8421acf6096\",\n          \"fingerprintAlgo\": \"string\",\n          \"fingerprint\": \"string\",\n          \"bodyFingerprint\": \"string\",\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"canonical\": {\n          \"lineageId\": \"9eea30e2-4dc4-4b01-8dd3-fb3975913ed2\",\n          \"electedAt\": \"2018-02-18T13:11:21.203Z\",\n          \"electionReason\": \"string\"\n        },\n        \"liveness\": {\n          \"liveOccurrenceCount\": 4706,\n          \"firstSeenAt\": \"1987-07-04T04:21:24.867Z\",\n          \"lastSeenAt\": \"1948-01-29T21:34:03.976Z\",\n          \"gone\": false\n        },\n        \"createdAt\": \"1962-11-09T07:59:46.825Z\",\n        \"updatedAt\": \"1995-03-26T14:47:19.624Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dafa1f6a-70d1-4e8d-a08d-0e61c3c19242",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[provider]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[owner]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[repo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[kind]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4510bd24-2bc7-445f-8172-5764bed70b93",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[provider]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[owner]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[repo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[kind]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "505083a7-f58c-4421-bb82-51bce4af41fd",
+          "name": "Fetches a context lineage by id.",
+          "request": {
+            "name": "Fetches a context lineage by id.",
+            "description": {
+              "content": "Fetches a context lineage by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "experimental",
+                "context",
+                "lineages",
+                ":lineageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lineageId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccb763ce-092c-4c6d-bdea-700cce92107f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    ":lineageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"self\": \"https://Bt.fghMgkfqPFS9MomqoCPZb9\"\n  },\n  \"data\": {\n    \"id\": \"be11cdac-0116-356e-d889-117b8903d728\",\n    \"type\": \"context-lineage\",\n    \"attributes\": {\n      \"kind\": \"string\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"visibility\": \"public\",\n      \"coordinates\": {\n        \"provider\": \"string\",\n        \"sourceUrl\": \"http://NutZ.daulNAB7rkyqpt7EFGIIazCK\",\n        \"owner\": \"string\",\n        \"repo\": \"string\",\n        \"registry\": {\n          \"workspaceName\": \"string\",\n          \"tileName\": \"string\"\n        },\n        \"path\": \"string\",\n        \"ref\": \"string\",\n        \"occurrenceType\": \"string\"\n      },\n      \"head\": {\n        \"versionId\": \"3ea0e3bf-fbd0-bbaf-fd43-f54307040a11\",\n        \"fingerprintAlgo\": \"string\",\n        \"fingerprint\": \"string\",\n        \"bodyFingerprint\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      \"canonical\": {\n        \"lineageId\": \"31c52de2-e4f0-d839-b0f2-38a5f044c77d\",\n        \"electedAt\": \"1997-12-08T11:41:16.175Z\",\n        \"electionReason\": \"string\"\n      },\n      \"liveness\": {\n        \"liveOccurrenceCount\": 8012,\n        \"firstSeenAt\": \"2017-10-19T13:19:25.744Z\",\n        \"lastSeenAt\": \"1951-08-11T19:14:10.768Z\",\n        \"gone\": false\n      },\n      \"createdAt\": \"1949-02-11T01:31:18.389Z\",\n      \"updatedAt\": \"1978-10-20T16:41:44.496Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3eb19d8-16ac-4cbe-b293-a6e1b17320f4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    ":lineageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96b8cdc7-b142-4220-8077-358f01b4642a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "experimental",
+                    "context",
+                    "lineages",
+                    ":lineageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tessl.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1bb1a68b-6ae5-455e-a255-18b030ee9e6a",
+    "name": "Tessl Admin Keys Context API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Admin-scoped API keys for support tooling.",
+      "type": "text/plain"
+    }
+  }
+}

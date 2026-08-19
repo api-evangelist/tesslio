@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys InstallPolicy API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InstallPolicy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Evaluate an install policy decision for a batch of plugin sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/install/policy/evaluate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a per-source allow/warn/block decision plus structured reasons. For users who belong to multiple orgs, the lowest-sorted org id wins and a warning is logged — set up an org-scoped API key to avoid the picker's arbitrary choice."
+        },
+        {
+          "info": {
+            "name": "GET /v1/orgs/{orgId}/install-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/install-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the install policy for the organization, falling back to the default policy when no row exists."
+        },
+        {
+          "info": {
+            "name": "PUT /v1/orgs/{orgId}/install-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/install-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts the install policy for the organization."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/orgs/{orgId}/install-policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/orgs/:orgId/install-policy",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the install policy for the organization, reverting to the default policy. Idempotent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

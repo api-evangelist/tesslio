@@ -1,0 +1,548 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Skills API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Skills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/skill-reviews",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the LLM skill reviews (per skill) for a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-security-reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/skill-security-reviews",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Snyk security reviews (per skill) for a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/implement-ticket-schema/schema.json",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/implement-ticket-schema/schema.json"
+          },
+          "docs": "Returns the JSON Schema for the implement-ticket skill input payload. Public and unauthenticated."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/skills/workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/skills/workspace",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Indexes one or more SKILL.md files from a GitHub repository using the workspace GitHub App installation. Supports public and private repositories."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills/analyse",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills/analyse",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Scans a public repository (GitHub, GitLab, or Bitbucket) at a given branch for SKILL.md files and returns a summary."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceUrl][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[includeInvalid]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][eq]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][ne]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              }
+            ]
+          },
+          "docs": "Lists standalone skills with search and source-URL filters."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Indexes a standalone skill from a public source URL (GitHub, GitLab, or Bitbucket) and triggers review + security workflows."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a standalone skill by id, including the SKILL.md body."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills/{id}/request-evals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills/:id/request-evals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a skill-index eval workflow for a standalone skill."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{provider}/{owner}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:provider/:owner",
+            "params": [
+              {
+                "name": "filter[includeInvalid]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][eq]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][ne]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists repositories owned by an SCM owner that contain indexed skills."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{provider}/{owner}/{repo}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:provider/:owner/:repo",
+            "params": [
+              {
+                "name": "filter[includeInvalid]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][eq]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "filter[includeInvalid][ne]",
+                "value": "",
+                "type": "query",
+                "description": "When true, include skills that failed validation. Defaults to false."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists indexed skills in a specific repository."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{provider}/{owner}/{repo}/{skillName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:provider/:owner/:repo/:skillName",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "skillName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a skill by provider/owner/repo/name, including reviews and security findings."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/:provider/:owner/:repo/:skillName/eval-suite",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "skillName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the eval suite (latest run + scenarios) for a skill identified by provider/owner/repo/name."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills/improve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills/improve",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Iteratively improves a SKILL.md via LLM passes guided by the review pipeline; returns the diff and revised content."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skills/review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skills/review",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the LLM skill-review pipeline against a SKILL.md content string and returns scored validation results."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/tile-skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/tile-skills",
+            "params": [
+              {
+                "name": "sourceUrl",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists tile-skills (skills shipped inside a tile version) sourced from a given repository URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

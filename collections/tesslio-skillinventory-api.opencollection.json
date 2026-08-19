@@ -1,0 +1,1210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys SkillInventory API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SkillInventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists skill inventories claimed by the workspace, ordered by scan recency."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates (or returns) the workspace's skill inventory for a connected SCM provider, deriving the org-equivalent from the workspace's integration. This is the backend-driven bootstrap for the read-only scan model: after connecting a provider, create the inventory here, opt it into private indexing, then start a scan. Returns 422 (scm_not_connected) when the workspace has no integration for the requested provider. `created` is false when the inventory already existed."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the authenticated header row for a workspace-scoped skill inventory."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace-scoped skill inventory. Requires the `manage_integrations` permission (workspace manager or owner). The delete is a soft delete: the inventory and all its scans become inaccessible, but the org can be re-scanned later. Idempotent — deleting an already-deleted or unknown inventory returns 404."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/github-app-status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/github-app-status",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reports whether the workspace's GitHub App installation is present, healthy, and covers the repos of the inventory's org. Preflight check for the private-indexing opt-in."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/import-status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/import-status",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Live import progress for a skill inventory’s most recent scan. Reports the current `phase` (`scanning` → `analysing` → `complete`, or `failed`) plus `reposScanned` climbing toward `reposTotal` and the running `skillsFound`. Before the scan has created its row the endpoint reports a zeroed `scanning` state."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/source-preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/source-preview",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Provider-agnostic, workspace-level preview of a connected SCM source, before any skill inventory exists. Given a `provider` (github, gitlab, or bitbucket), returns whether that provider is connected for the workspace, the connected account/org/group/workspace, and how many repositories the connection can currently see. `repositorySelection` is GitHub-only and is null for other providers."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/source-repos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/source-repos",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists repositories the workspace’s connected SCM source can see, for the create-flow repo picker. Given a `provider` (github, gitlab, bitbucket, or the dev-only mockhub) and an optional `q`, runs a provider-side name search when `q` is present (so a huge org need not be enumerated to find a repo) or lists the first page of the account otherwise, returning the bare repo `name` (the scan filter key), the `owner/repo` `fullName`, and whether the repo is archived. Results are capped; `hasMore` signa"
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/scans",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all Scans for a workspace-scoped skill inventory, newest first."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans/{scanIndex}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/scans/:scanIndex",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scanIndex",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns diff summary + Findings added/resolved for one Scan of a workspace-scoped skill inventory."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans/{scanIndex}/indexing-results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/scans/:scanIndex/indexing-results",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scanIndex",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the per-skill first-party indexing results recorded for one Scan of a workspace-scoped skill inventory: each source SKILL.md that was processed during private indexing, with its repo/path, the outcome (indexed/skipped/failed), the reason when it wasn't indexed, and when it was indexed. Newest first."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/catalog",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[sourceType][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[agent][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[inTestFixtures]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[inTestFixtures][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[inTestFixtures][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Catalog lens — paginated list of current LogicalSkills for a workspace-scoped skill inventory."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/by-repo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/by-repo",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "By-repo lens — paginated current InventoryRepos with nested LogicalSkill summaries."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/by-skill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/by-skill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "security",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "By-skill lens — paginated version-blind GlobalSkillId groups with their SkillInstances and the manifests that reference them."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/committers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/committers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Full committer roster for the inventory — every username touching a current SkillInstance, with skill / repo / finding counts."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/findings",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "archetype",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skill",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "repoFullName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists Findings for an inventory across every archetype. Default status=active limits to Findings whose last_seen_scan_id matches the inventory’s latest scan."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/automatic-scanning/opt-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/automatic-scanning/opt-in",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "One-time opt-in to automatic scanning for a skill inventory. Once opted in, the inventory is covered by the daily scheduled re-scan sweep. This is independent of the private-indexing opt-in: a swept scan only indexes the inventory's skills when it has also opted into private indexing. Returns 409 (already_opted_in) when the inventory has already opted in."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/opt-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/opt-in",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "One-time opt-in to private skill indexing for a skill inventory. Guarded by the inventory's SCM connection readiness check. Returns 422 when the connection is not ready — the error message is the machine-readable, provider-namespaced reason (e.g. github_app_not_installed, github_app_account_mismatch, github_app_unhealthy for GitHub; bitbucket_not_connected, bitbucket_reconnect_required, bitbucket_workspace_mismatch for Bitbucket; gitlab_not_connected, gitlab_scope_mismatch for GitLab) — and 409 "
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/reindex",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/reindex",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Re-triggers private skill indexing for the latest scan of a workspace-scoped skill inventory. Only valid once the inventory has opted in to private indexing (409 not_opted_in otherwise) and when a scan exists to index (409 no_scan_to_reindex otherwise). The trigger is idempotent per scan: if a run for the latest scan is already in flight it returns status 'already_running' rather than starting a second one."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/unapproved-skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/unapproved-skills",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Paginated list of the inventory's pending first-party logical skills still awaiting an approval decision, scoped to the latest scan. Each row carries the skill's name, description and footprint (repo/instance counts). Sortable by canonical name or repo."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/approve-skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/approve-skills",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves a selection of the inventory's pending first-party logical skills, assigning each to a target workspace, and triggers private indexing of the latest scan so the newly approved skills are indexed. Each item's target workspace must be one the actor may assign skills to (edit permission) and must belong to the same org as the inventory owner; a 404 is returned for one that is not editable and a 400 (workspace_cross_org) for one in another org. Duplicate logicalSkillId entries are rejected "
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/preferences",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads the inventory's indexing preferences: whether newly discovered first-party skills are auto-approved, and the default workspace they are assigned to when they are."
+        },
+        {
+          "info": {
+            "name": "PUT /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/private-indexing/preferences",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the inventory's indexing preferences. Only the supplied fields are written, so `autoApproveNewSkills` and `defaultTargetWorkspaceId` can be changed independently. Setting a non-null `defaultTargetWorkspaceId` requires edit permission on that workspace (404 otherwise) — newly auto-approved skills are assigned into it."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/ignored-repos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/ignored-repos",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the list of ignored repos for a skill inventory."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/ignored-repos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/ignored-repos",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ignores repos from a skill inventory, deleting their scanned data."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/ignored-repos",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/ignored-repos",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Un-ignores repos from a skill inventory."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/rescan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/:id/rescan",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts an on-demand re-scan of a skill inventory (the \"scan now\" action). Requires publisher rights on the workspace and that the inventory has opted into automatic scanning. Returns 409 (not_opted_in) when the inventory has not opted in, and 409 (indexing_in_flight, analysis_in_flight, or rescan_in_flight) when a scan or index is already running for the inventory — the operation is idempotent, so a duplicate trigger never stacks a second scan. The route only starts the workflow; the scan, persi"
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceNameOrID}/skill-inventories/import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceNameOrID/skill-inventories/import",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceNameOrID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provider-agnostic web-onboarding import: creates (or resolves) the workspace's skill inventory for the given SCM provider — deriving the org-equivalent from the connected integration — and kicks its first scan. Supports GitHub, GitLab, Bitbucket, and the dev-only MockHub; the scan itself is already provider-aware via the inventory's stored provider. Returns 400 when the workspace has no connected integration for the provider, 409 when a scan or analysis is already in flight, 503 when the workflo"
+        },
+        {
+          "info": {
+            "name": "POST /experimental/skill-inventories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/skill-inventories",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload of a skill inventory scan from the CLI."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Policy API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Evaluate generic policy action decisions for a batch of requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/policy/evaluate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns generic policy decisions and follow-up requests for registered policy actions."
+        },
+        {
+          "info": {
+            "name": "GET /v1/policies/{targetType}/{targetId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/policies/:targetType/:targetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the raw policy doc stored for a specific target. All section×target combinations are accepted; sections that do not apply to a given target are stored but have no effect at evaluation time."
+        },
+        {
+          "info": {
+            "name": "PUT /v1/policies/{targetType}/{targetId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/v1/policies/:targetType/:targetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Writes the sections present in the request body to the target, merging with any existing sections not mentioned. Callers only need to include the sections they intend to set — omitted sections are preserved unchanged. To clear a section, delete the row and re-create it without that section. All section×target combinations are accepted on the backend; sections that are irrelevant to a given target are stored but have no effect at evaluation time. Requires org-level edit permission on the owning o"
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/policies/{targetType}/{targetId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/policies/:targetType/:targetId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the policy row for a specific target. Requires org-level edit permission on the owning org regardless of target type."
+        },
+        {
+          "info": {
+            "name": "GET /v1/policies/{targetType}/{targetId}/effective",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/policies/:targetType/:targetId/effective",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "provenance",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the effective policy for a target by merging the full hierarchy (org → workspace → managed_project) with strictest-wins semantics. Each field reflects the strictest value set at any level; absent fields at all levels are absent in the result. Pass `?provenance=true` to also receive `policySource`: per-field arrays of the levels that set each value, ordered strictest-first."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

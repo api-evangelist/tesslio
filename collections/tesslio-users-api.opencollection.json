@@ -1,0 +1,307 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/users",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[username][like]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists users with username filter and sorting."
+        },
+        {
+          "info": {
+            "name": "POST /v1/users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/users"
+          },
+          "docs": "Creates the authenticated user record from their auth-provider claims."
+        },
+        {
+          "info": {
+            "name": "GET /v1/users/me",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/users/me",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Returns the authenticated user's profile and feature flags."
+        },
+        {
+          "info": {
+            "name": "GET /v1/users/me/invitations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/users/me/invitations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Lists invitations the authenticated user should consider during signup: valid pending invitations and recently revoked recoverable invitations discovered by exact or alias-stripped email match. Used to prompt the user to accept an invite before a personal org is created."
+        },
+        {
+          "info": {
+            "name": "POST /v1/users/me/invitations/{invitationId}/accept",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/users/me/invitations/:invitationId/accept",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "invitationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Explicitly accepts a pending invitation addressed to the authenticated user, joining them to the invited organization and workspaces."
+        },
+        {
+          "info": {
+            "name": "POST /v1/users/me/default-org",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/users/me/default-org",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Provisions a personal/default org for the authenticated user if they do not already belong to one. This is the explicit \"skip invites\" path during signup. Idempotent: returns the existing org when one is present."
+        },
+        {
+          "info": {
+            "name": "PATCH /v1/users/{userId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/users/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the authenticated user's profile (username, name, onboarding state)."
+        },
+        {
+          "info": {
+            "name": "GET /v1/users/{userIdOrName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/users/:userIdOrName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "userIdOrName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Looks up a user by id or username."
+        },
+        {
+          "info": {
+            "name": "GET /v1/users/{userId}/orgs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/users/:userId/orgs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists organizations a user is a member of."
+        },
+        {
+          "info": {
+            "name": "PUT /v1/users/{userId}/scope-defaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/v1/users/:userId/scope-defaults",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the authenticated user's default org and per-org default workspace in one batch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

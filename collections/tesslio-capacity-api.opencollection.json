@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Capacity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capacity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /experimental/sandbox-lease",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/sandbox-lease",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Deprecated — replaced by GET /capacity-lease. Lists active sandbox leases for safe rollback."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/sandbox-lease",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/sandbox-lease",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Deprecated — replaced by DELETE /capacity-lease. Truncates all active sandbox leases."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/sandbox-lease/running/{workflowId}/{activityId}/stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/sandbox-lease/running/:workflowId/:activityId/stop",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deprecated — replaced by POST /capacity-lease/:leaseId/stop. Stops the sandbox attached to a running lease."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

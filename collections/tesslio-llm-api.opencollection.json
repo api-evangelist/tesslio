@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys LLM API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LLM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /v1/llm/keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/llm/keys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a LiteLLM API key scoped to the requested models. The key may only call the listed model names (calls to anything else are rejected) and the real underlying models stay hidden behind aliases. Expires after `duration` (1-99 hours or minutes, e.g. `72h` or `30m`; default 72h)."
+        },
+        {
+          "info": {
+            "name": "GET /v1/llm/available",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/llm/available",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ]
+          },
+          "docs": "Lists the model names the authenticated caller may scope a LiteLLM key to via `POST /v1/llm/keys` — the same actor-scoped catalogue that endpoint validates against. Tessl-only models are included only for Tessl members."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

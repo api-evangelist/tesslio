@@ -1,0 +1,1379 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Workspaces API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[orgId][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[isMember]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[isMember][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[isMember][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived][ne]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists workspaces with name/org/membership/archived filters."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new workspace."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceIdOrName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceIdOrName",
+            "params": [
+              {
+                "name": "workspaceIdOrName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a workspace by id or name."
+        },
+        {
+          "info": {
+            "name": "PATCH /v1/workspaces/{workspaceId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a workspace: rename, archive, restore, or update settings (blockPublicTilePublish, securityReviewsEnabled, evalsEnabled, orgDefaultRole)."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/workspaces/{workspaceId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace by id."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceId}/onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId/onboarding",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the onboarding checklist state for a workspace."
+        },
+        {
+          "info": {
+            "name": "GET /v1/workspaces/{workspaceId}/members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId/members",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the members of a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /v1/workspaces/{workspaceId}/members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId/members",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a user as a member of a workspace."
+        },
+        {
+          "info": {
+            "name": "PATCH /v1/workspaces/{workspaceId}/members/{userId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId/members/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a workspace member's role."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/workspaces/{workspaceId}/members/{userId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/workspaces/:workspaceId/members/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a member from a workspace. Cannot remove the last owner."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists integrations (GitHub, GitLab, Linear) configured for a workspace."
+        },
+        {
+          "info": {
+            "name": "PATCH /experimental/workspaces/{workspaceId}/integrations/{integrationId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/:integrationId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the connectionData on a Linear integration. `targetRepo` and `taskDelegation` are independently editable; pass `null` to clear either. Writing `taskDelegation` requires the `linear-task-mirroring` feature flag."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/integrations/{integrationId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/:integrationId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes an integration from a workspace."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/integrations/{integrationId}/linear/metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/:integrationId/linear/metadata",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the connected Linear org's workflow states across all teams. Each state carries its name, type, and owning team, so a caller can choose a delegation state to store in the task-delegation config."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/github-app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/github-app",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a GitHub App OAuth handshake, attaching the installation to a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/github-app/request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/github-app/request",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a request to install a GitHub App for a workspace (pending org-admin approval)."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/github-app/token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/github-app/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mints a short-lived GitHub installation token for the workspace's Tessl Helper GitHub App installation, plus the bot identity (`appSlug`, `botUserId`, `login`, `email`) resolved via the authenticated App credentials. Used by CI workflows and the CLI to act as the Tessl Helper bot without holding the private key or guessing the slug."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/github-app-agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/github-app-agent",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes the OAuth handshake for the read-write Tessl Helper GitHub App and records a workspace-scoped Tessl Helper installation, distinct from the Sync `github-app` integration."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/github-app-agent/request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/github-app-agent/request",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a request to install the read-write Tessl Helper GitHub App for a workspace (pending org-admin approval). Distinct from the Sync `github-app` request."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/gitlab-token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/gitlab-token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches a GitLab personal/group access token as an integration to a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/mockhub",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/mockhub",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Dev-only: instantly connects a synthetic MockHub SCM provider to a workspace (no OAuth) and kicks a first inventory scan of its seeded repos/skills. Rejected with 404 unless NODE_ENV is development, and 503 when the workflow engine could not accept the first scan."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/linear/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/linear/authorize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the Linear OAuth flow for the workspace by issuing a signed state and authorize URL."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/linear/callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/linear/callback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes the Linear OAuth handshake by exchanging the authorization code for a workspace token."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/bitbucket-cloud-oauth/authorize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the Bitbucket Cloud OAuth flow for the workspace by issuing a signed state and authorize URL."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/bitbucket-cloud-oauth/callback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes the Bitbucket Cloud OAuth handshake by exchanging the authorization code for an access + refresh token."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/integrations/requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/requests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists pending integration requests (GitHub App, GitLab token) for a workspace."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/integrations/requests/{requestId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/integrations/requests/:requestId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a pending workspace integration request."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/analytics",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns workspace-scoped analytics: total publishes and installs in the last 30 days, plus a week-on-week delta. Shape will evolve while this lives under /experimental."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/inventory",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[id]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[id][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[tile]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[tile][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[tile][nlike]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[q]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInventoryDetails",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the workspace's repository inventory (tile.json files discovered via the SCM integration)."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/mcp-servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists MCP servers configured for a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers or updates a workspace MCP server and returns an OAuth authorization URL."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace MCP server. The endpoint is idempotent."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/reauth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName/reauth",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a fresh OAuth authorization flow for an existing workspace MCP server."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/mcp-servers/:mcpName/callback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "mcpName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes an MCP OAuth callback by exchanging the authorization code for tokens."
+        },
+        {
+          "info": {
+            "name": "Get workflow status (Temporal-backed compat shim)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/workflows/:workflowId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Backwards-compatible polling endpoint for CLI builds released before the workflow DB table was retired. Resolves status from the Temporal describe API; the path param is a Temporal workflow ID, not a UUID. Deprecated — new clients should poll the workflow-backed entity (e.g. generation-run / eval-run) instead."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/registry-keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/registry-keys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists registry keys (npm/maven/pypi) configured for a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/registry-keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/registry-keys",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a registry key (npm/maven/pypi) to a workspace."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/registry-keys/{registryKeyId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/registry-keys/:registryKeyId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "registryKeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a registry key from a workspace."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/skills/workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/skills/workspace",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Indexes one or more SKILL.md files from a GitHub repository using the workspace GitHub App installation. Supports public and private repositories."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/tile-rollout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/tile-rollout",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint has been retired."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/workspaces/{workspaceId}/reviewer-plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/reviewer-plugin",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the reviewer plugin configuration for a workspace."
+        },
+        {
+          "info": {
+            "name": "PUT /experimental/workspaces/{workspaceId}/reviewer-plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/reviewer-plugin",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the reviewer plugin configuration for a workspace."
+        },
+        {
+          "info": {
+            "name": "DELETE /experimental/workspaces/{workspaceId}/reviewer-plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/reviewer-plugin",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the reviewer plugin configuration for a workspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

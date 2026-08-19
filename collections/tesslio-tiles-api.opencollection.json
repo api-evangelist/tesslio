@@ -1,0 +1,997 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Tiles API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v1/tiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[fullName][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[archived][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[workspaceId][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[packageRegistry][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[featured][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSkills][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasSteering][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[hasDocs][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeModerationFailed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists tiles in the catalog. Supports search, filtering by workspace/registry/featured, and ranked sorting."
+        },
+        {
+          "info": {
+            "name": "Publish a tile version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/tiles",
+            "headers": [
+              {
+                "name": "content-type",
+                "value": ""
+              },
+              {
+                "name": "github-oidc-token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Publishes a new tile version to the registry. If the tile does not yet exist, it will be created automatically. The request body should be a gzipped tar archive (tar.gz) containing the tile manifest (tile.json) and tile contents, e.g. markdown documentation files, eval scenarios, etc. The tile name and version are extracted from the manifest file."
+        },
+        {
+          "info": {
+            "name": "POST /v1/tiles/match",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/tiles/match",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the tiles that describe each of the given package URLs (purls)."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a tile by workspace and tile name, including its latest version."
+        },
+        {
+          "info": {
+            "name": "PATCH /v1/tiles/{workspaceName}/{tileName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a tile (visibility, featured flag, archive/restore)."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/tiles/{workspaceName}/{tileName}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a tile and all of its versions. Allowed within 48 hours of publish, or any time if the tile is private or has fewer than 500 downloads."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/stats",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns install and skill-activation usage stats for a tile (7d or 30d window)."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[describes][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[major][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[minor][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][eq]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][ne]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][gt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][gte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][lt]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][lte]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[patch][like]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists versions of a tile, with semver and describes filters. Pass `includeArchived=true` to also return archived versions (excluded by default)."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version",
+            "params": [
+              {
+                "name": "includePolicyVerdict",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches a specific tile version by semver string."
+        },
+        {
+          "info": {
+            "name": "PATCH /v1/tiles/{workspaceName}/{tileName}/versions/{version}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a tile version (archive/restore)."
+        },
+        {
+          "info": {
+            "name": "DELETE /v1/tiles/{workspaceName}/{tileName}/versions/{version}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a tile version. Allowed within 48 hours of publish, or any time if the tile is private or has fewer than 500 downloads."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/files",
+            "headers": [
+              {
+                "name": "accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists or downloads (as a tarball) the files in a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/files/{filePath}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/files/:filePath",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filePath",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Streams a single file from a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/eval-suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/eval-suite",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the eval suite (scenarios + latest run status) for a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/skill-reviews",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the LLM skill reviews (per skill) for a tile version."
+        },
+        {
+          "info": {
+            "name": "GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-security-reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/v1/tiles/:workspaceName/:tileName/versions/:version/skill-security-reviews",
+            "params": [
+              {
+                "name": "workspaceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tileName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Snyk security reviews (per skill) for a tile version."
+        },
+        {
+          "info": {
+            "name": "POST /experimental/workspaces/{workspaceId}/tile-rollout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/experimental/workspaces/:workspaceId/tile-rollout",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint has been retired."
+        },
+        {
+          "info": {
+            "name": "GET /experimental/skills/tile-skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tessl.io/experimental/skills/tile-skills",
+            "params": [
+              {
+                "name": "sourceUrl",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists tile-skills (skills shipped inside a tile version) sourced from a given repository URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

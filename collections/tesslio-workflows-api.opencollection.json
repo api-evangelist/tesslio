@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tessl Admin Keys Workflows API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /v1/uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tessl.io/v1/uploads",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a presigned S3 upload URL for a file. When `encrypted` is true, a per-upload RSA public key is also returned (SPKI DER, base64) for the client to encrypt to; `workspaceId` is required in that case. The matching private key is wrapped under the workspace data key and stored against the upload, never returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
