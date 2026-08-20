@@ -39,6 +39,17 @@ tags:
 - Agentic Development
 - Developer Tools
 - Skills Registry
+- MCP
+- Spec-Driven Development
+- Code Review
+- CLI
+tags_raw:
+- Company
+- Ai Ml
+- Agent Enablement
+- Agentic Development
+- Developer Tools
+- Skills Registry
 - Model Context Protocol
 - Spec-Driven Development
 - Code Review
@@ -74,6 +85,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -218,6 +231,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -278,6 +293,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Organization
+  tags_raw:
   - Orgs
   properties:
   - type: OpenAPI
@@ -302,6 +319,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -410,6 +429,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -434,6 +455,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
