@@ -183,6 +183,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -493,6 +495,8 @@ apis:
   humanURL: https://docs.tessl.io/
   baseURL: https://api.tessl.io
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
