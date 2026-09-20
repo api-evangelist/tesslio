@@ -1,0 +1,47 @@
+slug: tesslio
+provider: tessl.io
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Billing
+  spec_file: tesslio-billing-api-openapi.yml
+  capability_id: BC-4250
+  capability_id_l1: BC-4250
+  capability_name: Subscription Billing & Revenue Management
+  confidence: 0.72
+  evidence: POST /v1/orgs/{orgId}/billing/checkout-sessions 'Start a Team upgrade checkout'; PATCH .../billing/subscription
+    'Cancel a Team subscription at period end'; GET /v1/orgs/{orgId}/credits/usage
+  reason: Operations handle subscription checkout, subscription cancellation, credit top-ups and credit
+    usage — the SaaS commercial billing surface. Spans billing/credits and subscription lifecycle, so
+    L1 only; sub-capability is ambiguous between rating/collection and subscription modification.
+- tag: Evals
+  spec_file: tesslio-evals-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.72
+  evidence: GET /v1/tiles/{workspaceName}/{tileName}/versions/{version}/eval-suite; POST /experimental/eval-runs-v2;
+    POST /experimental/eval-scenarios/generate; POST /experimental/eval-runs/{id}/retry
+  reason: Eval suites, eval runs, scenario generation and retry/debug of results are test-suite definition
+    and execution against product artefacts — quality engineering for software (here, agent skills). Vendor
+    description confirms 'eval/scenario tooling to prove a skill changes agent behavior'.
+- tag: Users
+  spec_file: tesslio-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /v1/users, GET /v1/users/me/invitations, POST /v1/users/me/invitations/{invitationId}/accept,
+    GET /v1/users/{userId}/orgs
+  reason: User account and org-membership/invitation administration — identity and access management for
+    the platform, not HR records.
