@@ -8,6 +8,9 @@ note: ESTIMATES, not quotes. Computed by API Evangelist from the prices this pro
   replace it — publish that and the estimate is retired.
 audience_of_source_pricing: developer-api
 pricing_basis: per-call
+delivery: managed+licensed
+delivery_method: page
+delivery_evidence: Bring your own LLM, single-tenant deployment, self-hosted
 estimate_count: 1
 estimates:
 - kind: entry_cost
