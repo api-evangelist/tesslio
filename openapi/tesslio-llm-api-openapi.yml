@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys LLM API
+  title: Tessl LLM API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -190,6 +189,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create llm keys
+      x-summary-source: derived
+      operationId: postV1LlmKeys
+      x-operation-id-source: derived
   /v1/llm/available:
     get:
       tags:
@@ -353,3 +356,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get llm available
+      x-summary-source: derived
+      operationId: getV1LlmAvailable
+      x-operation-id-source: derived

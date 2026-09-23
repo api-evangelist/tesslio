@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys SkillInventory API
+  title: Tessl Skill Inventory API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -303,6 +302,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventories
+      x-operation-id-source: derived
     post:
       tags:
       - SkillInventory
@@ -520,6 +523,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventories
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}:
     get:
       tags:
@@ -855,6 +862,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesById
+      x-operation-id-source: derived
     delete:
       tags:
       - SkillInventory
@@ -988,6 +999,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete workspaces by workspace name or id skill inventories by id
+      x-summary-source: derived
+      operationId: deleteV1WorkspacesByWorkspaceNameOrIDSkillInventoriesById
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/github-app-status:
     get:
       tags:
@@ -1193,6 +1208,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id github app status
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdGithubAppStatus
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/import-status:
     get:
       tags:
@@ -1372,6 +1391,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id import status
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdImportStatus
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/source-preview:
     get:
       tags:
@@ -1602,6 +1625,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories source preview
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesSourcePreview
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/source-repos:
     get:
       tags:
@@ -1816,6 +1843,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories source repos
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesSourceRepos
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans:
     get:
       tags:
@@ -2079,6 +2110,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id scans
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdScans
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans/{scanIndex}:
     get:
       tags:
@@ -2347,6 +2382,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id scans by scan…
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdScansByScanIndex
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/scans/{scanIndex}/indexing-results:
     get:
       tags:
@@ -2576,6 +2615,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id scans by scan…
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdScansByScanIndexIndexingResults
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/catalog:
     get:
       tags:
@@ -3060,6 +3103,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id catalog
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdCatalog
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/by-repo:
     get:
       tags:
@@ -3385,6 +3432,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id by repo
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdByRepo
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/by-skill:
     get:
       tags:
@@ -4056,6 +4107,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id by skill
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdBySkill
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/committers:
     get:
       tags:
@@ -4279,6 +4334,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id committers
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdCommitters
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/findings:
     get:
       tags:
@@ -4995,6 +5054,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id findings
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdFindings
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/automatic-scanning/opt-in:
     post:
       tags:
@@ -5194,6 +5257,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id automatic…
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdAutomaticScanningOptIn
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/opt-in:
     post:
       tags:
@@ -5420,6 +5487,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id private…
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingOptIn
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/reindex:
     post:
       tags:
@@ -5685,6 +5756,10 @@ paths:
                         - 503
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id private…
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingReindex
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/unapproved-skills:
     get:
       tags:
@@ -5949,6 +6024,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id private indexing…
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingUnapprovedSkills
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/approve-skills:
     post:
       tags:
@@ -6166,6 +6245,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id private…
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingApproveSkills
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/private-indexing/preferences:
     get:
       tags:
@@ -6343,6 +6426,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id private indexing…
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingPreferences
+      x-operation-id-source: derived
     put:
       tags:
       - SkillInventory
@@ -6533,6 +6620,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Replace workspaces by workspace name or id skill inventories by id private…
+      x-summary-source: derived
+      operationId: putV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdPrivateIndexingPreferences
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/ignored-repos:
     get:
       tags:
@@ -6725,6 +6816,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace name or id skill inventories by id ignored repos
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdIgnoredRepos
+      x-operation-id-source: derived
     post:
       tags:
       - SkillInventory
@@ -6874,6 +6969,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id ignored repos
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdIgnoredRepos
+      x-operation-id-source: derived
     delete:
       tags:
       - SkillInventory
@@ -7023,6 +7122,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete workspaces by workspace name or id skill inventories by id ignored repos
+      x-summary-source: derived
+      operationId: deleteV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdIgnoredRepos
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/{id}/rescan:
     post:
       tags:
@@ -7226,6 +7329,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories by id rescan
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesByIdRescan
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceNameOrID}/skill-inventories/import:
     post:
       tags:
@@ -7478,6 +7585,10 @@ paths:
                         - 503
                       message:
                         type: string
+      summary: Create workspaces by workspace name or id skill inventories import
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceNameOrIDSkillInventoriesImport
+      x-operation-id-source: derived
   /experimental/skill-inventories:
     post:
       tags:
@@ -7778,3 +7889,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skill inventories
+      x-summary-source: derived
+      operationId: postExperimentalSkillInventories
+      x-operation-id-source: derived

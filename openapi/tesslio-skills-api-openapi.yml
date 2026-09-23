@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Skills API
+  title: Tessl Skills API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Skill discovery, reviews, and security checks.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -292,6 +292,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version skill reviews
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionSkillReviews
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-security-reviews:
     get:
       tags:
@@ -511,6 +515,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version skill security…
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionSkillSecurityReviews
+      x-operation-id-source: derived
   /experimental/implement-ticket-schema/schema.json:
     get:
       tags:
@@ -579,6 +587,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental implement ticket schema schema json
+      x-summary-source: derived
+      operationId: getExperimentalImplementTicketSchemaSchemaJson
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/skills/workspace:
     post:
       tags:
@@ -785,6 +797,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id skills workspace
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdSkillsWorkspace
+      x-operation-id-source: derived
   /experimental/skills/analyse:
     post:
       tags:
@@ -930,6 +946,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills analyse
+      x-summary-source: derived
+      operationId: postExperimentalSkillsAnalyse
+      x-operation-id-source: derived
   /experimental/skills:
     get:
       tags:
@@ -1257,6 +1277,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills
+      x-summary-source: derived
+      operationId: getExperimentalSkills
+      x-operation-id-source: derived
     post:
       tags:
       - Skills
@@ -1460,6 +1484,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills
+      x-summary-source: derived
+      operationId: postExperimentalSkills
+      x-operation-id-source: derived
   /experimental/skills/{id}:
     get:
       tags:
@@ -1590,6 +1618,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by id
+      x-summary-source: derived
+      operationId: getExperimentalSkillsById
+      x-operation-id-source: derived
   /experimental/skills/{id}/request-evals:
     post:
       tags:
@@ -1771,6 +1803,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills by id request evals
+      x-summary-source: derived
+      operationId: postExperimentalSkillsByIdRequestEvals
+      x-operation-id-source: derived
   /experimental/skills/{provider}/{owner}:
     get:
       tags:
@@ -1932,6 +1968,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by provider by owner
+      x-summary-source: derived
+      operationId: getExperimentalSkillsByProviderByOwner
+      x-operation-id-source: derived
   /experimental/skills/{provider}/{owner}/{repo}:
     get:
       tags:
@@ -2192,6 +2232,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by provider by owner by repo
+      x-summary-source: derived
+      operationId: getExperimentalSkillsByProviderByOwnerByRepo
+      x-operation-id-source: derived
   /experimental/skills/{provider}/{owner}/{repo}/{skillName}:
     get:
       tags:
@@ -2638,6 +2682,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by provider by owner by repo by skill name
+      x-summary-source: derived
+      operationId: getExperimentalSkillsByProviderByOwnerByRepoBySkillName
+      x-operation-id-source: derived
   /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite:
     get:
       tags:
@@ -3109,6 +3157,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by provider by owner by repo by skill name eval suite
+      x-summary-source: derived
+      operationId: getExperimentalSkillsByProviderByOwnerByRepoBySkillNameEvalSuite
+      x-operation-id-source: derived
   /experimental/skills/improve:
     post:
       tags:
@@ -3289,6 +3341,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills improve
+      x-summary-source: derived
+      operationId: postExperimentalSkillsImprove
+      x-operation-id-source: derived
   /experimental/skills/review:
     post:
       tags:
@@ -3577,6 +3633,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills review
+      x-summary-source: derived
+      operationId: postExperimentalSkillsReview
+      x-operation-id-source: derived
   /experimental/skills/tile-skills:
     get:
       tags:
@@ -3694,3 +3754,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills tile skills
+      x-summary-source: derived
+      operationId: getExperimentalSkillsTileSkills
+      x-operation-id-source: derived

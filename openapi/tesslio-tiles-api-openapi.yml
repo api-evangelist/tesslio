@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Tiles API
+  title: Tessl Tiles API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Tile catalog, versions, and metadata.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -778,6 +778,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles
+      x-summary-source: derived
+      operationId: getV1Tiles
+      x-operation-id-source: derived
     post:
       summary: Publish a tile version
       tags:
@@ -1056,6 +1060,8 @@ paths:
                         - 501
                       message:
                         type: string
+      operationId: postV1Tiles
+      x-operation-id-source: derived
   /v1/tiles/match:
     post:
       tags:
@@ -1160,6 +1166,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create tiles match
+      x-summary-source: derived
+      operationId: postV1TilesMatch
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}:
     get:
       tags:
@@ -1627,6 +1637,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileName
+      x-operation-id-source: derived
     patch:
       tags:
       - Tiles
@@ -1892,6 +1906,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update tiles by workspace name by tile name
+      x-summary-source: derived
+      operationId: patchV1TilesByWorkspaceNameByTileName
+      x-operation-id-source: derived
     delete:
       tags:
       - Tiles
@@ -2051,6 +2069,10 @@ paths:
                         - 503
                       message:
                         type: string
+      summary: Delete tiles by workspace name by tile name
+      x-summary-source: derived
+      operationId: deleteV1TilesByWorkspaceNameByTileName
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/stats:
     get:
       tags:
@@ -2314,6 +2336,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name stats
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameStats
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions:
     get:
       tags:
@@ -2821,6 +2847,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersions
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}:
     get:
       tags:
@@ -3579,6 +3609,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersion
+      x-operation-id-source: derived
     patch:
       tags:
       - Tiles
@@ -3820,6 +3854,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update tiles by workspace name by tile name versions by version
+      x-summary-source: derived
+      operationId: patchV1TilesByWorkspaceNameByTileNameVersionsByVersion
+      x-operation-id-source: derived
     delete:
       tags:
       - Tiles
@@ -3957,6 +3995,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete tiles by workspace name by tile name versions by version
+      x-summary-source: derived
+      operationId: deleteV1TilesByWorkspaceNameByTileNameVersionsByVersion
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/files:
     get:
       tags:
@@ -4138,6 +4180,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version files
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionFiles
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/files/{filePath}:
     get:
       tags:
@@ -4255,6 +4301,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version files by file path
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionFilesByFilePath
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/eval-suite:
     get:
       tags:
@@ -4657,6 +4707,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version eval suite
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionEvalSuite
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-reviews:
     get:
       tags:
@@ -4940,6 +4994,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version skill reviews
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionSkillReviews
+      x-operation-id-source: derived
   /v1/tiles/{workspaceName}/{tileName}/versions/{version}/skill-security-reviews:
     get:
       tags:
@@ -5159,6 +5217,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version skill security…
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionSkillSecurityReviews
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/tile-rollout:
     post:
       tags:
@@ -5286,6 +5348,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id tile rollout
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdTileRollout
+      x-operation-id-source: derived
   /experimental/skills/tile-skills:
     get:
       tags:
@@ -5403,3 +5469,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills tile skills
+      x-summary-source: derived
+      operationId: getExperimentalSkillsTileSkills
+      x-operation-id-source: derived

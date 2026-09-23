@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys InstallPolicy API
+  title: Tessl Install Policy API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -1228,6 +1227,8 @@ paths:
                         - 500
                       message:
                         type: string
+      operationId: postV1InstallPolicyEvaluate
+      x-operation-id-source: derived
   /v1/orgs/{orgId}/install-policy:
     get:
       tags:
@@ -1504,6 +1505,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get orgs by org id install policy
+      x-summary-source: derived
+      operationId: getV1OrgsByOrgIdInstallPolicy
+      x-operation-id-source: derived
     put:
       tags:
       - InstallPolicy
@@ -1890,6 +1895,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Replace orgs by org id install policy
+      x-summary-source: derived
+      operationId: putV1OrgsByOrgIdInstallPolicy
+      x-operation-id-source: derived
     delete:
       tags:
       - InstallPolicy
@@ -2018,3 +2027,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete orgs by org id install policy
+      x-summary-source: derived
+      operationId: deleteV1OrgsByOrgIdInstallPolicy
+      x-operation-id-source: derived

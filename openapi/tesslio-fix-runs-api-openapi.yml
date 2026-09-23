@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Fix Runs API
+  title: Tessl Fix Runs API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -285,6 +284,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental fix runs
+      x-summary-source: derived
+      operationId: postExperimentalFixRuns
+      x-operation-id-source: derived
   /experimental/fix-runs/{id}:
     get:
       tags:
@@ -600,6 +603,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental fix runs by id
+      x-summary-source: derived
+      operationId: getExperimentalFixRunsById
+      x-operation-id-source: derived
   /experimental/fix-runs/{id}/cancel:
     post:
       tags:
@@ -778,6 +785,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental fix runs by id cancel
+      x-summary-source: derived
+      operationId: postExperimentalFixRunsByIdCancel
+      x-operation-id-source: derived
   /experimental/fix-runs/{id}/bundle:
     get:
       tags:
@@ -949,3 +960,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental fix runs by id bundle
+      x-summary-source: derived
+      operationId: getExperimentalFixRunsByIdBundle
+      x-operation-id-source: derived

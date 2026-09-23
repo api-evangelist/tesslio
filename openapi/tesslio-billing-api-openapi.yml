@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Billing API
+  title: Tessl Billing API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -237,6 +236,8 @@ paths:
                         - 503
                       message:
                         type: string
+      operationId: postV1OrgsByOrgIdBillingCheckoutSessions
+      x-operation-id-source: derived
   /v1/orgs/{orgId}/billing/subscription:
     get:
       tags:
@@ -463,6 +464,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get orgs by org id billing subscription
+      x-summary-source: derived
+      operationId: getV1OrgsByOrgIdBillingSubscription
+      x-operation-id-source: derived
     patch:
       summary: Cancel a Team subscription at period end
       tags:
@@ -731,6 +736,8 @@ paths:
                         - 503
                       message:
                         type: string
+      operationId: patchV1OrgsByOrgIdBillingSubscription
+      x-operation-id-source: derived
   /v1/orgs/{orgId}/credits:
     get:
       tags:
@@ -1012,6 +1019,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get orgs by org id credits
+      x-summary-source: derived
+      operationId: getV1OrgsByOrgIdCredits
+      x-operation-id-source: derived
     post:
       summary: Start a credit-bundle checkout (top up)
       tags:
@@ -1250,6 +1261,8 @@ paths:
                         - 503
                       message:
                         type: string
+      operationId: postV1OrgsByOrgIdCredits
+      x-operation-id-source: derived
   /v1/orgs/{orgId}/credits/usage:
     get:
       tags:
@@ -1600,3 +1613,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get orgs by org id credits usage
+      x-summary-source: derived
+      operationId: getV1OrgsByOrgIdCreditsUsage
+      x-operation-id-source: derived

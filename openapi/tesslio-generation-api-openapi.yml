@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Generation API
+  title: Tessl Generation API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Eval scenario generation runs.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -346,6 +346,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental eval scenarios generate
+      x-summary-source: derived
+      operationId: postExperimentalEvalScenariosGenerate
+      x-operation-id-source: derived
   /experimental/generation-runs:
     get:
       tags:
@@ -677,6 +681,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental generation runs
+      x-summary-source: derived
+      operationId: getExperimentalGenerationRuns
+      x-operation-id-source: derived
   /experimental/generation-runs/{id}:
     get:
       tags:
@@ -974,6 +982,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental generation runs by id
+      x-summary-source: derived
+      operationId: getExperimentalGenerationRunsById
+      x-operation-id-source: derived
   /experimental/generation-runs/{id}/download:
     get:
       tags:
@@ -1202,6 +1214,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental generation runs by id download
+      x-summary-source: derived
+      operationId: getExperimentalGenerationRunsByIdDownload
+      x-operation-id-source: derived
   /experimental/generation-runs-v2/{id}:
     get:
       tags:
@@ -1458,6 +1474,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental generation runs v2 by id
+      x-summary-source: derived
+      operationId: getExperimentalGenerationRunsV2ById
+      x-operation-id-source: derived
   /experimental/generation-runs-v2/{id}/download:
     get:
       tags:
@@ -1629,3 +1649,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental generation runs v2 by id download
+      x-summary-source: derived
+      operationId: getExperimentalGenerationRunsV2ByIdDownload
+      x-operation-id-source: derived

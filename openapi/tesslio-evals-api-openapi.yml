@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Evals API
+  title: Tessl Evals API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Eval runs, scenarios, and solution scoring.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -411,6 +411,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get tiles by workspace name by tile name versions by version eval suite
+      x-summary-source: derived
+      operationId: getV1TilesByWorkspaceNameByTileNameVersionsByVersionEvalSuite
+      x-operation-id-source: derived
   /experimental/eval-runs:
     get:
       tags:
@@ -964,6 +968,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs
+      x-summary-source: derived
+      operationId: getExperimentalEvalRuns
+      x-operation-id-source: derived
   /experimental/eval-runs/{id}:
     get:
       tags:
@@ -1629,6 +1637,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs by id
+      x-summary-source: derived
+      operationId: getExperimentalEvalRunsById
+      x-operation-id-source: derived
     patch:
       tags:
       - Evals
@@ -1823,6 +1835,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update experimental eval runs by id
+      x-summary-source: derived
+      operationId: patchExperimentalEvalRunsById
+      x-operation-id-source: derived
   /experimental/eval-runs/{id}/debug:
     get:
       tags:
@@ -2059,6 +2075,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs by id debug
+      x-summary-source: derived
+      operationId: getExperimentalEvalRunsByIdDebug
+      x-operation-id-source: derived
   /experimental/eval-runs/{id}/solutions/{solutionId}/files:
     get:
       tags:
@@ -2137,6 +2157,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs by id solutions by solution id files
+      x-summary-source: derived
+      operationId: getExperimentalEvalRunsByIdSolutionsBySolutionIdFiles
+      x-operation-id-source: derived
   /experimental/eval-runs-v2:
     post:
       tags:
@@ -2658,6 +2682,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental eval runs v2
+      x-summary-source: derived
+      operationId: postExperimentalEvalRunsV2
+      x-operation-id-source: derived
   /experimental/eval-runs-v2:check:
     post:
       tags:
@@ -2874,6 +2902,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental eval runs v2:check
+      x-summary-source: derived
+      operationId: postExperimentalEvalRunsV2:check
+      x-operation-id-source: derived
   /experimental/eval-runs/agents:
     get:
       tags:
@@ -3056,6 +3088,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs agents
+      x-summary-source: derived
+      operationId: getExperimentalEvalRunsAgents
+      x-operation-id-source: derived
   /experimental/eval-runs/repo-results:
     get:
       tags:
@@ -3204,6 +3240,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental eval runs repo results
+      x-summary-source: derived
+      operationId: getExperimentalEvalRunsRepoResults
+      x-operation-id-source: derived
   /experimental/eval-scenarios/generate:
     post:
       tags:
@@ -3541,6 +3581,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental eval scenarios generate
+      x-summary-source: derived
+      operationId: postExperimentalEvalScenariosGenerate
+      x-operation-id-source: derived
   /experimental/eval-runs/{id}/retry:
     post:
       tags:
@@ -3759,6 +3803,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental eval runs by id retry
+      x-summary-source: derived
+      operationId: postExperimentalEvalRunsByIdRetry
+      x-operation-id-source: derived
   /experimental/skills/{id}/request-evals:
     post:
       tags:
@@ -3940,6 +3988,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental skills by id request evals
+      x-summary-source: derived
+      operationId: postExperimentalSkillsByIdRequestEvals
+      x-operation-id-source: derived
   /experimental/skills/{provider}/{owner}/{repo}/{skillName}/eval-suite:
     get:
       tags:
@@ -4411,3 +4463,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental skills by provider by owner by repo by skill name eval suite
+      x-summary-source: derived
+      operationId: getExperimentalSkillsByProviderByOwnerByRepoBySkillNameEvalSuite
+      x-operation-id-source: derived

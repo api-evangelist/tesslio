@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys MCP API
+  title: Tessl MCP API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -253,6 +252,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id mcp servers
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdMcpServers
+      x-operation-id-source: derived
     post:
       tags:
       - MCP
@@ -484,6 +487,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServers
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}:
     delete:
       tags:
@@ -619,6 +626,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id mcp servers by mcp name
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdMcpServersByMcpName
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/reauth:
     post:
       tags:
@@ -822,6 +833,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers by mcp name reauth
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServersByMcpNameReauth
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/callback:
     post:
       tags:
@@ -1035,3 +1050,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers by mcp name callback
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServersByMcpNameCallback
+      x-operation-id-source: derived

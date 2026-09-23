@@ -1,18 +1,6 @@
 generated: '2026-07-21'
 method: searched
 host: https://tessl.io
-documents:
-- path: /.well-known/security.txt
-  status: 200
-  file: tesslio-security.txt
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
 other_hosts:
 - host: https://docs.tessl.io
   documents:
@@ -20,3 +8,22 @@ other_hosts:
     status: 404
   - path: /.well-known/openid-configuration
     status: 404
+hosts:
+- host: https://tessl.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: tesslio-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys PublishPolicy API
+  title: Tessl Publish Policy API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -217,6 +216,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental orgs by org id publish policy
+      x-summary-source: derived
+      operationId: getExperimentalOrgsByOrgIdPublishPolicy
+      x-operation-id-source: derived
     put:
       tags:
       - PublishPolicy
@@ -469,6 +472,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Replace experimental orgs by org id publish policy
+      x-summary-source: derived
+      operationId: putExperimentalOrgsByOrgIdPublishPolicy
+      x-operation-id-source: derived
     delete:
       tags:
       - PublishPolicy
@@ -597,3 +604,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental orgs by org id publish policy
+      x-summary-source: derived
+      operationId: deleteExperimentalOrgsByOrgIdPublishPolicy
+      x-operation-id-source: derived

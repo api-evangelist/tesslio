@@ -1,8 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Tasks API
+  title: Tessl Tasks API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -458,6 +457,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental tasks
+      x-summary-source: derived
+      operationId: postExperimentalTasks
+      x-operation-id-source: derived
     get:
       tags:
       - Tasks
@@ -766,6 +769,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental tasks
+      x-summary-source: derived
+      operationId: getExperimentalTasks
+      x-operation-id-source: derived
   /experimental/tasks/by-link:
     get:
       tags:
@@ -1623,6 +1630,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental tasks by link
+      x-summary-source: derived
+      operationId: getExperimentalTasksByLink
+      x-operation-id-source: derived
   /experimental/tasks/{id}:
     get:
       tags:
@@ -2468,6 +2479,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental tasks by id
+      x-summary-source: derived
+      operationId: getExperimentalTasksById
+      x-operation-id-source: derived
   /experimental/tasks/{id}/events:
     get:
       tags:
@@ -3241,6 +3256,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental tasks by id events
+      x-summary-source: derived
+      operationId: getExperimentalTasksByIdEvents
+      x-operation-id-source: derived
     post:
       tags:
       - Tasks
@@ -4085,6 +4104,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental tasks by id events
+      x-summary-source: derived
+      operationId: postExperimentalTasksByIdEvents
+      x-operation-id-source: derived
   /experimental/tasks/{id}/inputs:
     post:
       tags:
@@ -4870,6 +4893,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental tasks by id inputs
+      x-summary-source: derived
+      operationId: postExperimentalTasksByIdInputs
+      x-operation-id-source: derived
   /experimental/tasks/{id}/runs:
     get:
       tags:
@@ -5110,6 +5137,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental tasks by id runs
+      x-summary-source: derived
+      operationId: getExperimentalTasksByIdRuns
+      x-operation-id-source: derived
   /experimental/tasks/{id}/cancel:
     post:
       tags:
@@ -5370,6 +5401,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental tasks by id cancel
+      x-summary-source: derived
+      operationId: postExperimentalTasksByIdCancel
+      x-operation-id-source: derived
   /experimental/task-events:
     get:
       tags:
@@ -6149,3 +6184,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental task events
+      x-summary-source: derived
+      operationId: getExperimentalTaskEvents
+      x-operation-id-source: derived

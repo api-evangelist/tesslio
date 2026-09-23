@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Workflows API
+  title: Tessl Workflows API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Background workflow executions and repository workflow configs.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -172,3 +172,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create uploads
+      x-summary-source: derived
+      operationId: postV1Uploads
+      x-operation-id-source: derived

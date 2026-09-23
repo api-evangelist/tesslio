@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Search API
+  title: Tessl Search API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Search across tiles, skills, and repos.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -875,6 +875,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental search
+      x-summary-source: derived
+      operationId: getExperimentalSearch
+      x-operation-id-source: derived
   /experimental/search/github:
     get:
       tags:
@@ -986,6 +990,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental search github
+      x-summary-source: derived
+      operationId: getExperimentalSearchGithub
+      x-operation-id-source: derived
   /experimental/search/repos:
     get:
       tags:
@@ -1136,3 +1144,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental search repos
+      x-summary-source: derived
+      operationId: getExperimentalSearchRepos
+      x-operation-id-source: derived

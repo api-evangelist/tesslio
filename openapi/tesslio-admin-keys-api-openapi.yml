@@ -1,4 +1,4 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   title: Tessl Admin Keys API
   version: 1.0.0
@@ -262,6 +262,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get orgs by org id api keys
+      x-summary-source: derived
+      operationId: getV1OrgsByOrgIdApiKeys
+      x-operation-id-source: derived
     post:
       tags:
       - Admin Keys
@@ -480,6 +484,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create orgs by org id api keys
+      x-summary-source: derived
+      operationId: postV1OrgsByOrgIdApiKeys
+      x-operation-id-source: derived
   /v1/orgs/{orgId}/api-keys/{apiKeyId}:
     delete:
       tags:
@@ -615,3 +623,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete orgs by org id api keys by api key id
+      x-summary-source: derived
+      operationId: deleteV1OrgsByOrgIdApiKeysByApiKeyId
+      x-operation-id-source: derived

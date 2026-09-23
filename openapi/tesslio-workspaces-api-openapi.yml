@@ -1,8 +1,8 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Tessl Admin Keys Workspaces API
+  title: Tessl Workspaces API
   version: 1.0.0
-  description: Admin-scoped API keys for support tooling.
+  description: Workspaces and workspace membership.
 servers:
 - url: https://api.tessl.io
 tags:
@@ -317,6 +317,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces
+      x-summary-source: derived
+      operationId: getV1Workspaces
+      x-operation-id-source: derived
     post:
       tags:
       - Workspaces
@@ -494,6 +498,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces
+      x-summary-source: derived
+      operationId: postV1Workspaces
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceIdOrName}:
     get:
       tags:
@@ -642,6 +650,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace id or name
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceIdOrName
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceId}:
     patch:
       tags:
@@ -1002,6 +1014,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update workspaces by workspace id
+      x-summary-source: derived
+      operationId: patchV1WorkspacesByWorkspaceId
+      x-operation-id-source: derived
     delete:
       tags:
       - Workspaces
@@ -1130,6 +1146,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete workspaces by workspace id
+      x-summary-source: derived
+      operationId: deleteV1WorkspacesByWorkspaceId
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceId}/onboarding:
     get:
       tags:
@@ -1295,6 +1315,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace id onboarding
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceIdOnboarding
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceId}/members:
     get:
       tags:
@@ -1575,6 +1599,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get workspaces by workspace id members
+      x-summary-source: derived
+      operationId: getV1WorkspacesByWorkspaceIdMembers
+      x-operation-id-source: derived
     post:
       tags:
       - Workspaces
@@ -1784,6 +1812,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create workspaces by workspace id members
+      x-summary-source: derived
+      operationId: postV1WorkspacesByWorkspaceIdMembers
+      x-operation-id-source: derived
   /v1/workspaces/{workspaceId}/members/{userId}:
     patch:
       tags:
@@ -1998,6 +2030,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update workspaces by workspace id members by user id
+      x-summary-source: derived
+      operationId: patchV1WorkspacesByWorkspaceIdMembersByUserId
+      x-operation-id-source: derived
     delete:
       tags:
       - Workspaces
@@ -2132,6 +2168,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete workspaces by workspace id members by user id
+      x-summary-source: derived
+      operationId: deleteV1WorkspacesByWorkspaceIdMembersByUserId
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations:
     get:
       tags:
@@ -2683,6 +2723,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id integrations
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdIntegrations
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/{integrationId}:
     delete:
       tags:
@@ -2816,6 +2860,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id integrations by integration id
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdIntegrationsByIntegrationId
+      x-operation-id-source: derived
     patch:
       tags:
       - Workspaces
@@ -3109,6 +3157,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Update experimental workspaces by workspace id integrations by integration id
+      x-summary-source: derived
+      operationId: patchExperimentalWorkspacesByWorkspaceIdIntegrationsByIntegrationId
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/{integrationId}/linear/metadata:
     get:
       tags:
@@ -3335,6 +3387,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id integrations by integration id…
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdIntegrationsByIntegrationIdLinearMetadata
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/github-app:
     post:
       tags:
@@ -3560,6 +3616,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations github app
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGithubApp
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/github-app/request:
     post:
       tags:
@@ -3752,6 +3812,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations github app request
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGithubAppRequest
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/github-app/token:
     post:
       tags:
@@ -3962,6 +4026,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations github app token
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGithubAppToken
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/github-app-agent:
     post:
       tags:
@@ -4188,6 +4256,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations github app agent
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGithubAppAgent
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/github-app-agent/request:
     post:
       tags:
@@ -4380,6 +4452,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations github app agent…
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGithubAppAgentRequest
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/gitlab-token:
     post:
       tags:
@@ -4619,6 +4695,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations gitlab token
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsGitlabToken
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/mockhub:
     post:
       tags:
@@ -4911,6 +4991,10 @@ paths:
                         - 503
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations mockhub
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsMockhub
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/linear/authorize:
     post:
       tags:
@@ -5092,6 +5176,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations linear authorize
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsLinearAuthorize
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/linear/callback:
     post:
       tags:
@@ -5306,6 +5394,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations linear callback
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsLinearCallback
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/authorize:
     post:
       tags:
@@ -5488,6 +5580,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations bitbucket cloud…
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsBitbucketCloudOauthAuthorize
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/bitbucket-cloud-oauth/callback:
     post:
       tags:
@@ -5706,6 +5802,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id integrations bitbucket cloud…
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdIntegrationsBitbucketCloudOauthCallback
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/requests:
     get:
       tags:
@@ -5941,6 +6041,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id integrations requests
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdIntegrationsRequests
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/integrations/requests/{requestId}:
     delete:
       tags:
@@ -6076,6 +6180,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id integrations requests by request…
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdIntegrationsRequestsByRequestId
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/analytics:
     get:
       tags:
@@ -6375,6 +6483,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id analytics
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdAnalytics
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/inventory:
     get:
       tags:
@@ -6663,6 +6775,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id inventory
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdInventory
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers:
     get:
       tags:
@@ -6908,6 +7024,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id mcp servers
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdMcpServers
+      x-operation-id-source: derived
     post:
       tags:
       - Workspaces
@@ -7139,6 +7259,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServers
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}:
     delete:
       tags:
@@ -7274,6 +7398,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id mcp servers by mcp name
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdMcpServersByMcpName
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/reauth:
     post:
       tags:
@@ -7477,6 +7605,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers by mcp name reauth
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServersByMcpNameReauth
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/mcp-servers/{mcpName}/callback:
     post:
       tags:
@@ -7690,6 +7822,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id mcp servers by mcp name callback
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdMcpServersByMcpNameCallback
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/workflows/{workflowId}:
     get:
       summary: Get workflow status (Temporal-backed compat shim)
@@ -7882,6 +8018,8 @@ paths:
                         - 500
                       message:
                         type: string
+      operationId: getExperimentalWorkspacesByWorkspaceIdWorkflowsByWorkflowId
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/registry-keys:
     get:
       tags:
@@ -8091,6 +8229,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id registry keys
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdRegistryKeys
+      x-operation-id-source: derived
     post:
       tags:
       - Workspaces
@@ -8303,6 +8445,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id registry keys
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdRegistryKeys
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/registry-keys/{registryKeyId}:
     delete:
       tags:
@@ -8436,6 +8582,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id registry keys by registry key id
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdRegistryKeysByRegistryKeyId
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/skills/workspace:
     post:
       tags:
@@ -8642,6 +8792,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id skills workspace
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdSkillsWorkspace
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/tile-rollout:
     post:
       tags:
@@ -8769,6 +8923,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Create experimental workspaces by workspace id tile rollout
+      x-summary-source: derived
+      operationId: postExperimentalWorkspacesByWorkspaceIdTileRollout
+      x-operation-id-source: derived
   /experimental/workspaces/{workspaceId}/reviewer-plugin:
     get:
       tags:
@@ -8914,6 +9072,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Get experimental workspaces by workspace id reviewer plugin
+      x-summary-source: derived
+      operationId: getExperimentalWorkspacesByWorkspaceIdReviewerPlugin
+      x-operation-id-source: derived
     put:
       tags:
       - Workspaces
@@ -9068,6 +9230,10 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Replace experimental workspaces by workspace id reviewer plugin
+      x-summary-source: derived
+      operationId: putExperimentalWorkspacesByWorkspaceIdReviewerPlugin
+      x-operation-id-source: derived
     delete:
       tags:
       - Workspaces
@@ -9196,3 +9362,7 @@ paths:
                         - 500
                       message:
                         type: string
+      summary: Delete experimental workspaces by workspace id reviewer plugin
+      x-summary-source: derived
+      operationId: deleteExperimentalWorkspacesByWorkspaceIdReviewerPlugin
+      x-operation-id-source: derived
