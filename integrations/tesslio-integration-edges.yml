@@ -29,16 +29,43 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-official-clis.py
   first_seen: '2026-10-20'
+- partner_name: Index Ventures
+  partner: index-ventures
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.indexventures.com/companies/tesslio/
+  category: vc portfolio participation
+  contract_reference:
+    register: Index Ventures companies (indexventures.com/companies/)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: tessl.io
+    register_id: https://www.indexventures.com/companies/tesslio/
+    register_country: null
+    register_website: http://tessl.io
+    matched_domain: tessl.io
+    matched_by: domain
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+    sector: aiml
+  detected_by: sweep-vc-portfolios.py
+  first_seen: '2026-10-21'
 generated: '2026-10-20'
 method: searched
 source:
-- https://cdn.winget.microsoft.com/cache
-- https://formulae.brew.sh/api/cask.json
 - https://formulae.brew.sh/api/formula.json
-- https://github.com/ScoopInstaller/Extras
+- https://formulae.brew.sh/api/cask.json
+- https://cdn.winget.microsoft.com/cache
 - https://github.com/ScoopInstaller/Main
-- https://pypi.org/pypi
+- https://github.com/ScoopInstaller/Extras
 - https://registry.npmjs.org
+- https://pypi.org/pypi
 checked:
 - https://cdn.winget.microsoft.com/cache
 - https://formulae.brew.sh/api/cask.json
@@ -47,3 +74,9 @@ checked:
 - https://github.com/ScoopInstaller/Main
 - https://pypi.org/pypi
 - https://registry.npmjs.org
+- https://a16z.com/portfolio/
+- https://www.battery.com/company/
+- https://www.battery.com/wp-admin/admin-ajax.php
+- https://www.indexventures.com/companies/
+- https://www.sequoiacap.com/our-companies/
+- https://www.sequoiacap.com/sitemap.xml
