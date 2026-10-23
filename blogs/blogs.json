@@ -5,7 +5,7 @@
       "source": "https://tessl.io/blog/feed",
       "feed_url": "https://tessl.io/blog/feed",
       "title": "",
-      "saved": 14,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -16,6 +16,13 @@
       "method": "discovered"
     },
     {
+      "source": "https://tessl.io/blog/feed/",
+      "feed_url": "https://tessl.io/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://docs.tessl.io/support/faqs",
       "feed_url": "https://docs.tessl.io/support/faqs",
       "title": "",
@@ -23,6 +30,6 @@
       "method": "none"
     }
   ],
-  "post_count": 14,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 50,
+  "fetched": "2026-10-17T14:53:57Z"
 }
